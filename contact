@@ -3,9 +3,9 @@
         <h2>Contact</h2>
         <p>Feel free to reach out to me:</p>
         <div class="contact-info">
-            <p><strong>Email:</strong> <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-            <p><strong>Institution:</strong> Institute of Science and Technology Austria (ISTA)</p>
-            <!-- Add more contact details as needed -->
+            <p><strong>Email:</strong> <a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a></p>
+            <p><strong>Institution:</strong> The University of Edinburgh</p>
+            <p><strong>Lab:</strong> <a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a></p>
         </div>
     </div>
 </section>
