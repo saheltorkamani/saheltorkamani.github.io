@@ -1,11 +1,302 @@
-<section id="contact" class="contact-section">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Section</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f7fafc;
+      padding: 2rem;
+    }
+
+    #contact {
+      background: linear-gradient(135deg, #718096 0%, #2d3748 100%);
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    .contact-header h2 {
+      font-size: 3rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .contact-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-content {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-info {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 3rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .contact-info h3 {
+      color: #2d3748;
+      font-size: 1.8rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f7fafc;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .contact-item:hover {
+      background: #edf2f7;
+      border-left-color: #4fd1c7;
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4fd1c7, #81e6d9);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .contact-details {
+      flex: 1;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      color: #2d3748;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .contact-value a {
+      color: #4fd1c7;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .contact-value a:hover {
+      color: #38b2ac;
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .social-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .contact-header h2 {
+        font-size: 2.5rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .contact-info {
+        padding: 2rem;
+      }
+
+      .contact-info h3 {
+        font-size: 1.5rem;
+      }
+
+      .contact-item {
+        padding: 1rem;
+      }
+
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+
+      .social-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="contact">
     <div class="container">
+      <div class="contact-header">
         <h2>Contact</h2>
-        <p>Feel free to reach out to me:</p>
+        <p>Feel free to reach out to me for research opportunities, collaborations, and interesting projects.</p>
+      </div>
+
+      <div class="contact-content">
         <div class="contact-info">
-            <p><strong>Email:</strong> <a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a></p>
-            <p><strong>Institution:</strong> The University of Edinburgh</p>
-            <p><strong>Lab:</strong> <a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a></p>
+          <h3>
+            <i class="fas fa-address-book"></i>
+            Contact Information
+          </h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="contact-details">
+              <div class="contact-label">Institution</div>
+              <div class="contact-value">
+                The University of Edinburgh
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-flask"></i>
+            </div>
+            <div class="contact-details">
+              <div class="contact-label">Lab</div>
+              <div class="contact-value">
+                <a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <div class="contact-label">Location</div>
+              <div class="contact-value">
+                Edinburgh, Scotland
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="social-link" target="_blank" title="Google Scholar">
+          <i class="fas fa-graduation-cap"></i>
+        </a>
+        <a href="https://linkedin.com/in/sahel-torkamani/" class="social-link" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/saheltorkamani" class="social-link" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://orcid.org/0009-0004-2110-1641" class="social-link" target="_blank" title="ORCID">
+          <i class="fab fa-orcid"></i>
+        </a>
+      </div>
     </div>
-</section>
+  </section>
+</body>
+</html>
