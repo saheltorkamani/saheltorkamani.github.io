@@ -1,413 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Talks - Sahel Torkamani</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Talks & Presentations – Sahel Torkamani">
+    <title>Talks – Sahel Torkamani</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+    <style>
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.24s; }
+        .delay-3 { transition-delay: 0.36s; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background: linear-gradient(135deg, #718096 0%, #2d3748 100%);
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
+        /* ===== NAV UNDERLINE ===== */
+        .navbar .nav-link {
+            position: relative;
+        }
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 50%;
+            width: 0; height: 2px;
+            background: #F85C70;
+            transition: width 0.28s ease, left 0.28s ease;
+        }
+        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        /* ===== SUBPAGE HERO ===== */
+        .page-hero {
+            background-image: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.55)), url(assets/imgs/header.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-family: "Dosis", sans-serif;
+        }
+        .page-hero p {
+            font-size: 1rem;
+            opacity: 0.85;
+            letter-spacing: 0.5px;
+        }
+        .hero-line {
+            width: 50px;
+            height: 3px;
+            background: #F85C70;
+            margin: 12px auto 14px;
+        }
 
-    .header {
-      text-align: center;
-      margin-bottom: 3rem;
-      color: white;
-    }
+        /* ===== TALKS SECTION ===== */
+        #talks-section {
+            padding: 70px 0;
+        }
 
-    .header h1 {
-      font-size: 3rem;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            background: #17263C;
+            padding: 28px 0;
+            margin-bottom: 60px;
+        }
+        .stats-bar .stat-item {
+            text-align: center;
+            color: #fff;
+        }
+        .stats-bar .stat-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #F85C70;
+            display: block;
+            font-family: "Dosis", sans-serif;
+        }
+        .stats-bar .stat-lbl {
+            font-size: 0.82rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+        /* ===== TALK CARD ===== */
+        .talk-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .talk-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 4px; height: 100%;
+            background: #F85C70;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.35s ease;
+        }
+        .talk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(248,92,112,0.12);
+            border-color: rgba(248,92,112,0.3);
+        }
+        .talk-card:hover::before {
+            transform: scaleY(1);
+        }
+        .talk-type-badge {
+            display: inline-block;
+            background: #F85C70;
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .talk-type-badge.mini { background: #17263C; }
+        .talk-type-badge.seminar { background: #6c757d; }
+        .talk-card .talk-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #17263C;
+            margin-bottom: 8px;
+            line-height: 1.45;
+            font-family: "Dosis", sans-serif;
+        }
+        .talk-card .talk-venue {
+            font-size: 0.88rem;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .talk-card .talk-venue i {
+            color: #F85C70;
+            width: 16px;
+        }
+        .talk-card .talk-date {
+            font-size: 0.82rem;
+            color: #aaa;
+            margin-bottom: 0;
+        }
+        .talk-card .talk-date i {
+            color: #F85C70;
+            width: 16px;
+        }
+        .talk-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        .talk-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 18px;
+            border-radius: 25px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .talk-btn.slides {
+            background: #F85C70;
+            color: #fff;
+        }
+        .talk-btn.slides:hover {
+            background: #e0485b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 14px rgba(248,92,112,0.3);
+            text-decoration: none;
+            color: #fff;
+        }
+        .talk-btn.video {
+            background: #17263C;
+            color: #fff;
+        }
+        .talk-btn.video:hover {
+            background: #243650;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 14px rgba(23,38,60,0.3);
+            text-decoration: none;
+            color: #fff;
+        }
+        .talk-btn.paper {
+            border-color: #F85C70;
+            color: #F85C70;
+            background: transparent;
+        }
+        .talk-btn.paper:hover {
+            background: #F85C70;
+            color: #fff;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
 
-    .back-button {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-      background: rgba(255,255,255,0.2);
-      color: white;
-      padding: 0.7rem 1.2rem;
-      border-radius: 25px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    .back-button:hover {
-      background: rgba(255,255,255,0.3);
-      transform: translateY(-2px);
-    }
-
-    .talks-grid {
-      display: grid;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .talk-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-      border-left: 5px solid #4fd1c7;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .talk-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(45deg, #4fd1c7, #81e6d9);
-      opacity: 0.1;
-      border-radius: 50%;
-      transform: translate(30px, -30px);
-    }
-
-    .talk-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .talk-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-
-    .talk-info {
-      flex: 1;
-    }
-
-    .talk-type {
-      display: inline-block;
-      background: #4fd1c7;
-      color: white;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .talk-type.mini-course {
-      background: #718096;
-    }
-
-    .title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #2d3748;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-
-    .institution {
-      color: #4a5568;
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .season {
-      color: #718096;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .season i {
-      color: #4fd1c7;
-    }
-
-    .actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.2rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-
-    .slides-btn {
-      background: #4fd1c7;
-      color: white;
-    }
-
-    .slides-btn:hover {
-      background: #38b2ac;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(79, 209, 199, 0.3);
-    }
-
-    .video-btn {
-      background: #718096;
-      color: white;
-    }
-
-    .video-btn:hover {
-      background: #4a5568;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(113, 128, 150, 0.3);
-    }
-
-    .link-btn {
-      background: #a0aec0;
-      color: white;
-    }
-
-    .link-btn:hover {
-      background: #718096;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(160, 174, 192, 0.3);
-    }
-
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 3rem;
-      padding: 2rem;
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-    }
-
-    .stat {
-      text-align: center;
-      color: white;
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2rem;
-      }
-      
-      .back-button {
-        position: relative;
-        top: 0;
-        left: 0;
-        margin-bottom: 2rem;
-        display: inline-block;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      .action-btn {
-        justify-content: center;
-      }
-
-      .stats {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-  </style>
+        @media (max-width: 767px) {
+            .page-hero h1 { font-size: 2rem; }
+            .talk-card { padding: 20px; }
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <a href="index.html" class="back-button">
-      <i class="fas fa-arrow-left"></i> Back to Home
-    </a>
+<body data-spy="scroll" data-target=".navbar" data-offset="40">
 
-    <div class="header">
-      <h1>Talks & Presentations</h1>
-      <p>Academic presentations and mini-courses</p>
+    <!-- Navbar (matches index) -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="0">
+        <div class="container">
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarTalks" aria-controls="navbarTalks" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse mt-sm-20 navbar-collapse" id="navbarTalks">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
+                </ul>
+                <ul class="navbar-nav brand">
+                    <img src="assets/imgs/avatar.jpg" alt="Avatar" class="brand-img">
+                    <li class="brand-txt">
+                        <h5 class="brand-title">Sahel Torkamani</h5>
+                        <div class="brand-subtitle">Ph.D Student</div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="talks.html" class="nav-link active">Talks</a></li>
+                    <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="nav-link" target="_blank">Publications</a></li>
+                    <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <div>
+            <h1>Talks &amp; Presentations</h1>
+            <div class="hero-line"></div>
+            <p>Academic presentations, seminars, and mini-courses</p>
+        </div>
     </div>
 
-    <div class="talks-grid">
-      <!-- Poster 1 -->
-      <div class="talk-card">
-        <div class="talk-type">Conference Poster</div>
-        <div class="talk-info">
-          <div class="title">Magnitude Distance: A Geometric Measure of Dataset Similarity</div>
-          <div class="institution">
-            <i class="fas fa-users"></i> Workshop on Principles of Generative Modeling (PriGM) @ EurIPS2025
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> December 2025
-          </div>
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-4 stat-item">
+                    <span class="stat-num">6</span>
+                    <span class="stat-lbl">Presentations</span>
+                </div>
+                <div class="col-4 stat-item">
+                    <span class="stat-num">3</span>
+                    <span class="stat-lbl">Institutions</span>
+                </div>
+                <div class="col-4 stat-item">
+                    <span class="stat-num">1</span>
+                    <span class="stat-lbl">Mini-Course</span>
+                </div>
+            </div>
         </div>
-        <div class="actions">
-          <a href="assets/Pdf/PriGM_Sahel_Torkamani.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Poster
-          </a>
-        </div>
-        <div class="actions">
-          <a href="https://openreview.net/pdf?id=RRM7and535" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Paper
-          </a>
-        </div>
-      </div>
-      
-      <!-- Talk 1 -->
-      <div class="talk-card">
-        <div class="talk-type">Research Talk</div>
-        <div class="talk-info">
-          <div class="title">Metric Space Magnitude for Machine Learning</div>
-          <div class="institution">
-            <i class="fas fa-university"></i> Institute of Science and Technology Austria (ISTA)
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> Summer 2025
-          </div>
-        </div>
-        <div class="actions">
-          <a href="assets/Pdf/Magnitude in ML.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Slides
-          </a>
-        </div>
-      </div>
-
-      <!-- Talk 2 -->
-      <div class="talk-card">
-        <div class="talk-type">Conference Talk</div>
-        <div class="talk-info">
-          <div class="title">Heterogeneous Differential Privacy via Graphs</div>
-          <div class="institution">
-            <i class="fas fa-users"></i> IEEE International Symposium on Information Theory (ISIT)
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> Summer 2022
-          </div>
-        </div>
-        <div class="actions">
-          <a href="assets/Pdf/ISIT 2022.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Slides
-          </a>
-        </div>
-      </div>
-
-      <!-- Talk 3 -->
-      <div class="talk-card">
-        <div class="talk-type">Seminar Talk</div>
-        <div class="talk-info">
-          <div class="title">Optimal Binary Differential Privacy via Graphs</div>
-          <div class="institution">
-            <i class="fas fa-university"></i> Institute of Science and Technology Austria (ISTA)
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> Summer 2022
-          </div>
-        </div>
-        <div class="actions">
-          <a href="assets/Pdf/optimal-binary-dp-slides.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Slides
-          </a>
-        </div>
-      </div>
-
-      <!-- Talk 4 -->
-      <div class="talk-card">
-        <div class="talk-type">Research Talk</div>
-        <div class="talk-info">
-          <div class="title">Sparse Multi-Decoder Recursive Projection Aggregation for Reed-Muller Codes with Neural Network Implementation</div>
-          <div class="institution">
-            <i class="fas fa-university"></i> Institute of Science and Technology Austria (ISTA)
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> Summer 2022
-          </div>
-        </div>
-        <div class="actions">
-          <a href="assets/Pdf/reed-muller-codes-slides.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Slides
-          </a>
-        </div>
-      </div>
-
-      <!-- Mini-Course -->
-      <div class="talk-card">
-        <div class="talk-type mini-course">Mini-Course</div>
-        <div class="talk-info">
-          <div class="title">Introduction to Coding Theory</div>
-          <div class="institution">
-            <i class="fas fa-graduation-cap"></i> Department of Mathematical Sciences, Sharif University of Technology
-          </div>
-          <div class="season">
-            <i class="fas fa-calendar-alt"></i> Autumn 2021
-          </div>
-        </div>
-        <div class="actions">
-          <a href="assets/Pdf/Coding Theory.pdf" class="action-btn slides-btn" target="_blank">
-            <i class="fas fa-file-pdf"></i> Slides
-          </a>
-          <a href="https://hamband.math.sharif.ir/wiki/نظریه_ی_کدگذاری_ساحل_ترکمنی" class="action-btn video-btn" target="_blank">
-            <i class="fas fa-play"></i> Video
-          </a>
-        </div>
-      </div>
     </div>
 
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-number">5</span>
-        <span class="stat-label">Total Presentations</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">3</span>
-        <span class="stat-label">Institutions</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">1</span>
-        <span class="stat-label">Mini-Course</span>
-      </div>
-    </div>
-  </div>
+    <!-- Talks -->
+    <section id="talks-section">
+        <div class="container">
+
+            <div class="talk-card reveal">
+                <span class="talk-type-badge">Conference Poster</span>
+                <div class="talk-title">Magnitude Distance: A Geometric Measure of Dataset Similarity</div>
+                <p class="talk-venue"><i class="ti-user"></i> Workshop on Principles of Generative Modeling (PriGM) @ EurIPS2025</p>
+                <p class="talk-date"><i class="ti-calendar"></i> December 2025</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/PriGM_Sahel_Torkamani.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Poster</a>
+                    <a href="https://openreview.net/pdf?id=RRM7and535" class="talk-btn paper" target="_blank"><i class="ti-link"></i> Paper</a>
+                </div>
+            </div>
+
+            <div class="talk-card reveal delay-1">
+                <span class="talk-type-badge">Research Talk</span>
+                <div class="talk-title">Metric Space Magnitude for Machine Learning</div>
+                <p class="talk-venue"><i class="ti-home"></i> Institute of Science and Technology Austria (ISTA)</p>
+                <p class="talk-date"><i class="ti-calendar"></i> Summer 2025</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/Magnitude in ML.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Slides</a>
+                </div>
+            </div>
+
+            <div class="talk-card reveal delay-2">
+                <span class="talk-type-badge">Conference Talk</span>
+                <div class="talk-title">Heterogeneous Differential Privacy via Graphs</div>
+                <p class="talk-venue"><i class="ti-user"></i> IEEE International Symposium on Information Theory (ISIT)</p>
+                <p class="talk-date"><i class="ti-calendar"></i> Summer 2022</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/ISIT 2022.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Slides</a>
+                </div>
+            </div>
+
+            <div class="talk-card reveal">
+                <span class="talk-type-badge seminar">Seminar Talk</span>
+                <div class="talk-title">Optimal Binary Differential Privacy via Graphs</div>
+                <p class="talk-venue"><i class="ti-home"></i> Institute of Science and Technology Austria (ISTA)</p>
+                <p class="talk-date"><i class="ti-calendar"></i> Summer 2022</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/optimal-binary-dp-slides.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Slides</a>
+                </div>
+            </div>
+
+            <div class="talk-card reveal delay-1">
+                <span class="talk-type-badge">Research Talk</span>
+                <div class="talk-title">Sparse Multi-Decoder Recursive Projection Aggregation for Reed-Muller Codes with Neural Network Implementation</div>
+                <p class="talk-venue"><i class="ti-home"></i> Institute of Science and Technology Austria (ISTA)</p>
+                <p class="talk-date"><i class="ti-calendar"></i> Summer 2022</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/reed-muller-codes-slides.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Slides</a>
+                </div>
+            </div>
+
+            <div class="talk-card reveal delay-2">
+                <span class="talk-type-badge mini">Mini-Course</span>
+                <div class="talk-title">Introduction to Coding Theory</div>
+                <p class="talk-venue"><i class="ti-graduation-cap"></i> Department of Mathematical Sciences, Sharif University of Technology</p>
+                <p class="talk-date"><i class="ti-calendar"></i> Autumn 2021</p>
+                <div class="talk-actions">
+                    <a href="assets/Pdf/Coding Theory.pdf" class="talk-btn slides" target="_blank"><i class="ti-file"></i> Slides</a>
+                    <a href="https://hamband.math.sharif.ir/wiki/نظریه_ی_کدگذاری_ساحل_ترکمنی" class="talk-btn video" target="_blank"><i class="ti-control-play"></i> Video</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer py-3">
+        <div class="container">
+            <p class="small mb-0 text-light">
+                &copy; <script>document.write(new Date().getFullYear())</script> Sahel Torkamani
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script>
+        const els = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+    </script>
 </body>
 </html>

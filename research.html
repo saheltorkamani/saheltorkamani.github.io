@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Research Projects – Sahel Torkamani">
+    <title>Research – Sahel Torkamani</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+    <style>
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.24s; }
+        .delay-3 { transition-delay: 0.36s; }
+
+        /* ===== NAV UNDERLINE ===== */
+        .navbar .nav-link { position: relative; }
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 50%;
+            width: 0; height: 2px;
+            background: #F85C70;
+            transition: width 0.28s ease, left 0.28s ease;
+        }
+        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
+
+        /* ===== SUBPAGE HERO ===== */
+        .page-hero {
+            background-image: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.55)), url(assets/imgs/header.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-family: "Dosis", sans-serif;
+        }
+        .page-hero p { font-size: 1rem; opacity: 0.85; letter-spacing: 0.5px; }
+        .hero-line {
+            width: 50px; height: 3px;
+            background: #F85C70;
+            margin: 12px auto 14px;
+        }
+
+        /* ===== RESEARCH SECTION ===== */
+        #research-section { padding: 80px 0; }
+
+        /* ===== PROJECT CARD ===== */
+        .project-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 32px 34px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 4px; height: 100%;
+            background: #F85C70;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.35s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(248,92,112,0.11);
+            border-color: rgba(248,92,112,0.3);
+        }
+        .project-card:hover::before {
+            transform: scaleY(1);
+        }
+        .project-status {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .project-status.ongoing {
+            background: rgba(248,92,112,0.12);
+            color: #F85C70;
+        }
+        .project-status.completed {
+            background: rgba(108,117,125,0.1);
+            color: #6c757d;
+        }
+        .project-card .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #17263C;
+            margin-bottom: 8px;
+            line-height: 1.45;
+            font-family: "Dosis", sans-serif;
+        }
+        .project-card .project-date {
+            font-size: 0.82rem;
+            color: #aaa;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .project-card .project-date i { color: #F85C70; }
+        .project-card .project-desc {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.75;
+            margin: 0;
+        }
+        .project-tags {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #e8e8e8;
+            color: #6c757d;
+            background: #fafafa;
+            transition: all 0.25s ease;
+        }
+        .project-card:hover .project-tag {
+            border-color: rgba(248,92,112,0.3);
+            color: #F85C70;
+            background: rgba(248,92,112,0.04);
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #F85C70;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F85C70;
+            display: inline-block;
+        }
+
+        @media (max-width: 767px) {
+            .page-hero h1 { font-size: 2rem; }
+            .project-card { padding: 22px 20px; }
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40">
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="0">
+        <div class="container">
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarResearch" aria-controls="navbarResearch" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse mt-sm-20 navbar-collapse" id="navbarResearch">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
+                </ul>
+                <ul class="navbar-nav brand">
+                    <img src="assets/imgs/avatar.jpg" alt="Avatar" class="brand-img">
+                    <li class="brand-txt">
+                        <h5 class="brand-title">Sahel Torkamani</h5>
+                        <div class="brand-subtitle">Ph.D Student</div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="talks.html" class="nav-link">Talks</a></li>
+                    <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="nav-link" target="_blank">Publications</a></li>
+                    <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <div>
+            <h1>Research Projects</h1>
+            <div class="hero-line"></div>
+            <p>Differential Privacy, Machine Learning, and Information Theory</p>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <section id="research-section">
+        <div class="container">
+
+            <div class="section-label reveal">Current &amp; Recent Work</div>
+
+            <div class="project-card reveal">
+                <span class="project-status ongoing">Ongoing</span>
+                <div class="project-title">Potential Privacy Risk in Machine Learning</div>
+                <p class="project-date"><i class="ti-calendar"></i> December 2024 – Present</p>
+                <p class="project-desc">We consider the problem of advanced estimation of privacy risk of adding a data point to the training set of a machine learning model with standard optimisation methods. The goal is to develop principled tools that help practitioners assess the privacy cost before committing to training decisions.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Differential Privacy</span>
+                    <span class="project-tag">Machine Learning</span>
+                    <span class="project-tag">Privacy Risk</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal delay-1">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">Secure Data Scoring and Selection for ML Models with Zero-Knowledge Proofs</div>
+                <p class="project-date"><i class="ti-calendar"></i> December 2024 – April 2025</p>
+                <p class="project-desc">We describe secure protocols that make use of a small subset of the data to perform an assessment and output a score that can be used to determine the final price of a data transaction. The protocols are based on zero-knowledge proofs of properties of the data and model inference, ensuring both correctness and confidentiality of the underlying data.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Zero-Knowledge Proofs</span>
+                    <span class="project-tag">Data Markets</span>
+                    <span class="project-tag">Secure Computation</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal delay-2">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">Continual Observation with Differential Privacy</div>
+                <p class="project-date"><i class="ti-calendar"></i> March 2024 – September 2024</p>
+                <p class="project-desc">We consider the problem of counting under continual observation and present a new generalization of the binary tree mechanism that uses a k-ary number system with negative digits to improve the privacy-accuracy trade-off. This leads to improved error bounds compared to previous approaches.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Differential Privacy</span>
+                    <span class="project-tag">Continual Observation</span>
+                    <span class="project-tag">Counting Mechanisms</span>
+                </div>
+            </div>
+
+            <div class="section-label reveal" style="margin-top: 20px;">Earlier Work</div>
+
+            <div class="project-card reveal">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">Sparse MultiDecoder Recursive Projection Aggregation for Reed-Muller Codes</div>
+                <p class="project-date"><i class="ti-calendar"></i> March 2022 – September 2022</p>
+                <p class="project-desc">The Sparse Recursive Projection Aggregation (SRPA) decoder for Reed-Muller codes achieves performance close to the maximum likelihood decoder for short-length RM codes. We simulated an algorithm based on a neural network to lower the computational budget while keeping performance close to that of the SRPA decoder by performing a better selection of projections in each sparsified decoder.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Reed-Muller Codes</span>
+                    <span class="project-tag">Neural Networks</span>
+                    <span class="project-tag">Coding Theory</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal delay-1">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">Algorithms and Differential Privacy via Graphs</div>
+                <p class="project-date"><i class="ti-calendar"></i> March 2021 – February 2024</p>
+                <p class="project-desc">In this project, we generalized the previous framework for designing utility-optimal differentially private (DP) mechanisms via graphs in two main directions. First, heterogeneous mechanisms where the partial mechanism can have different probability distributions at the boundary. Secondly, we solved the problem in a general heterogeneous privacy setting on neighboring datasets to provide different levels of privacy for each data point.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Differential Privacy</span>
+                    <span class="project-tag">Graph Theory</span>
+                    <span class="project-tag">Utility Optimization</span>
+                    <span class="project-tag">Heterogeneous Privacy</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer py-3">
+        <div class="container">
+            <p class="small mb-0 text-light">
+                &copy; <script>document.write(new Date().getFullYear())</script> Sahel Torkamani
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script>
+        const els = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

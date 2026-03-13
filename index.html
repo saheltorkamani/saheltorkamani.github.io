@@ -1,25 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with JohnDoe landing page.">
-    <meta name="author" content="Devcrud">
+    <meta name="description" content="Sahel Torkamani – Ph.D. Student at University of Edinburgh. Differential Privacy, ML Theory, Zero-Knowledge Proofs.">
+    <meta name="author" content="Sahel Torkamani">
     <title>Sahel Torkamani</title>
-    <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-    <!-- Bootstrap + JohnDoe main styles -->
-	<link rel="stylesheet" href="assets/css/johndoe.css">
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+    <style>
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal-right { opacity: 0; transform: translateX(28px);  transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible, .reveal-left.visible, .reveal-right.visible {
+            opacity: 1; transform: translate(0,0);
+        }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.24s; }
+        .delay-3 { transition-delay: 0.36s; }
+        .delay-4 { transition-delay: 0.48s; }
+
+        /* ===== HERO ===== */
+        .header { position: relative; }
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 70px;
+            text-align: center;
+        }
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 16px;
+            animation: heroUp 0.9s ease 0.2s both;
+        }
+        .hero-name {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            color: #fff;
+            font-family: "Dosis", sans-serif;
+            line-height: 1;
+            margin-bottom: 22px;
+            animation: heroUp 0.9s ease 0.35s both;
+        }
+        .hero-chips {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 30px;
+            animation: heroUp 0.9s ease 0.5s both;
+        }
+        .hero-chip {
+            background: rgba(248,92,112,0.18);
+            border: 1px solid rgba(248,92,112,0.55);
+            color: rgba(255,255,255,0.92);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 18px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(6px);
+            transition: background 0.25s, border-color 0.25s;
+        }
+        .hero-chip:hover { background: rgba(248,92,112,0.35); border-color: rgba(248,92,112,0.8); }
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: heroUp 0.9s ease 0.65s both;
+        }
+        .hero-btn-solid {
+            background: #F85C70;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            border: 2px solid #F85C70;
+            transition: all 0.3s ease;
+            letter-spacing: 0.2px;
+        }
+        .hero-btn-solid:hover {
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 6px 22px rgba(248,92,112,0.45);
+            transform: translateY(-2px);
+        }
+        .hero-btn-outline {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            border: 2px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(6px);
+            transition: all 0.3s ease;
+        }
+        .hero-btn-outline:hover {
+            background: rgba(255,255,255,0.18);
+            color: #fff;
+            text-decoration: none;
+            border-color: rgba(255,255,255,0.75);
+            transform: translateY(-2px);
+        }
+        .hero-socials {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 22px;
+            animation: heroUp 0.9s ease 0.8s both;
+        }
+        .hero-socials a {
+            color: rgba(255,255,255,0.55);
+            font-size: 1.1rem;
+            transition: color 0.25s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .hero-socials a:hover { color: #fff; transform: translateY(-4px) scale(1.15); }
+        @keyframes heroUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== NAV UNDERLINE ===== */
+        .navbar .nav-link { position: relative; }
+        .navbar .nav-link::after {
+            content: ''; position: absolute;
+            bottom: 2px; left: 50%;
+            width: 0; height: 2px;
+            background: #F85C70;
+            transition: width 0.28s ease, left 0.28s ease;
+        }
+        .navbar .nav-link:hover::after,
+        .navbar .nav-link.active::after { width: 80%; left: 10%; }
+
+        /* ===== LINE SHIMMER ===== */
+        .line { position: relative; overflow: hidden; }
+        .line::after {
+            content: ''; position: absolute; left: -100%; top: 0;
+            width: 60%; height: 100%;
+            background: rgba(255,255,255,0.5);
+            animation: shimmer 2.5s infinite 1.2s;
+        }
+        @keyframes shimmer { 0% { left: -60%; } 100% { left: 160%; } }
+
+        /* ===== ABOUT / PROFILE ===== */
+        .about-section .about-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .about-section .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(248,92,112,0.08);
+        }
+
+        .profile-photo {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 5px solid #fff;
+            box-shadow: 0 8px 28px rgba(248,92,112,0.18);
+            margin-bottom: 16px;
+            display: block;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 38px rgba(248,92,112,0.28);
+        }
+        .profile-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #17263C;
+            font-family: "Dosis", sans-serif;
+            margin-bottom: 3px;
+        }
+        .profile-title { font-size: 0.83rem; color: #999; margin-bottom: 20px; letter-spacing: 0.2px; }
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 16px 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 20px;
+        }
+        .ps-item { flex: 1; text-align: center; }
+        .ps-item + .ps-item { border-left: 1px solid #f0f0f0; }
+        .ps-n {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #F85C70;
+            font-family: "Dosis", sans-serif;
+            display: block;
+            line-height: 1.1;
+        }
+        .ps-l { font-size: 0.66rem; color: #bbb; text-transform: uppercase; letter-spacing: 0.8px; }
+        .profile-socials {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        .profile-socials a {
+            width: 36px; height: 36px;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #888;
+            font-size: 0.9rem;
+            transition: all 0.28s ease;
+            text-decoration: none;
+        }
+        .profile-socials a:hover {
+            border-color: #F85C70;
+            color: #F85C70;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(248,92,112,0.2);
+        }
+
+        /* INTEREST CHIPS */
+        .interest-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+        .interest-chip {
+            background: #fafafa;
+            border: 1.5px solid #e8e8e8;
+            color: #555;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 13px;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+            cursor: default;
+        }
+        .interest-chip:hover { border-color: #F85C70; color: #F85C70; background: rgba(248,92,112,0.04); }
+
+        /* INFO LIST */
+        .modern-info { list-style: none; padding: 0; }
+        .modern-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        .modern-info li i { color: #F85C70; margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
+
+        /* HONORS */
+        .honors-list { list-style: none; padding: 0; }
+        .honors-list li {
+            font-size: 0.82rem;
+            color: #666;
+            padding: 7px 0;
+            border-bottom: 1px solid #f5f5f5;
+            line-height: 1.4;
+        }
+        .honors-list li:last-child { border-bottom: none; }
+        .honor-year {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #F85C70;
+            background: rgba(248,92,112,0.08);
+            padding: 1px 7px;
+            border-radius: 10px;
+            margin-right: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #F85C70;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ===== RESEARCH PROJECTS ===== */
+        #research { background: #fafafa; }
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .research-item {
+            position: relative;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 18px 22px;
+            background: #fff;
+            cursor: default;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
+        }
+        .research-item::before {
+            content: ''; position: absolute; left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: #F85C70;
+            transform: scaleY(0); transform-origin: bottom;
+            transition: transform 0.35s ease;
+        }
+        .research-item:hover {
+            border-color: rgba(248,92,112,0.4);
+            box-shadow: 0 8px 28px rgba(248,92,112,0.12);
+            transform: translateY(-3px);
+        }
+        .research-item:hover::before { transform: scaleY(1); }
+        .research-item .proj-title {
+            font-size: 0.9rem; font-weight: 700;
+            color: #F85C70; margin-bottom: 4px; line-height: 1.45;
+        }
+        .research-item .proj-date { font-size: 0.76rem; color: #bbb; margin-bottom: 0; }
+        .research-item .proj-details {
+            max-height: 0; overflow: hidden; opacity: 0; margin-top: 0;
+            transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.3s ease;
+        }
+        .research-item:hover .proj-details { max-height: 250px; opacity: 1; margin-top: 12px; }
+        .research-item .proj-details p {
+            font-size: 0.82rem; color: #6c757d; line-height: 1.65; margin: 0;
+        }
+        .view-all-btn {
+            display: inline-block; margin-top: 30px;
+            color: #F85C70; font-weight: 700; font-size: 0.88rem;
+            border: 2px solid #F85C70; padding: 9px 26px; border-radius: 30px;
+            transition: all 0.3s ease; text-decoration: none;
+        }
+        .view-all-btn:hover {
+            background: #F85C70; color: #fff; text-decoration: none;
+            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(248,92,112,0.3);
+        }
+
+        /* ===== EDUCATION & SKILLS ===== */
+        #resume .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        #resume .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+        #resume .progress-bar { transition: width 1.1s cubic-bezier(0.4,0,0.2,1) !important; }
+
+        /* ===== NEWS SCROLL ===== */
+        .scroll-container {
+            display: flex; overflow-x: auto;
+            gap: 18px; padding: 8px 4px 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scroll-container .blog-card {
+            flex: 0 0 calc(50% - 9px); min-width: calc(50% - 9px);
+            scroll-snap-align: start;
+            padding: 24px 26px;
+            border: 1px solid #e8e8e8; border-radius: 10px;
+            background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            margin: 0;
+        }
+        .scroll-container .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(248,92,112,0.11);
+            border-color: rgba(248,92,112,0.32);
+        }
+        .scroll-container::-webkit-scrollbar { height: 4px; }
+        .scroll-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: #F85C70; border-radius: 10px; }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .gallery-item {
+            position: relative; border-radius: 10px; overflow: hidden;
+            cursor: pointer; aspect-ratio: 4/3; background: #f0f0f0;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.45s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.07); }
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: rgba(23,38,60,0);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-end;
+            padding: 16px;
+            transition: background 0.35s ease;
+        }
+        .gallery-item:hover .gallery-overlay { background: rgba(23,38,60,0.55); }
+        .gallery-meta { transform: translateY(12px); opacity: 0; transition: all 0.3s ease; text-align: center; }
+        .gallery-item:hover .gallery-meta { transform: translateY(0); opacity: 1; }
+        .gallery-cat {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #F85C70;
+            background: rgba(255,255,255,0.15); padding: 2px 10px;
+            border-radius: 10px; display: inline-block; margin-bottom: 4px;
+        }
+        .gallery-cap { font-size: 0.8rem; font-weight: 600; color: #fff; }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.93); z-index: 9999;
+            align-items: center; justify-content: center;
+        }
+        .lightbox-overlay.open { display: flex; animation: lbFadeIn 0.22s ease; }
+        @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .lightbox-inner {
+            position: relative; max-width: 90vw; max-height: 90vh;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .lightbox-inner img {
+            max-width: 90vw; max-height: 80vh; object-fit: contain;
+            border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: lbZoom 0.28s ease;
+        }
+        @keyframes lbZoom { from { transform: scale(0.93); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .lightbox-caption { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-top: 14px; text-align: center; }
+        .lb-close {
+            position: fixed; top: 20px; right: 24px; color: #fff;
+            font-size: 1.8rem; cursor: pointer;
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(255,255,255,0.1);
+            transition: background 0.2s, transform 0.2s; line-height: 1;
+        }
+        .lb-close:hover { background: rgba(248,92,112,0.7); transform: rotate(90deg); }
+        .lb-arrow {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            color: #fff; font-size: 1.6rem; cursor: pointer;
+            width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(255,255,255,0.1);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .lb-arrow:hover { background: rgba(248,92,112,0.65); }
+        .lb-prev { left: 16px; }
+        .lb-next { right: 16px; }
+        .lb-prev:hover { transform: translateY(-50%) translateX(-2px); }
+        .lb-next:hover { transform: translateY(-50%) translateX(2px); }
+        .lb-counter {
+            position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.45); font-size: 0.78rem; letter-spacing: 1px;
+        }
+
+        /* ===== MISC ===== */
+        .btn-outline-danger { transition: all 0.3s ease; }
+        .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(248,92,112,0.3); }
+
+        @media (max-width: 991px) {
+            .hero-name { font-size: 2.8rem; }
+            .about-card.text-center { text-align: center; }
+        }
+        @media (max-width: 767px) {
+            .scroll-container .blog-card { flex: 0 0 85%; min-width: 85%; }
+            .research-grid { grid-template-columns: 1fr; }
+            .hero-content { padding-bottom: 40px; }
+        }
+    </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- Hero Header -->
     <header class="header">
-        <div class="container">
-            <ul class="social-icons pt-3">
-                <li class="social-item"><a class="social-link text-light" href="https://scholar.google.com/citations?hl=en&user=gCDricIAAAAJ"><i class="ti-google" aria-hidden="true"></i></a></li>
-                <li class="social-item"><a class="social-link text-light" href="https://www.linkedin.com/in/sahel-torkamani"><i class="ti-linkedin" aria-hidden="true"></i></a></li>
-            </ul>  
+        <div class="hero-content">
+            <p class="hero-eyebrow">School of Informatics &nbsp;·&nbsp; University of Edinburgh</p>
+            <h1 class="hero-name">Sahel Torkamani</h1>
+            <div class="hero-chips">
+                <span class="hero-chip">Differential Privacy</span>
+                <span class="hero-chip">ML Theory</span>
+                <span class="hero-chip">Zero-Knowledge Proofs</span>
+                <span class="hero-chip">Statistical Inference</span>
+            </div>
+            <div class="hero-ctas">
+                <a href="assets/Pdf/cv.pdf" class="hero-btn-solid" target="_blank">Download CV</a>
+                <a href="#research" class="hero-btn-outline">View Research</a>
+                <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="hero-btn-outline" target="_blank">Google Scholar</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ti-google"></i></a>
+                <a href="https://www.linkedin.com/in/sahel-torkamani" target="_blank" title="LinkedIn"><i class="ti-linkedin"></i></a>
+                <a href="https://github.com/saheltorkamani" target="_blank" title="GitHub"><i class="ti-github"></i></a>
+                <a href="https://orcid.org/0009-0004-2110-1641" target="_blank" title="ORCID"><i class="ti-link"></i></a>
+            </div>
         </div>
     </header>
+
+    <!-- Navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
         <div class="container">
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,217 +505,210 @@
             </button>
             <div class="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#cv" class="nav-link" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/Pdf/cv.pdf'" target="_blank">CV</a>
-                    </li>
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
                 </ul>
                 <ul class="navbar-nav brand">
-			<img src="/assets/imgs/avatar.jpg" alt="Avatar" class="brand-img">
-			<li class="brand-txt">
-				<h5 class="brand-title">Sahel Torkamani</h5>
-				<div class="brand-subtitle">Ph.D Student</div>
-			</li>
-		</ul>
-
+                    <img src="assets/imgs/avatar.jpg" alt="Avatar" class="brand-img">
+                    <li class="brand-txt">
+                        <h5 class="brand-title">Sahel Torkamani</h5>
+                        <div class="brand-subtitle">Ph.D Student</div>
+                    </li>
+                </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="./talks.html" class="nav-link">Talks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#publications" class="nav-link" onclick="javascript:location.href='https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en'" target="_blank">Publications</a>
-                    </li>
-                    <li class="nav-item last-item">
-                        <a href="./contact.html" class="nav-link">Contact</a>
-                    </li>
+                    <li class="nav-item"><a href="./talks.html" class="nav-link">Talks</a></li>
+                    <li class="nav-item"><a href="./teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="nav-link" target="_blank">Publications</a></li>
+                    <li class="nav-item last-item"><a href="./contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!-- About -->
     <div class="container-fluid">
         <div id="about" class="row about-section">
-            <div class="col-lg-4 about-card">
-                <h3 class="font-weight-light">Who am I ?</h3>
-                <span class="line mb-5"></span>
-                <h5 class="mb-3">Ph.D. Student at University of Edinburgh</h5>
-                <p class="mt-20">
-                    I am currently a Ph.D. student in computer science at the University of Edinburgh. I am very honored to be advised by Professor Rik Sarkar. My main research interests are Differential Privacy and Machine Learning.			
-			Formerly studied my bachelor studies at the Sharif University of Technology in Applied Mathematics, where I mostly focused on Differential Privacy, Coding Theory, and Information Theory under the supervision of Professor Javad Ebrahimi. Also, I had the great honor to work with Professor Marco Mondelli on Channel Coding and Machine Learning as a scientific intern at IST Austria. 
-                </p>
-                <a href="assets/Pdf/cv.pdf" class="btn btn-outline-danger" target="_blank"> <i class="icon-down-circled2"></i> Download My CV
-		</a>
 
-            </div>
-            <div class="col-lg-4 about-card">
-                <h3 class="font-weight-light">Personal Info</h3>
-                <span class="line mb-5"></span>
-                <ul class="mt40 info list-unstyled">
-                    <li><span>Address</span>: Informatics Department, University of Edinburgh, Edinburgh, United Kingdom</li>
-                    <li><span>Email</span>: sahel.torkamani@ed.ac.uk</li>
+            <!-- Profile Card -->
+            <div class="col-lg-4 about-card text-center reveal reveal-left" style="padding: 50px 30px; display:flex; flex-direction:column; align-items:center;">
+                <img src="assets/imgs/Portrait.jpg" alt="Sahel Torkamani" class="profile-photo">
+                <div class="profile-name">Sahel Torkamani</div>
+                <div class="profile-title">Ph.D. Student &nbsp;·&nbsp; University of Edinburgh</div>
+                <div class="profile-stats">
+                    <div class="ps-item"><span class="ps-n">5</span><span class="ps-l">Papers</span></div>
+                    <div class="ps-item"><span class="ps-n">6</span><span class="ps-l">Talks</span></div>
+                    <div class="ps-item"><span class="ps-n">8</span><span class="ps-l">Courses</span></div>
+                </div>
+                <ul class="profile-socials">
+                    <li><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ti-google"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/sahel-torkamani" target="_blank" title="LinkedIn"><i class="ti-linkedin"></i></a></li>
+                    <li><a href="https://github.com/saheltorkamani" target="_blank" title="GitHub"><i class="ti-github"></i></a></li>
+                    <li><a href="https://orcid.org/0009-0004-2110-1641" target="_blank" title="ORCID"><i class="ti-link"></i></a></li>
                 </ul>
-                <ul class="social-icons pt-3">
-                    <li class="social-item"><a class="social-link" href="#"><i class="ti-twitter" aria-hidden="true"></i></a></li>
-                    <li class="social-item"><a class="social-link" href="#"><i class="ti-google" aria-hidden="true" onclick="javascript:location.href='https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en'"></i></a></li>
-                    <li class="social-item"><a class="social-link" href="#"><i class="ti-github" aria-hidden="true"></i></a></li>
-                </ul>  
+                <a href="assets/Pdf/cv.pdf" class="btn btn-outline-danger" target="_blank" style="width:100%; max-width:200px;">
+                    Download CV
+                </a>
             </div>
-            <div class="col-lg-4 about-card">
-                <h3 class="font-weight-light">Research Interests</h3>
-                <span class="line mb-5"></span>
-                <div class="row">
-                    <div class="col-1 text-danger pt-1"><i class="ti-lock icon-lg"></i></div>
-                    <div class="col-10 ml-auto mr-3">
-                        <h6>Differential Privacy</h6>
-                        
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1 text-danger pt-1"><i class="ti-info icon-lg"></i></div>
-                    <div class="col-10 ml-auto mr-3">
-                        <h6>Theoritical Machine Learning</h6>
-                        
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1 text-danger pt-1"><i class="ti-rss-alt icon-lg"></i></div>
-                    <div class="col-10 ml-auto mr-3">
-                        <h6>Statistical Inference</h6>
-                        
-                        <hr>
-                    </div>
+
+            <!-- Bio + Interests -->
+            <div class="col-lg-4 about-card reveal delay-1">
+                <span class="section-eyebrow">About</span>
+                <h3 class="font-weight-light" style="margin-bottom:10px;">Who am I?</h3>
+                <span class="line mb-4"></span>
+                <p style="font-size:0.93rem; line-height:1.8; color:#555;">
+                    I am a Ph.D. student in Computer Science at the University of Edinburgh, advised by
+                    <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank">Professor Rik Sarkar</a>.
+                    My research focuses on Differential Privacy and Theoretical Machine Learning.
+                </p>
+                <p style="font-size:0.93rem; line-height:1.8; color:#555;">
+                    I completed my B.Sc. in Applied Mathematics at Sharif University of Technology, working with
+                    Professor Javad Ebrahimi on Differential Privacy and Information Theory.
+                    I also interned at IST Austria with
+                    <a href="https://ist.ac.at/en/research/mondelli-group/" target="_blank">Professor Marco Mondelli</a>
+                    on Channel Coding and Machine Learning.
+                </p>
+                <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#bbb; margin-bottom:8px; margin-top:20px;">Research Interests</p>
+                <div class="interest-chips">
+                    <span class="interest-chip">Differential Privacy</span>
+                    <span class="interest-chip">ML Theory</span>
+                    <span class="interest-chip">Zero-Knowledge Proofs</span>
+                    <span class="interest-chip">Statistical Inference</span>
+                    <span class="interest-chip">Information Theory</span>
+                    <span class="interest-chip">Coding Theory</span>
                 </div>
             </div>
+
+            <!-- Contact + Honors -->
+            <div class="col-lg-4 about-card reveal reveal-right delay-2">
+                <span class="section-eyebrow">Contact</span>
+                <h3 class="font-weight-light" style="margin-bottom:10px;">Get In Touch</h3>
+                <span class="line mb-4"></span>
+                <ul class="modern-info">
+                    <li><i class="ti-location-pin"></i> Informatics Department, University of Edinburgh, Edinburgh, UK</li>
+                    <li><i class="ti-email"></i> <a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a></li>
+                    <li><i class="ti-user"></i> Advised by <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank">Prof. Rik Sarkar</a></li>
+                    <li><i class="ti-layers"></i> <a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a></li>
+                </ul>
+
+                <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#bbb; margin-bottom:10px; margin-top:22px;">Selected Honors</p>
+                <ul class="honors-list">
+                    <li><span class="honor-year">2024</span>Informatics Graduate School Scholarship, University of Edinburgh</li>
+                    <li><span class="honor-year">2024</span>Best Speaker, Undergraduate Research Seminars, Sharif University</li>
+                    <li><span class="honor-year">2019</span>Scholarship, National Elites Foundation</li>
+                    <li><span class="honor-year">2018</span>National Silver Medal, Iranian Mathematics Olympiad</li>
+                    <li><span class="honor-year">2017</span>Gold &amp; International Gold, Iranian Geometry Olympiad</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 
-    <!--Resume Section-->
-    <section class="section" id="resume">
+    <!-- Research Projects -->
+    <section class="section" id="research">
         <div class="container">
-            <h2 class="mb-5"><span class="text-danger">My</span> Resume</h2>
+            <span class="section-eyebrow reveal">Work</span>
+            <h2 class="mb-1 reveal delay-1"><span class="text-danger">Research</span> Projects</h2>
+            <p class="text-muted mb-4 reveal delay-2" style="font-size:0.88rem;">Hover over a project to read more.</p>
+            <div class="research-grid">
+                <div class="research-item reveal">
+                    <p class="proj-title">Potential Privacy Risk in Machine Learning</p>
+                    <p class="proj-date">December 2024 – Ongoing</p>
+                    <div class="proj-details">
+                        <p>Advanced estimation of privacy risk of adding a data point to the training set of a machine learning model with standard optimisation methods.</p>
+                    </div>
+                </div>
+                <div class="research-item reveal delay-1">
+                    <p class="proj-title">Secure Data Scoring &amp; Selection for ML with Zero-Knowledge Proofs</p>
+                    <p class="proj-date">December 2024 – April 2025</p>
+                    <div class="proj-details">
+                        <p>Secure protocols using a small subset of data to assess and price data transactions, based on zero-knowledge proofs of data properties and model inference.</p>
+                    </div>
+                </div>
+                <div class="research-item reveal delay-2">
+                    <p class="proj-title">Continual Observation with Differential Privacy</p>
+                    <p class="proj-date">March 2024 – September 2024</p>
+                    <div class="proj-details">
+                        <p>A new generalization of the binary tree mechanism using a k-ary number system with negative digits to improve the privacy-accuracy trade-off for counting under continual observation.</p>
+                    </div>
+                </div>
+                <div class="research-item reveal delay-3">
+                    <p class="proj-title">Sparse MultiDecoder Recursive Projection Aggregation for Reed-Muller Codes</p>
+                    <p class="proj-date">March 2022 – September 2022</p>
+                    <div class="proj-details">
+                        <p>Neural network-based algorithm achieving near-maximum-likelihood performance for RM codes via better projection selection in each sparsified decoder.</p>
+                    </div>
+                </div>
+                <div class="research-item reveal delay-1">
+                    <p class="proj-title">Algorithms and Differential Privacy via Graphs</p>
+                    <p class="proj-date">March 2021 – February 2024</p>
+                    <div class="proj-details">
+                        <p>Generalized framework for utility-optimal DP mechanisms via graphs, extended to heterogeneous mechanisms and general heterogeneous privacy settings on neighboring datasets.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center reveal delay-2">
+                <a href="research.html" class="view-all-btn">View All Research &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Skills -->
+    <section class="section" id="resume" style="background:#fafafa;">
+        <div class="container">
+            <span class="section-eyebrow reveal">Background</span>
+            <h2 class="mb-5 reveal delay-1"><span class="text-danger">Education</span> &amp; Skills</h2>
             <div class="row">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 reveal reveal-left">
                     <div class="card">
-                       <div class="card-header">
-                            <div class="mt-2">
-                                <h4>Research Projects</h4>
-                                <span class="line"></span>  
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="mt-2"><h4>Education</h4><span class="line"></span></div></div>
                         <div class="card-body">
-				<h6 class="title text-danger">Potential Privacy Risk in Machine Learning</h6>
-                            <P>December 2024 - Ongoing</P>
-                            <P class="subtitle">We consider the problem of advanced estimation of privacy risk of adding a data point to the training set of a machine learning model with standard optimisation methods. </P>
+                            <h6 class="title text-danger">Ph.D of Informatics</h6>
+                            <p>2024 – 2028</p>
+                            <p class="subtitle">University of Edinburgh</p>
                             <hr>
-				<h6 class="title text-danger">Secure Data Scoring and Selection for Machine Learning Models with Zero-/Knowledge Proofs</h6>
-                            <P>December 2024 - April 2025</P>
-                            <P class="subtitle">We describe secure protocols that make use of a small subset of the data to perform an assessment and output a score that can be used to determine the final price of the data transaction. The protocols are based on zero-knowledge proofs of properties of the data and model inference.</P>
+                            <h6 class="title text-danger">B.Sc in Applied Mathematics</h6>
+                            <p>2019 – 2023</p>
+                            <p class="subtitle">Sharif University of Technology</p>
                             <hr>
-				<h6 class="title text-danger">Continual Observation with Differential Privacy</h6>
-                            <P>March 2024 - September 2024</P>
-                            <P class="subtitle">We consider the problem of counting under continual observation and present a new generalization of the binary tree mechanism that uses a k-ary number system with negative digits to improve the privacy-accuracy trade-off. </P>
+                            <h6 class="title text-danger">Diploma in Physics and Mathematics</h6>
+                            <p>2013 – 2019</p>
+                            <p class="subtitle">National Organization for the Development of Exceptional Talent</p>
                             <hr>
-                        	<h6 class="title text-danger">Sparse MultiDecoder Recursive Projection Aggregation for Reed-Muller Codes</h6>
-                            <P>March 2022 - September 2022</P>
-                            <P class="subtitle">Sparse recursive projection aggregation (SRPA) decoder for Reed-Muller codes achieves a performance that is close to the maximum likelihood decoder for short-length RM codes. We simulated an algorithm based on a neural network to lower the computational budget while keeping a performance close to that of the SRPA decoder by performing a better selection of projections in each sparsified decoder.</P>
-                            <hr>
-                        	<h6 class="title text-danger">Algorithms and Differential Privacy via Graphs</h6>
-                            <P>March 2021 - February 2024</P>
-                            <P class="subtitle">In this project, we generalized the previous framework for designing utility-optimal differentially private (DP) mechanisms via graphs in two main directions. First, heterogeneous mechanisms where the partial mechanism can have different probability distributions at the boundary. Secondly, we solved the problem in a general heterogeneous privacy setting on neighboring datasets to provide different levels of privacy.</P>
-                            <hr>   
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 reveal delay-1">
                     <div class="card">
-                       <div class="card-header">
-                            <div class="mt-2">
-                                <h4>Education</h4>
-                                <span class="line"></span>  
-                            </div>
-                        </div>
-                        <div class="card-body">
-			    <h6 class="title text-danger">Ph.D of Informatics</h6>
-                            <P>2024 - 2028</P>
-                            <P class="subtitle">University of Edinburgh</P>
-                            <hr>
-                            <h6 class="title text-danger">B.sc in Applied Mathematics</h6>
-                            <P>2019 - 2023</P>
-                            <P class="subtitle">Sharif University of Technology</P>
-                            <hr>
-                            <h6 class="title text-danger">Diploma in Physics and Mathematics Discipline</h6>
-                            <P>2013 – 2019</P>
-                            <P class="subtitle">National Organization for the Development of Exceptional Talent</P>
-                            <hr>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                       <div class="card-header">
-                            <div class="pull-left">
-                                <h4 class="mt-2">Skills</h4>
-                                <span class="line"></span>  
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="pull-left"><h4 class="mt-2">Technical Skills</h4><span class="line"></span></div></div>
                         <div class="card-body pb-2">
-                           <h6>Python</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 97%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>Java</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6>NumPy</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <h6>Python</h6>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="97%" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100"></div></div>
                             <h6>PyTorch</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div></div>
+                            <h6>NumPy / SciPy</h6>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
                             <h6>Matlab</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div></div>
+                            <h6>Java</h6>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div></div>
                             <h6>R</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4 reveal reveal-right delay-2">
                     <div class="card">
-                       <div class="card-header">
-                            <div class="pull-left">
-                                <h4 class="mt-2">Languages</h4>
-                                <span class="line"></span>  
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="pull-left"><h4 class="mt-2">Languages</h4><span class="line"></span></div></div>
                         <div class="card-body pb-2">
-                           <h6>Persian</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <h6>Persian</h6>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
                             <h6>English</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
+                            <h6>Italian</h6>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div></div>
                             <h6>French</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-				<h6>Italian</h6>
-                            <div class="progress mb-3">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <div class="progress mb-3"><div class="progress-bar bg-danger" role="progressbar" data-width="20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div></div>
                         </div>
                     </div>
                 </div>
@@ -245,173 +716,191 @@
         </div>
     </section>
 
-<!-- Bootstrap + JohnDoe main styles -->
-	<link rel="stylesheet" href="assets/css/johndoe.css">
-    
-    <style>
-        .scroll-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .scroll-container .blog-card {
-            flex: 0 0 calc(50% - 10px);
-            min-width: calc(50% - 10px);
-            scroll-snap-align: start;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .scroll-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    </style>
-</head>
-
-<section class="section" id="blog">
-    <div class="container">
-        <h2 class="mb-5">Latest <span class="text-danger">News</span></h2>
-        <div class="scroll-container">
-            
-            <div class="blog-card">
-                <div class="content-holder">
-                    <h6 class="title">EurIPS 2025</h6>
-                    <p><b>December 2025</b></p>
-                    <p>I'm excited to announce that I will be attending the Workshop on Principles of Generative Modeling (PriGM) @ EurIPS2025!</p>
-                    <a href="https://openreview.net/pdf?id=RRM7and535" target="_blank" class="read-more">OpenReview <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="content-holder">
-                    <h6 class="title">Count on Your Elders: Laplace vs Gaussian Noise</h6>
-                    <p><b>January 2025</b></p>
-                    <p>Paper "Count on Your Elders: Laplace vs Gaussian Noise" accepted at the FORC 2025.</p>
-                    <a href="https://arxiv.org/pdf/2408.07021" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div>
-            
-            <div class="blog-card">
-                <div class="content-holder">
-                    <h6 class="title">Improved Counting under Continual Observation with Pure Differential Privacy</h6>
-                    <p><b>August 2024</b></p>
-                    <p>Paper "Improved Counting under Continual Observation with Pure Differential Privacy" accepted at the TPDP 2024.</p>
-                    <a href="https://arxiv.org/pdf/2408.07021" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div>
-            
-            <div class="blog-card">
-                <div class="content-holder">
-                    <h6 class="title">Optimal Differential Privacy via Graphs</h6>
-                    <p><b>October 2023</b></p>
-                    <p>Paper "Optimal Differential Privacy via Graphs" accepted at the JSAIT 2023.</p>
-                    <a href="https://arxiv.org/abs/2310.20486" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="content-holder">
-                    <h6 class="title">Heterogeneous Differential Privacy via Graphs</h6>
-                    <p><b>April 2022</b></p>
-                    <p>Paper "Heterogeneous Differential Privacy via Graphs" accepted at the 2022 IEEE International Symposium on Information Theory (ISIT'22)</p>
-                    <a href="https://arxiv.org/abs/2203.15429" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-    <section class="section" id="blog">
+    <!-- Latest News -->
+    <section class="section" id="news">
         <div class="container">
-            <h2 class="mb-5">Beyond <span class="text-danger">Research</span></h2>
-            <div class="row">
+            <span class="section-eyebrow reveal">Updates</span>
+            <h2 class="mb-4 reveal delay-1">Latest <span class="text-danger">News</span></h2>
+            <div class="scroll-container reveal delay-2">
                 <div class="blog-card">
-
-
-		<div class="content-holder">
-                        <h6 class="title"> Photography </h6>
-			<p> My passion for photography sparked during our travels- it's just the beginning!</p>
-
-    
-                        <p><b>London, UK, October 2024</b></p>
-
-                        
-                        <a href="#" class="read-more" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/imgs/london1.jpg'" target="_blank"> Westminister Bridge <i class="ti-angle-double-right"></i></a>
+                    <div class="content-holder">
+                        <h6 class="title">EurIPS 2025</h6>
+                        <p><b>December 2025</b></p>
+                        <p>Attending the Workshop on Principles of Generative Modeling (PriGM) @ EurIPS2025.</p>
+                        <a href="https://openreview.net/pdf?id=RRM7and535" target="_blank" class="read-more">OpenReview <i class="ti-angle-double-right"></i></a>
                     </div>
-
-		<div class="content-holder">
-                        <h6 class="title"> Cooking </h6>
-			<p> Cooking is my therapy. An escape to where I can spend time creating magic.</p>
-
-    
-                        <p><b>Italian Cuisine</b></p>
-
-                        
-                        <a href="#" class="read-more" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/imgs/pastacarbonara.jpg'" target="_blank"> Pasta Carbonara <i class="ti-angle-double-right"></i></a>
+                </div>
+                <div class="blog-card">
+                    <div class="content-holder">
+                        <h6 class="title">Count on Your Elders: Laplace vs Gaussian Noise</h6>
+                        <p><b>January 2025</b></p>
+                        <p>Paper accepted at FORC 2025.</p>
+                        <a href="https://arxiv.org/pdf/2408.07021" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
                     </div>
-
-		<div class="content-holder">
-                        <h6 class="title"> Art, Art, Art </h6>
-			<p> Art, in all its forms, is a remedy for our souls, whether through music, cinema, painting, or sculpture. With one life to live, I want to express my thoughts in art in every vibrant way possible.</p>
-                        <a href="#" class="read-more" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/imgs/watercoloring.jpg'" target="_blank"> Trying Watercolour For The First Time <i class="ti-angle-double-right"></i></a>
-			<a href="#" class="read-more" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/imgs/ittakestwo.jpg'" target="_blank"> Creating May From "It Takes Two"! <i class="ti-angle-double-right"></i></a>
-			<a href="#" class="read-more" onclick="javascript:location.href='https://saheltorkamani.github.io/assets/imgs/lemons.jpg'" target="_blank">Oil Painting of Amalfi Coast, Italy <i class="ti-angle-double-right"></i></a>
-                    
+                </div>
+                <div class="blog-card">
+                    <div class="content-holder">
+                        <h6 class="title">Improved Counting under Continual Observation</h6>
+                        <p><b>August 2024</b></p>
+                        <p>Paper accepted at TPDP 2024.</p>
+                        <a href="https://arxiv.org/pdf/2408.07021" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
                     </div>
-		
-                </div><!-- end of blog wrapper -->
-
-
+                </div>
+                <div class="blog-card">
+                    <div class="content-holder">
+                        <h6 class="title">Optimal Differential Privacy via Graphs</h6>
+                        <p><b>October 2023</b></p>
+                        <p>Paper accepted at JSAIT 2023.</p>
+                        <a href="https://arxiv.org/abs/2310.20486" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="content-holder">
+                        <h6 class="title">Heterogeneous Differential Privacy via Graphs</h6>
+                        <p><b>April 2022</b></p>
+                        <p>Paper accepted at IEEE ISIT'22.</p>
+                        <a href="https://arxiv.org/abs/2203.15429" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-	
+    <!-- Beyond Research -->
+    <section class="section" style="background:#fafafa;" id="beyond-research">
+        <div class="container">
+            <span class="section-eyebrow reveal">Life</span>
+            <h2 class="mb-2 reveal delay-1">Beyond <span class="text-danger">Research</span></h2>
+            <p class="text-muted mb-5 reveal delay-2" style="font-size:0.88rem;">Click any photo to explore.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal" data-src="assets/imgs/london1.jpg" data-caption="Westminster Bridge — London, UK, October 2024" data-cat="Photography">
+                    <img src="assets/imgs/london1.jpg" alt="Westminster Bridge">
+                    <div class="gallery-overlay"><div class="gallery-meta"><div class="gallery-cat">Photography</div><div class="gallery-cap">Westminster Bridge</div></div></div>
+                </div>
+                <div class="gallery-item reveal delay-1" data-src="assets/imgs/pastacarbonara.jpg" data-caption="Pasta Carbonara — Italian Cuisine" data-cat="Cooking">
+                    <img src="assets/imgs/pastacarbonara.jpg" alt="Pasta Carbonara">
+                    <div class="gallery-overlay"><div class="gallery-meta"><div class="gallery-cat">Cooking</div><div class="gallery-cap">Pasta Carbonara</div></div></div>
+                </div>
+                <div class="gallery-item reveal delay-2" data-src="assets/imgs/watercoloring.jpg" data-caption="Trying Watercolour For The First Time" data-cat="Art">
+                    <img src="assets/imgs/watercoloring.jpg" alt="Watercolour painting">
+                    <div class="gallery-overlay"><div class="gallery-meta"><div class="gallery-cat">Art</div><div class="gallery-cap">First Watercolour</div></div></div>
+                </div>
+                <div class="gallery-item reveal delay-1" data-src="assets/imgs/ittakestwo.jpg" data-caption='Creating May from "It Takes Two"' data-cat="Art">
+                    <img src="assets/imgs/ittakestwo.jpg" alt="It Takes Two sculpture">
+                    <div class="gallery-overlay"><div class="gallery-meta"><div class="gallery-cat">Art</div><div class="gallery-cap">Creating May</div></div></div>
+                </div>
+                <div class="gallery-item reveal delay-2" data-src="assets/imgs/lemons.jpg" data-caption="Oil Painting — Amalfi Coast, Italy" data-cat="Art">
+                    <img src="assets/imgs/lemons.jpg" alt="Oil painting, Amalfi Coast">
+                    <div class="gallery-overlay"><div class="gallery-meta"><div class="gallery-cat">Art</div><div class="gallery-cap">Amalfi Coast, Oil Painting</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+        <span class="lb-close" id="lb-close" title="Close">&times;</span>
+        <span class="lb-arrow lb-prev" id="lb-prev" title="Previous">&#8249;</span>
+        <span class="lb-arrow lb-next" id="lb-next" title="Next">&#8250;</span>
+        <div class="lightbox-inner">
+            <img id="lb-img" src="" alt="">
+            <div class="lightbox-caption" id="lb-caption"></div>
+        </div>
+        <div class="lb-counter" id="lb-counter"></div>
+    </div>
+
     <footer class="footer py-3">
         <div class="container">
             <p class="small mb-0 text-light">
-                &copy; <script>document.write(new Date().getFullYear())</script> Created With <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com" target="_blank"><span class="text-danger" title="Bootstrap 4 Themes and Dashboards">DevCRUD</span></a> 
+                &copy; <script>document.write(new Date().getFullYear())</script> Sahel Torkamani
             </p>
         </div>
     </footer>
 
-	<!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-
-    <!-- bootstrap 3 affix -->
     <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <!-- Isotope  -->
     <script src="assets/vendors/isotope/isotope.pkgd.js"></script>
-    
-    <!-- Google mpas -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"></script>
-
-    <!-- JohnDoe js -->
     <script src="assets/js/johndoe.js"></script>
+    <script>
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
 
+        // Animated progress bars
+        document.querySelectorAll('#resume .progress-bar').forEach(bar => {
+            const w = bar.getAttribute('data-width');
+            bar.setAttribute('data-target', w);
+            bar.style.width = '0%';
+        });
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                        requestAnimationFrame(() => { bar.style.width = bar.getAttribute('data-target'); });
+                    });
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('#resume .card').forEach(card => progressObserver.observe(card));
+
+        // Lightbox
+        const items = Array.from(document.querySelectorAll('.gallery-item'));
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbCap = document.getElementById('lb-caption');
+        const lbCounter = document.getElementById('lb-counter');
+        let current = 0;
+
+        function openLightbox(idx) {
+            current = idx;
+            const el = items[idx];
+            lbImg.src = el.dataset.src;
+            lbImg.alt = el.dataset.caption || '';
+            lbCap.textContent = el.dataset.caption || '';
+            lbCounter.textContent = (idx + 1) + ' / ' + items.length;
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+            lbImg.src = '';
+        }
+        function navigate(dir) {
+            current = (current + dir + items.length) % items.length;
+            lbImg.style.animation = 'none';
+            lbImg.offsetHeight;
+            lbImg.style.animation = '';
+            openLightbox(current);
+        }
+
+        items.forEach((el, idx) => el.addEventListener('click', () => openLightbox(idx)));
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
+        document.getElementById('lb-next').addEventListener('click', () => navigate(1));
+        lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+        document.addEventListener('keydown', (e) => {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        });
+        let touchStartX = 0;
+        lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+        lb.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+        });
+    </script>
 </body>
 </html>
