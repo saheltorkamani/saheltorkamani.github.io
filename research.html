@@ -33,9 +33,9 @@
 
         /* ===== SUBPAGE HERO ===== */
         .page-hero {
-            background-image: linear-gradient(to bottom, rgba(23,38,60,0.82), rgba(23,38,60,0.65)), url(assets/imgs/header.jpg);
+            background-image: linear-gradient(to bottom, rgba(15,25,40,0.55), rgba(15,25,40,0.40)), url(assets/imgs/Istanbul.jpg);
             background-size: cover;
-            background-position: center;
+            background-position: center 45%;
             background-attachment: scroll;
             min-height: 280px;
             display: flex;
@@ -43,7 +43,8 @@
             justify-content: center;
             text-align: center;
             color: #fff;
-            padding: 60px 20px;
+            padding: 60px 20px 44px;
+            position: relative;
         }
         .page-hero h1 {
             font-size: 2.8rem;
@@ -51,16 +52,39 @@
             margin-bottom: 6px;
             font-family: "Dosis", sans-serif;
             color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
         }
-        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; margin: 0; }
+        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.88); letter-spacing: 0.5px; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
         .hero-line {
             width: 50px; height: 3px;
             background: #0d9488;
             margin: 12px auto 14px;
         }
+        .hero-photo-credit {
+            position: absolute;
+            bottom: 8px;
+            right: 14px;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
 
         /* ===== RESEARCH SECTION ===== */
-        #research-section { padding: 80px 0; }
+        #research-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        #research-section::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 220px; height: 100%;
+            background: url(assets/imgs/Vienna_Car.jpg) center top / cover no-repeat;
+            opacity: 0.07;
+            pointer-events: none;
+            mask-image: linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 100%);
+        }
 
         /* ===== PROJECT CARD ===== */
         .project-card {
@@ -212,6 +236,7 @@
             <div class="hero-line"></div>
             <p>Differential Privacy, Machine Learning, and Information Theory</p>
         </div>
+        <span class="hero-photo-credit">Istanbul, Turkey</span>
     </div>
 
     <!-- Projects -->

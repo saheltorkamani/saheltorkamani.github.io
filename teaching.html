@@ -35,9 +35,9 @@
 
         /* ===== HERO ===== */
         .page-hero {
-            background-image: linear-gradient(to bottom, rgba(23,38,60,0.82), rgba(23,38,60,0.65)), url(assets/imgs/header.jpg);
+            background-image: linear-gradient(to bottom, rgba(15,25,40,0.55), rgba(15,25,40,0.40)), url(assets/imgs/Vienna.jpg);
             background-size: cover;
-            background-position: center;
+            background-position: center 35%;
             background-attachment: scroll;
             min-height: 280px;
             display: flex;
@@ -45,7 +45,8 @@
             justify-content: center;
             text-align: center;
             color: #fff;
-            padding: 60px 20px;
+            padding: 60px 20px 44px;
+            position: relative;
         }
         .page-hero h1 {
             font-size: 2.8rem;
@@ -53,9 +54,18 @@
             margin-bottom: 6px;
             font-family: "Dosis", sans-serif;
             color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
         }
-        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; margin: 0; }
+        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.88); letter-spacing: 0.5px; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
         .hero-line { width: 50px; height: 3px; background: #0d9488; margin: 12px auto 14px; }
+        .hero-photo-credit {
+            position: absolute;
+            bottom: 8px;
+            right: 14px;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
 
         /* ===== TEACHING SECTION ===== */
         #teaching-section { padding: 80px 0; }
@@ -180,23 +190,25 @@
             box-shadow: 0 4px 12px rgba(13,148,136,0.25);
         }
 
-        /* ===== STATS BAR ===== */
+        /* ===== STATS BAR (bottom) ===== */
         .stats-bar {
-            background: #17263C;
-            padding: 28px 0;
-            margin-bottom: 60px;
+            background: #f7fafa;
+            border-top: 1px solid #e4f0ee;
+            padding: 18px 0;
+            margin-top: 40px;
         }
-        .stats-bar .stat-item { text-align: center; color: #fff; }
+        .stats-bar .stat-item { text-align: center; color: #555; }
         .stats-bar .stat-num {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: #0d9488;
             display: block;
             font-family: "Dosis", sans-serif;
+            line-height: 1.1;
         }
         .stats-bar .stat-lbl {
-            font-size: 0.78rem;
-            opacity: 0.7;
+            font-size: 0.7rem;
+            color: #aaa;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -248,26 +260,7 @@
             <div class="hero-line"></div>
             <p>Courses, tutorials, and lectures at Edinburgh and beyond</p>
         </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-bar">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-4 stat-item">
-                    <span class="stat-num">8</span>
-                    <span class="stat-lbl">Courses</span>
-                </div>
-                <div class="col-4 stat-item">
-                    <span class="stat-num">3</span>
-                    <span class="stat-lbl">Institutions</span>
-                </div>
-                <div class="col-4 stat-item">
-                    <span class="stat-num">4</span>
-                    <span class="stat-lbl">Open Course Links</span>
-                </div>
-            </div>
-        </div>
+        <span class="hero-photo-credit">Vienna, Austria</span>
     </div>
 
     <!-- Teaching Content -->
@@ -401,6 +394,26 @@
 
         </div>
     </section>
+
+    <!-- Stats (compact, at bottom) -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-4 stat-item">
+                    <span class="stat-num">8</span>
+                    <span class="stat-lbl">Courses</span>
+                </div>
+                <div class="col-4 stat-item">
+                    <span class="stat-num">3</span>
+                    <span class="stat-lbl">Institutions</span>
+                </div>
+                <div class="col-4 stat-item">
+                    <span class="stat-num">4</span>
+                    <span class="stat-lbl">Course Links</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer py-3">
         <div class="container">
