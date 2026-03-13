@@ -27,7 +27,7 @@
 
         /* ===== HERO ===== */
         html, body { overflow-x: hidden; }
-        .header { position: relative; overflow: hidden; }
+        .header { position: relative; overflow-x: hidden; overflow-y: visible; }
         .hero-inner {
             position: absolute;
             inset: 0;
@@ -35,23 +35,23 @@
             align-items: center;
         }
         .hero-photo-col {
-            flex: 0 0 320px;
+            flex: 0 0 380px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: flex-end;
         }
         .hero-circle {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
             overflow: hidden;
-            margin-right: -55px;
+            margin-right: -60px;
+            margin-bottom: -68px;
             flex-shrink: 0;
-            /* white inner ring + pink glow halo */
             border: 4px solid rgba(255,255,255,0.3);
             box-shadow:
-                0 0 0 10px rgba(248,92,112,0.22),
-                0 0 0 22px rgba(248,92,112,0.07),
+                0 0 0 10px rgba(13,148,136,0.22),
+                0 0 0 22px rgba(13,148,136,0.07),
                 0 28px 80px rgba(0,0,0,0.5);
             animation: heroUp 0.9s ease 0.1s both;
         }
@@ -129,22 +129,31 @@
         }
         .side-link:last-child { border-bottom: none; }
         .side-link i { font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center; color: #ccc; transition: color 0.2s; }
-        .side-link:hover { color: #F85C70; background: rgba(248,92,112,0.04); text-decoration: none; }
-        .side-link:hover i { color: #F85C70; }
-        /* ===== NAVBAR BRAND FIX ===== */
-        .navbar-nav.brand { min-width: 190px !important; }
-        .navbar-nav.brand .brand-txt { white-space: nowrap; }
+        .side-link:hover { color: #0d9488; background: rgba(13,148,136,0.04); text-decoration: none; }
+        .side-link:hover i { color: #0d9488; }
+        /* ===== NAVBAR BRAND ===== */
+        .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
+        .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
+        .navbar-brand.brand-block .brand-subtitle { font-size: 0.65rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
+        .navbar .nav-link.active { color: #0d9488 !important; font-weight: 700; }
+        .navbar .nav-link.active::after { width: 80%; left: 10%; }
+        /* Override Bootstrap danger → teal */
+        .text-danger { color: #0d9488 !important; }
+        .bg-danger { background-color: #0d9488 !important; }
+        .btn-outline-danger { color: #0d9488; border-color: #0d9488; }
+        .btn-outline-danger:hover { background-color: #0d9488; border-color: #0d9488; color: #fff; }
+        .read-more { color: #0d9488 !important; font-weight: 700; font-size: 0.8rem; }
 
         @media (max-width: 991px) {
             .side-nav { display: none; }
-            .hero-photo-col { flex: 0 0 220px; }
-            .hero-circle { width: 200px; height: 200px; margin-right: -40px; }
+            .hero-photo-col { flex: 0 0 260px; }
+            .hero-circle { width: 280px; height: 280px; margin-right: -40px; margin-bottom: -55px; }
             .hero-text-col { padding: 30px 16px 30px 24px; }
         }
         @media (max-width: 600px) {
             .hero-inner { flex-direction: column-reverse; justify-content: flex-end; padding-bottom: 28px; }
-            .hero-photo-col { flex: 0 0 auto; justify-content: center; }
-            .hero-circle { width: 130px; height: 130px; margin-right: 0; }
+            .hero-photo-col { flex: 0 0 auto; justify-content: center; align-items: center; }
+            .hero-circle { width: 140px; height: 140px; margin-right: 0; margin-bottom: 0; }
             .hero-text-col { padding: 14px 20px; text-align: center; }
             .hero-socials { justify-content: center; }
         }
@@ -155,7 +164,7 @@
             content: ''; position: absolute;
             bottom: 2px; left: 50%;
             width: 0; height: 2px;
-            background: #F85C70;
+            background: #0d9488;
             transition: width 0.28s ease, left 0.28s ease;
         }
         .navbar .nav-link:hover::after,
@@ -175,7 +184,7 @@
         .about-section .about-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .about-section .about-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(248,92,112,0.08);
+            box-shadow: 0 10px 28px rgba(13,148,136,0.08);
         }
 
         /* profile-photo moved to hero-circle */
@@ -193,7 +202,7 @@
         .ps-n {
             font-size: 1.55rem;
             font-weight: 800;
-            color: #F85C70;
+            color: #0d9488;
             font-family: "Dosis", sans-serif;
             display: block;
             line-height: 1.1;
@@ -214,7 +223,7 @@
             transition: all 0.25s ease;
             cursor: default;
         }
-        .interest-chip:hover { border-color: #F85C70; color: #F85C70; background: rgba(248,92,112,0.04); }
+        .interest-chip:hover { border-color: #0d9488; color: #0d9488; background: rgba(13,148,136,0.04); }
 
         /* INFO LIST */
         .modern-info { list-style: none; padding: 0; }
@@ -227,7 +236,7 @@
             color: #555;
             line-height: 1.5;
         }
-        .modern-info li i { color: #F85C70; margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
+        .modern-info li i { color: #0d9488; margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
 
         /* HONORS */
         .honors-list { list-style: none; padding: 0; }
@@ -242,8 +251,8 @@
         .honor-year {
             font-size: 0.7rem;
             font-weight: 700;
-            color: #F85C70;
-            background: rgba(248,92,112,0.08);
+            color: #0d9488;
+            background: rgba(13,148,136,0.08);
             padding: 1px 7px;
             border-radius: 10px;
             margin-right: 6px;
@@ -256,7 +265,7 @@
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: #F85C70;
+            color: #0d9488;
             display: block;
             margin-bottom: 8px;
         }
@@ -282,19 +291,19 @@
         .research-item::before {
             content: ''; position: absolute; left: 0; top: 0;
             width: 3px; height: 100%;
-            background: #F85C70;
+            background: #0d9488;
             transform: scaleY(0); transform-origin: bottom;
             transition: transform 0.35s ease;
         }
         .research-item:hover {
-            border-color: rgba(248,92,112,0.4);
-            box-shadow: 0 8px 28px rgba(248,92,112,0.12);
+            border-color: rgba(13,148,136,0.4);
+            box-shadow: 0 8px 28px rgba(13,148,136,0.12);
             transform: translateY(-3px);
         }
         .research-item:hover::before { transform: scaleY(1); }
         .research-item .proj-title {
             font-size: 0.9rem; font-weight: 700;
-            color: #F85C70; margin-bottom: 4px; line-height: 1.45;
+            color: #0d9488; margin-bottom: 4px; line-height: 1.45;
         }
         .research-item .proj-date { font-size: 0.76rem; color: #bbb; margin-bottom: 0; }
         .research-item .proj-details {
@@ -307,13 +316,13 @@
         }
         .view-all-btn {
             display: inline-block; margin-top: 30px;
-            color: #F85C70; font-weight: 700; font-size: 0.88rem;
-            border: 2px solid #F85C70; padding: 9px 26px; border-radius: 30px;
+            color: #0d9488; font-weight: 700; font-size: 0.88rem;
+            border: 2px solid #0d9488; padding: 9px 26px; border-radius: 30px;
             transition: all 0.3s ease; text-decoration: none;
         }
         .view-all-btn:hover {
-            background: #F85C70; color: #fff; text-decoration: none;
-            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(248,92,112,0.3);
+            background: #0d9488; color: #fff; text-decoration: none;
+            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,148,136,0.3);
         }
 
         /* ===== EDUCATION & SKILLS ===== */
@@ -339,12 +348,12 @@
         }
         .scroll-container .blog-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(248,92,112,0.11);
-            border-color: rgba(248,92,112,0.32);
+            box-shadow: 0 10px 28px rgba(13,148,136,0.11);
+            border-color: rgba(13,148,136,0.32);
         }
         .scroll-container::-webkit-scrollbar { height: 4px; }
         .scroll-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .scroll-container::-webkit-scrollbar-thumb { background: #F85C70; border-radius: 10px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 10px; }
 
         /* ===== GALLERY ===== */
         .gallery-grid {
@@ -374,7 +383,7 @@
         .gallery-item:hover .gallery-meta { transform: translateY(0); opacity: 1; }
         .gallery-cat {
             font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
-            text-transform: uppercase; color: #F85C70;
+            text-transform: uppercase; color: #0d9488;
             background: rgba(255,255,255,0.15); padding: 2px 10px;
             border-radius: 10px; display: inline-block; margin-bottom: 4px;
         }
@@ -406,7 +415,7 @@
             border-radius: 50%; background: rgba(255,255,255,0.1);
             transition: background 0.2s, transform 0.2s; line-height: 1;
         }
-        .lb-close:hover { background: rgba(248,92,112,0.7); transform: rotate(90deg); }
+        .lb-close:hover { background: rgba(13,148,136,0.7); transform: rotate(90deg); }
         .lb-arrow {
             position: fixed; top: 50%; transform: translateY(-50%);
             color: #fff; font-size: 1.6rem; cursor: pointer;
@@ -414,7 +423,7 @@
             border-radius: 50%; background: rgba(255,255,255,0.1);
             transition: background 0.2s, transform 0.2s;
         }
-        .lb-arrow:hover { background: rgba(248,92,112,0.65); }
+        .lb-arrow:hover { background: rgba(13,148,136,0.65); }
         .lb-prev { left: 16px; }
         .lb-next { right: 16px; }
         .lb-prev:hover { transform: translateY(-50%) translateX(-2px); }
@@ -426,7 +435,7 @@
 
         /* ===== MISC ===== */
         .btn-outline-danger { transition: all 0.3s ease; }
-        .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(248,92,112,0.3); }
+        .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(13,148,136,0.3); }
 
         @media (max-width: 991px) {
             .hero-name { font-size: 2.8rem; }
@@ -447,6 +456,8 @@
         <a href="#resume" class="side-link"><i class="ti-briefcase"></i><span>Education</span></a>
         <a href="#news" class="side-link"><i class="ti-rss"></i><span>News</span></a>
         <a href="#beyond-research" class="side-link"><i class="ti-image"></i><span>Gallery</span></a>
+        <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="side-link" target="_blank"><i class="ti-book"></i><span>Publications</span></a>
+        <a href="contact.html" class="side-link"><i class="ti-email"></i><span>Contact</span></a>
     </nav>
 
     <!-- Hero Header -->
@@ -473,25 +484,20 @@
     <!-- Navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
         <div class="container">
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand brand-block" href="#home">
+                <span class="brand-title">Sahel Torkamani</span>
+                <span class="brand-subtitle">Ph.D Student</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
-                </ul>
-                <ul class="navbar-nav brand">
-                    <li class="brand-txt">
-                        <h5 class="brand-title">Sahel Torkamani</h5>
-                        <div class="brand-subtitle">Ph.D Student</div>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
                     <li class="nav-item"><a href="research.html" class="nav-link">Research</a></li>
                     <li class="nav-item"><a href="talks.html" class="nav-link">Talks</a></li>
                     <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
-                    <li class="nav-item"><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="nav-link" target="_blank">Publications</a></li>
                     <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </div>
