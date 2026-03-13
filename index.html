@@ -35,28 +35,34 @@
             align-items: center;
         }
         .hero-photo-col {
-            flex: 0 0 340px;
+            flex: 0 0 320px;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
         }
         .hero-circle {
-            width: 310px;
-            height: 310px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             overflow: hidden;
-            margin-left: -75px;
-            border: 5px solid rgba(255,255,255,0.18);
-            box-shadow: 0 24px 80px rgba(0,0,0,0.45);
-            animation: heroUp 0.9s ease 0.1s both;
+            margin-right: -55px;
             flex-shrink: 0;
+            /* white inner ring + pink glow halo */
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow:
+                0 0 0 10px rgba(248,92,112,0.22),
+                0 0 0 22px rgba(248,92,112,0.07),
+                0 28px 80px rgba(0,0,0,0.5);
+            animation: heroUp 0.9s ease 0.1s both;
         }
         .hero-circle img {
             width: 100%; height: 100%;
             object-fit: cover; object-position: top;
+            filter: brightness(1.04) contrast(1.03);
         }
         .hero-text-col {
             flex: 1;
-            padding: 40px 60px 40px 30px;
+            padding: 40px 30px 40px 60px;
             text-align: left;
         }
         .hero-eyebrow {
@@ -125,16 +131,20 @@
         .side-link i { font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center; color: #ccc; transition: color 0.2s; }
         .side-link:hover { color: #F85C70; background: rgba(248,92,112,0.04); text-decoration: none; }
         .side-link:hover i { color: #F85C70; }
+        /* ===== NAVBAR BRAND FIX ===== */
+        .navbar-nav.brand { min-width: 190px !important; }
+        .navbar-nav.brand .brand-txt { white-space: nowrap; }
+
         @media (max-width: 991px) {
             .side-nav { display: none; }
-            .hero-photo-col { flex: 0 0 230px; }
-            .hero-circle { width: 210px; height: 210px; margin-left: -55px; }
-            .hero-text-col { padding: 30px 24px 30px 16px; }
+            .hero-photo-col { flex: 0 0 220px; }
+            .hero-circle { width: 200px; height: 200px; margin-right: -40px; }
+            .hero-text-col { padding: 30px 16px 30px 24px; }
         }
         @media (max-width: 600px) {
-            .hero-inner { flex-direction: column; justify-content: flex-end; padding-bottom: 28px; }
-            .hero-photo-col { flex: 0 0 auto; }
-            .hero-circle { width: 130px; height: 130px; margin-left: -28px; }
+            .hero-inner { flex-direction: column-reverse; justify-content: flex-end; padding-bottom: 28px; }
+            .hero-photo-col { flex: 0 0 auto; justify-content: center; }
+            .hero-circle { width: 130px; height: 130px; margin-right: 0; }
             .hero-text-col { padding: 14px 20px; text-align: center; }
             .hero-socials { justify-content: center; }
         }
@@ -431,23 +441,17 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-    <!-- Left Sidebar: separate pages -->
-    <nav class="side-nav" aria-label="Site pages">
-        <a href="research.html" class="side-link"><i class="ti-bookmark"></i><span>Research</span></a>
-        <a href="talks.html" class="side-link"><i class="ti-microphone"></i><span>Talks</span></a>
-        <a href="teaching.html" class="side-link"><i class="ti-book"></i><span>Teaching</span></a>
-        <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" target="_blank" class="side-link"><i class="ti-google"></i><span>Publications</span></a>
-        <a href="contact.html" class="side-link"><i class="ti-email"></i><span>Contact</span></a>
+    <!-- Left Sidebar: in-page section navigator -->
+    <nav class="side-nav" aria-label="Page sections">
+        <a href="#about" class="side-link"><i class="ti-user"></i><span>About</span></a>
+        <a href="#resume" class="side-link"><i class="ti-briefcase"></i><span>Education</span></a>
+        <a href="#news" class="side-link"><i class="ti-rss"></i><span>News</span></a>
+        <a href="#beyond-research" class="side-link"><i class="ti-image"></i><span>Gallery</span></a>
     </nav>
 
     <!-- Hero Header -->
     <header class="header">
         <div class="hero-inner">
-            <div class="hero-photo-col">
-                <div class="hero-circle">
-                    <img src="assets/imgs/Portrait.jpg" alt="Sahel Torkamani">
-                </div>
-            </div>
             <div class="hero-text-col">
                 <p class="hero-eyebrow">School of Informatics &nbsp;·&nbsp; University of Edinburgh</p>
                 <h1 class="hero-name">Sahel Torkamani</h1>
@@ -456,6 +460,11 @@
                     <a href="https://www.linkedin.com/in/sahel-torkamani" target="_blank" title="LinkedIn"><i class="ti-linkedin"></i></a>
                     <a href="https://github.com/saheltorkamani" target="_blank" title="GitHub"><i class="ti-github"></i></a>
                     <a href="https://orcid.org/0009-0004-2110-1641" target="_blank" title="ORCID"><i class="ti-link"></i></a>
+                </div>
+            </div>
+            <div class="hero-photo-col">
+                <div class="hero-circle">
+                    <img src="assets/imgs/Portrait.jpg" alt="Sahel Torkamani">
                 </div>
             </div>
         </div>
@@ -470,7 +479,6 @@
             <div class="collapse mt-sm-20 navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
                 </ul>
                 <ul class="navbar-nav brand">
@@ -480,10 +488,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="#research" class="nav-link">Research</a></li>
-                    <li class="nav-item"><a href="#resume" class="nav-link">Education</a></li>
-                    <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
-                    <li class="nav-item last-item"><a href="#beyond-research" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="research.html" class="nav-link">Research</a></li>
+                    <li class="nav-item"><a href="talks.html" class="nav-link">Talks</a></li>
+                    <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="nav-link" target="_blank">Publications</a></li>
+                    <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -514,11 +523,6 @@
                 <div class="interest-chips">
                     <span class="interest-chip">Machine Learning Theory</span>
                     <span class="interest-chip">Differential Privacy</span>
-                </div>
-                <div class="profile-stats" style="max-width:320px; margin-top:28px;">
-                    <div class="ps-item"><span class="ps-n">5</span><span class="ps-l">Papers</span></div>
-                    <div class="ps-item"><span class="ps-n">6</span><span class="ps-l">Talks</span></div>
-                    <div class="ps-item"><span class="ps-n">8</span><span class="ps-l">Courses</span></div>
                 </div>
             </div>
 
