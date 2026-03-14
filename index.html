@@ -50,8 +50,8 @@
             flex-shrink: 0;
             border: 4px solid rgba(255,255,255,0.3);
             box-shadow:
-                0 0 0 10px rgba(13,148,136,0.22),
-                0 0 0 22px rgba(13,148,136,0.07),
+                0 0 0 10px rgba(248,92,112,0.22),
+                0 0 0 22px rgba(248,92,112,0.07),
                 0 28px 80px rgba(0,0,0,0.5);
             animation: heroUp 0.9s ease 0.1s both;
         }
@@ -129,20 +129,20 @@
         }
         .side-link:last-child { border-bottom: none; }
         .side-link i { font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center; color: #ccc; transition: color 0.2s; }
-        .side-link:hover { color: #0d9488; background: rgba(13,148,136,0.04); text-decoration: none; }
-        .side-link:hover i { color: #0d9488; }
+        .side-link:hover { color: #F85C70; background: rgba(248,92,112,0.04); text-decoration: none; }
+        .side-link:hover i { color: #F85C70; }
         /* ===== NAVBAR BRAND ===== */
         .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
         .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
         .navbar-brand.brand-block .brand-subtitle { font-size: 0.65rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
-        .navbar .nav-link.active { color: #0d9488 !important; font-weight: 700; }
+        .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
         .navbar .nav-link.active::after { width: 80%; left: 10%; }
         /* Override Bootstrap danger → teal */
-        .text-danger { color: #0d9488 !important; }
-        .bg-danger { background-color: #0d9488 !important; }
-        .btn-outline-danger { color: #0d9488; border-color: #0d9488; }
-        .btn-outline-danger:hover { background-color: #0d9488; border-color: #0d9488; color: #fff; }
-        .read-more { color: #0d9488 !important; font-weight: 700; font-size: 0.8rem; }
+        .text-danger { color: #F85C70 !important; }
+        .bg-danger { background-color: #F85C70 !important; }
+        .btn-outline-danger { color: #F85C70; border-color: #F85C70; }
+        .btn-outline-danger:hover { background-color: #F85C70; border-color: #F85C70; color: #fff; }
+        .read-more { color: #F85C70 !important; font-weight: 700; font-size: 0.8rem; }
 
         @media (max-width: 991px) {
             .side-nav { display: none; }
@@ -164,7 +164,7 @@
             content: ''; position: absolute;
             bottom: 2px; left: 50%;
             width: 0; height: 2px;
-            background: #0d9488;
+            background: #F85C70;
             transition: width 0.28s ease, left 0.28s ease;
         }
         .navbar .nav-link:hover::after,
@@ -184,7 +184,7 @@
         .about-section .about-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .about-section .about-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(13,148,136,0.08);
+            box-shadow: 0 10px 28px rgba(248,92,112,0.08);
         }
 
         /* profile-photo moved to hero-circle */
@@ -202,7 +202,7 @@
         .ps-n {
             font-size: 1.55rem;
             font-weight: 800;
-            color: #0d9488;
+            color: #F85C70;
             font-family: "Dosis", sans-serif;
             display: block;
             line-height: 1.1;
@@ -223,7 +223,7 @@
             transition: all 0.25s ease;
             cursor: default;
         }
-        .interest-chip:hover { border-color: #0d9488; color: #0d9488; background: rgba(13,148,136,0.04); }
+        .interest-chip:hover { border-color: #F85C70; color: #F85C70; background: rgba(248,92,112,0.04); }
 
         /* INFO LIST */
         .modern-info { list-style: none; padding: 0; }
@@ -236,7 +236,7 @@
             color: #555;
             line-height: 1.5;
         }
-        .modern-info li i { color: #0d9488; margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
+        .modern-info li i { color: #F85C70; margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
 
         /* HONORS */
         .honors-list { list-style: none; padding: 0; }
@@ -251,8 +251,8 @@
         .honor-year {
             font-size: 0.7rem;
             font-weight: 700;
-            color: #0d9488;
-            background: rgba(13,148,136,0.08);
+            color: #F85C70;
+            background: rgba(248,92,112,0.08);
             padding: 1px 7px;
             border-radius: 10px;
             margin-right: 6px;
@@ -265,7 +265,7 @@
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: #0d9488;
+            color: #F85C70;
             display: block;
             margin-bottom: 8px;
         }
@@ -291,19 +291,19 @@
         .research-item::before {
             content: ''; position: absolute; left: 0; top: 0;
             width: 3px; height: 100%;
-            background: #0d9488;
+            background: #F85C70;
             transform: scaleY(0); transform-origin: bottom;
             transition: transform 0.35s ease;
         }
         .research-item:hover {
-            border-color: rgba(13,148,136,0.4);
-            box-shadow: 0 8px 28px rgba(13,148,136,0.12);
+            border-color: rgba(248,92,112,0.4);
+            box-shadow: 0 8px 28px rgba(248,92,112,0.12);
             transform: translateY(-3px);
         }
         .research-item:hover::before { transform: scaleY(1); }
         .research-item .proj-title {
             font-size: 0.9rem; font-weight: 700;
-            color: #0d9488; margin-bottom: 4px; line-height: 1.45;
+            color: #F85C70; margin-bottom: 4px; line-height: 1.45;
         }
         .research-item .proj-date { font-size: 0.76rem; color: #bbb; margin-bottom: 0; }
         .research-item .proj-details {
@@ -316,13 +316,13 @@
         }
         .view-all-btn {
             display: inline-block; margin-top: 30px;
-            color: #0d9488; font-weight: 700; font-size: 0.88rem;
-            border: 2px solid #0d9488; padding: 9px 26px; border-radius: 30px;
+            color: #F85C70; font-weight: 700; font-size: 0.88rem;
+            border: 2px solid #F85C70; padding: 9px 26px; border-radius: 30px;
             transition: all 0.3s ease; text-decoration: none;
         }
         .view-all-btn:hover {
-            background: #0d9488; color: #fff; text-decoration: none;
-            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,148,136,0.3);
+            background: #F85C70; color: #fff; text-decoration: none;
+            transform: translateY(-2px); box-shadow: 0 6px 18px rgba(248,92,112,0.3);
         }
 
         /* ===== EDUCATION & SKILLS ===== */
@@ -348,12 +348,12 @@
         }
         .scroll-container .blog-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(13,148,136,0.11);
-            border-color: rgba(13,148,136,0.32);
+            box-shadow: 0 10px 28px rgba(248,92,112,0.11);
+            border-color: rgba(248,92,112,0.32);
         }
         .scroll-container::-webkit-scrollbar { height: 4px; }
         .scroll-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .scroll-container::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 10px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: #F85C70; border-radius: 10px; }
 
         /* ===== GALLERY ===== */
         .gallery-grid {
@@ -383,7 +383,7 @@
         .gallery-item:hover .gallery-meta { transform: translateY(0); opacity: 1; }
         .gallery-cat {
             font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
-            text-transform: uppercase; color: #0d9488;
+            text-transform: uppercase; color: #F85C70;
             background: rgba(255,255,255,0.15); padding: 2px 10px;
             border-radius: 10px; display: inline-block; margin-bottom: 4px;
         }
@@ -415,7 +415,7 @@
             border-radius: 50%; background: rgba(255,255,255,0.1);
             transition: background 0.2s, transform 0.2s; line-height: 1;
         }
-        .lb-close:hover { background: rgba(13,148,136,0.7); transform: rotate(90deg); }
+        .lb-close:hover { background: rgba(248,92,112,0.7); transform: rotate(90deg); }
         .lb-arrow {
             position: fixed; top: 50%; transform: translateY(-50%);
             color: #fff; font-size: 1.6rem; cursor: pointer;
@@ -423,7 +423,7 @@
             border-radius: 50%; background: rgba(255,255,255,0.1);
             transition: background 0.2s, transform 0.2s;
         }
-        .lb-arrow:hover { background: rgba(13,148,136,0.65); }
+        .lb-arrow:hover { background: rgba(248,92,112,0.65); }
         .lb-prev { left: 16px; }
         .lb-next { right: 16px; }
         .lb-prev:hover { transform: translateY(-50%) translateX(-2px); }
@@ -435,7 +435,7 @@
 
         /* ===== MISC ===== */
         .btn-outline-danger { transition: all 0.3s ease; }
-        .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(13,148,136,0.3); }
+        .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(248,92,112,0.3); }
 
         @media (max-width: 991px) {
             .hero-name { font-size: 2.8rem; }
