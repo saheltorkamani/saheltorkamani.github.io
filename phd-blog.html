@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sahel Torkamani – PhD Research Blog. The story of magnitude in machine learning.">
+    <meta name="author" content="Sahel Torkamani">
+    <title>PhD Research Blog · Sahel Torkamani</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== SHARED SITE STYLES ===== */
+        html, body { overflow-x: hidden; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.24s; }
+        .delay-3 { transition-delay: 0.36s; }
+
+        .text-danger { color: #F85C70 !important; }
+        .bg-danger { background-color: #F85C70 !important; }
+
+        /* Side nav — identical to main site */
+        .side-nav {
+            position: fixed; left: 0; top: 50%;
+            transform: translateY(-50%); z-index: 1050;
+            background: #fff; border-radius: 0 14px 14px 0;
+            box-shadow: 4px 0 24px rgba(0,0,0,0.07);
+            width: 48px; overflow: hidden; transition: width 0.28s ease;
+            border: 1px solid #f0f0f0; border-left: none;
+        }
+        .side-nav:hover { width: 158px; }
+        .side-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 13px 13px; color: #aaa; text-decoration: none;
+            font-size: 0.74rem; font-weight: 700; white-space: nowrap;
+            letter-spacing: 0.8px; text-transform: uppercase;
+            transition: color 0.2s, background 0.2s; border-bottom: 1px solid #f5f5f5;
+        }
+        .side-link:last-child { border-bottom: none; }
+        .side-link i { font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center; color: #ccc; transition: color 0.2s; }
+        .side-link:hover { color: #F85C70; background: rgba(248,92,112,0.04); text-decoration: none; }
+        .side-link:hover i { color: #F85C70; }
+
+        /* Navbar */
+        .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
+        .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
+        .navbar-brand.brand-block .brand-subtitle { font-size: 0.65rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
+        .navbar .nav-link { position: relative; }
+        .navbar .nav-link::after { content: ''; position: absolute; bottom: 2px; left: 50%; width: 0; height: 2px; background: #F85C70; transition: width 0.28s ease, left 0.28s ease; }
+        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
+        .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
+
+        /* ===== PAGE HEADER ===== */
+        .blog-header {
+            background: linear-gradient(135deg, #17263C 0%, #1e3450 60%, #253d5e 100%);
+            padding: 80px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-header::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(248,92,112,0.12) 0%, transparent 65%);
+        }
+        /* Floating math symbols decoration */
+        .math-deco {
+            position: absolute;
+            font-family: 'Lora', serif;
+            color: rgba(255,255,255,0.06);
+            font-size: 5rem;
+            font-style: italic;
+            pointer-events: none;
+            user-select: none;
+        }
+        .math-deco.d1 { top: 10%; right: 8%; font-size: 7rem; }
+        .math-deco.d2 { bottom: 5%; left: 5%; font-size: 4rem; }
+        .math-deco.d3 { top: 55%; right: 22%; font-size: 3.5rem; }
+        .blog-header-inner { max-width: 860px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
+        .blog-header-eyebrow {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: #F85C70;
+            margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+        }
+        .blog-header-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 2px; background: #F85C70; }
+        .blog-header h1 {
+            font-family: 'Lora', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 600; color: #fff;
+            line-height: 1.15; margin-bottom: 18px;
+            font-style: italic;
+        }
+        .blog-header h1 em { font-style: normal; color: #F85C70; }
+        .blog-header-subtitle {
+            font-size: 1rem; color: rgba(255,255,255,0.55);
+            line-height: 1.75; max-width: 580px;
+        }
+        .blog-header-meta {
+            margin-top: 28px; display: flex; gap: 24px; flex-wrap: wrap;
+        }
+        .blog-meta-pill {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px; padding: 5px 14px;
+            font-size: 0.75rem; font-weight: 600;
+            color: rgba(255,255,255,0.6); letter-spacing: 0.5px;
+        }
+
+        /* ===== STORYLINE LAYOUT ===== */
+        .storyline-outer {
+            background: #fafafa;
+            padding: 80px 0 100px;
+        }
+        .storyline-inner {
+            max-width: 860px; margin: 0 auto; padding: 0 40px;
+            position: relative;
+        }
+
+        /* The continuous vertical thread */
+        .storyline-thread {
+            position: absolute;
+            left: 61px; /* 40px padding + ~21px to center of node */
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #F85C70 0%, rgba(248,92,112,0.3) 100%);
+        }
+        .storyline-thread-fill {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            height: 0%;
+            background: #F85C70;
+            transition: height 0.1s linear;
+        }
+
+        /* Section intro text */
+        .storyline-intro {
+            font-size: 0.92rem; color: #666; line-height: 1.8;
+            margin-bottom: 60px; padding-left: 68px;
+            max-width: 680px;
+        }
+
+        /* ===== CHAPTER BLOCK ===== */
+        .chapter {
+            position: relative;
+            margin-bottom: 70px;
+        }
+        .chapter:last-child { margin-bottom: 0; }
+
+        /* Node on the thread */
+        .chapter-node {
+            position: absolute;
+            left: 0; top: 28px;
+            width: 42px; height: 42px;
+            background: #fff;
+            border: 3px solid #F85C70;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2;
+            box-shadow: 0 0 0 6px rgba(248,92,112,0.1), 0 4px 16px rgba(248,92,112,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .chapter:hover .chapter-node {
+            transform: scale(1.12);
+            box-shadow: 0 0 0 10px rgba(248,92,112,0.12), 0 6px 24px rgba(248,92,112,0.3);
+        }
+        .chapter-node .node-num {
+            font-family: 'Dosis', sans-serif;
+            font-size: 0.85rem; font-weight: 800;
+            color: #F85C70; line-height: 1;
+        }
+
+        /* The card */
+        .chapter-card {
+            margin-left: 68px;
+            background: #fff;
+            border-radius: 14px;
+            border: 1px solid #e8e8e8;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+        }
+        .chapter:hover .chapter-card {
+            box-shadow: 0 12px 40px rgba(248,92,112,0.13);
+            transform: translateY(-3px);
+        }
+
+        /* Card header bar */
+        .chapter-card-header {
+            padding: 28px 32px 22px;
+            border-bottom: 1px solid #f5f5f5;
+            position: relative;
+        }
+        .chapter-card-header::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, #F85C70 0%, rgba(248,92,112,0.3) 100%);
+        }
+        .chapter-tag {
+            display: inline-block;
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 1.8px; text-transform: uppercase;
+            color: #F85C70; background: rgba(248,92,112,0.08);
+            padding: 3px 10px; border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        .chapter-title {
+            font-family: 'Lora', serif;
+            font-size: 1.35rem; font-weight: 600;
+            color: #17263C; line-height: 1.3;
+            margin-bottom: 6px;
+        }
+        .chapter-venue {
+            font-size: 0.78rem; font-weight: 600;
+            color: #aaa; letter-spacing: 0.5px;
+        }
+        .chapter-venue a { color: #F85C70; text-decoration: none; }
+        .chapter-venue a:hover { text-decoration: underline; }
+
+        /* Card body */
+        .chapter-card-body {
+            padding: 26px 32px;
+        }
+
+        /* The "story" narrative text */
+        .chapter-story {
+            font-family: 'Lora', serif;
+            font-size: 0.97rem; color: #444;
+            line-height: 1.85; margin-bottom: 22px;
+            font-style: italic;
+            border-left: 3px solid rgba(248,92,112,0.3);
+            padding-left: 18px;
+        }
+
+        /* Key ideas list */
+        .chapter-ideas-title {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: #bbb; margin-bottom: 12px;
+        }
+        .chapter-ideas {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 22px;
+        }
+        .idea-chip {
+            background: #fafafa; border: 1.5px solid #e8e8e8;
+            color: #555; font-size: 0.78rem; font-weight: 600;
+            padding: 5px 13px; border-radius: 20px;
+            transition: all 0.25s ease; cursor: default;
+        }
+        .idea-chip:hover { border-color: #F85C70; color: #F85C70; background: rgba(248,92,112,0.04); }
+
+        /* Expandable abstract */
+        .chapter-abstract-toggle {
+            background: none; border: none; padding: 0;
+            font-size: 0.8rem; font-weight: 700;
+            color: #F85C70; cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+            letter-spacing: 0.3px; margin-bottom: 0;
+            transition: opacity 0.2s;
+        }
+        .chapter-abstract-toggle:hover { opacity: 0.75; }
+        .chapter-abstract-toggle .toggle-arrow {
+            display: inline-block; transition: transform 0.3s ease;
+            font-size: 0.7rem;
+        }
+        .chapter-abstract-toggle.open .toggle-arrow { transform: rotate(180deg); }
+        .chapter-abstract {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+            opacity: 0;
+        }
+        .chapter-abstract.open { max-height: 400px; opacity: 1; }
+        .chapter-abstract-inner {
+            margin-top: 14px; padding: 16px 18px;
+            background: #fafafa; border-radius: 8px;
+            font-size: 0.85rem; color: #666; line-height: 1.8;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* Card footer: links */
+        .chapter-card-footer {
+            padding: 16px 32px;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+        }
+        .chapter-link {
+            font-size: 0.78rem; font-weight: 700;
+            color: #F85C70; text-decoration: none;
+            display: flex; align-items: center; gap: 5px;
+            transition: opacity 0.2s;
+        }
+        .chapter-link:hover { opacity: 0.7; text-decoration: none; }
+
+        /* ===== CONNECTOR BETWEEN CHAPTERS ===== */
+        .chapter-connector {
+            margin-left: 68px;
+            margin-bottom: 16px;
+            margin-top: -40px;
+            padding: 14px 20px;
+            background: rgba(248,92,112,0.05);
+            border-left: 3px solid rgba(248,92,112,0.25);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.82rem; color: #888;
+            font-style: italic; line-height: 1.6;
+        }
+        .chapter-connector strong { color: #F85C70; font-style: normal; }
+
+        /* ===== "COMING NEXT" BLOCK ===== */
+        .coming-next {
+            margin-left: 68px; margin-top: 32px;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, rgba(248,92,112,0.06) 0%, rgba(248,92,112,0.02) 100%);
+            border: 2px dashed rgba(248,92,112,0.3);
+            border-radius: 12px;
+            position: relative;
+        }
+        .coming-next-label {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: #F85C70; margin-bottom: 8px;
+        }
+        .coming-next-title {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem; font-weight: 600;
+            color: #17263C; margin-bottom: 8px; font-style: italic;
+        }
+        .coming-next p { font-size: 0.85rem; color: #888; line-height: 1.7; margin: 0; }
+        .coming-next-badge {
+            position: absolute; top: -12px; right: 20px;
+            background: #F85C70; color: #fff;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; padding: 3px 12px; border-radius: 12px;
+        }
+
+        /* Thread end node */
+        .thread-end {
+            position: relative; margin-left: 0; margin-top: 40px;
+            display: flex; align-items: center; gap: 16px;
+        }
+        .thread-end-dot {
+            width: 16px; height: 16px;
+            background: rgba(248,92,112,0.25);
+            border: 2px solid rgba(248,92,112,0.4);
+            border-radius: 50%; flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(248,92,112,0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(248,92,112,0); }
+        }
+        .thread-end-text {
+            font-size: 0.82rem; color: #bbb; font-style: italic;
+        }
+
+        @media (max-width: 991px) {
+            .side-nav { display: none; }
+            .blog-header-inner { padding: 0 24px; }
+            .storyline-inner { padding: 0 24px; }
+            .storyline-thread { left: 43px; }
+            .chapter-node { width: 36px; height: 36px; }
+            .chapter-card, .chapter-connector, .coming-next { margin-left: 56px; }
+            .chapter-card-header, .chapter-card-body, .chapter-card-footer { padding-left: 22px; padding-right: 22px; }
+        }
+        @media (max-width: 600px) {
+            .blog-header { padding: 60px 0 50px; }
+            .blog-header h1 { font-size: 1.8rem; }
+            .storyline-thread { display: none; }
+            .chapter-node { display: none; }
+            .chapter-card, .chapter-connector, .coming-next, .thread-end { margin-left: 0; }
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40">
+
+    <!-- Side Nav -->
+    <nav class="side-nav" aria-label="Page sections">
+        <a href="index.html#about" class="side-link"><i class="ti-user"></i><span>About</span></a>
+        <a href="index.html#resume" class="side-link"><i class="ti-briefcase"></i><span>Education</span></a>
+        <a href="index.html#news" class="side-link"><i class="ti-rss"></i><span>News</span></a>
+        <a href="index.html#beyond-research" class="side-link"><i class="ti-image"></i><span>Gallery</span></a>
+        <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="side-link" target="_blank"><i class="ti-book"></i><span>Publications</span></a>
+        <a href="contact.html" class="side-link"><i class="ti-email"></i><span>Contact</span></a>
+    </nav>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand brand-block" href="index.html">
+                <span class="brand-title">Sahel Torkamani</span>
+                <span class="brand-subtitle">Ph.D Student</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
+                    <li class="nav-item"><a href="research.html" class="nav-link">Research</a></li>
+                    <li class="nav-item"><a href="talks.html" class="nav-link">Talks</a></li>
+                    <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="phd-blog.html" class="nav-link active">PhD Blog</a></li>
+                    <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="blog-header">
+        <span class="math-deco d1">Φ</span>
+        <span class="math-deco d2">∥·∥</span>
+        <span class="math-deco d3">d(X,Y)</span>
+        <div class="blog-header-inner">
+            <div class="blog-header-eyebrow">PhD Research Blog</div>
+            <h1>A Story of <em>Magnitude</em></h1>
+            <p class="blog-header-subtitle">
+                Every PhD has a thread — a conceptual idea that grows from a first question into a body of work.
+                Mine started with a simple curiosity: <em>can the geometry of a dataset tell us something meaningful?</em>
+                This is that story.
+            </p>
+            <div class="blog-header-meta">
+                <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × ML Theory</span>
+                <span class="blog-meta-pill"><i class="ti-calendar" style="margin-right:5px;"></i> 2024 – Present</span>
+                <span class="blog-meta-pill"><i class="ti-layers" style="margin-right:5px;"></i> 2 papers so far</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Storyline -->
+    <div class="storyline-outer">
+        <div class="storyline-inner">
+
+            <!-- The vertical thread -->
+            <div class="storyline-thread">
+                <div class="storyline-thread-fill" id="thread-fill"></div>
+            </div>
+
+            <!-- Intro text -->
+            <p class="storyline-intro reveal">
+                The story begins with a mathematical object from topology — the <strong>magnitude of a metric space</strong>, introduced by Tom Leinster.
+                Magnitude captures, in a single number, the "effective number of points" in a space — a notion sensitive to both scale and geometry.
+                What happens when you bring this idea into machine learning?
+            </p>
+
+            <!-- ========== CHAPTER 1 ========== -->
+            <div class="chapter reveal">
+                <div class="chapter-node"><span class="node-num">01</span></div>
+                <div class="chapter-card">
+                    <div class="chapter-card-header">
+                        <span class="chapter-tag">Chapter 1 &nbsp;·&nbsp; ICML 2026</span>
+                        <h2 class="chapter-title">Magnitude Distance: A Geometric Measure of Dataset Similarity</h2>
+                        <div class="chapter-venue">
+                            Sahel Torkamani, Henry Gouk, Rik Sarkar &nbsp;·&nbsp;
+                            <a href="https://icml.cc/virtual/2026/poster/65802" target="_blank">ICML 2026 <i class="ti-angle-double-right" style="font-size:0.65rem;"></i></a>
+                        </div>
+                    </div>
+                    <div class="chapter-card-body">
+                        <p class="chapter-story">
+                            "If two datasets live in the same space, how far apart are they — not just in raw values, but in their shape, spread, and structure? Classical distances like MMD or FID give you a number, but they often collapse in high dimensions or ignore the geometry that matters. We wanted something grounded in the actual topology of the data."
+                        </p>
+                        <p class="chapter-ideas-title">Core Ideas</p>
+                        <div class="chapter-ideas">
+                            <span class="idea-chip">Magnitude of metric spaces</span>
+                            <span class="idea-chip">Scale-tunable distance</span>
+                            <span class="idea-chip">Outlier robustness</span>
+                            <span class="idea-chip">High-dimensional geometry</span>
+                            <span class="idea-chip">Generative model training</span>
+                            <span class="idea-chip">Metric axioms</span>
+                        </div>
+                        <button class="chapter-abstract-toggle" onclick="toggleAbstract(this)">
+                            Read abstract <span class="toggle-arrow">▾</span>
+                        </button>
+                        <div class="chapter-abstract">
+                            <div class="chapter-abstract-inner">
+                                Quantifying the distance between datasets is a fundamental question in mathematics and machine learning. We propose <em>magnitude distance</em>, a novel distance metric defined on finite datasets using the notion of the magnitude of a metric space. The proposed distance incorporates a tunable scaling parameter, <em>t</em>, that controls the sensitivity to global structure (small <em>t</em>) and finer details (large <em>t</em>). We prove several theoretical properties of magnitude distance, including its limiting behavior across scales and conditions under which it satisfies key metric properties. In contrast to classical distances, we show that magnitude distance remains discriminative in high-dimensional settings when the scale is appropriately tuned. We further demonstrate how magnitude distance can be used as a training objective for push-forward generative models. Our experimental results support our theoretical analysis and demonstrate that magnitude distance provides meaningful signals, comparable to established distance-based generative approaches.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chapter-card-footer">
+                        <a href="https://icml.cc/virtual/2026/poster/65802" target="_blank" class="chapter-link">
+                            <i class="ti-link"></i> ICML 2026
+                        </a>
+                        <a href="https://openreview.net/forum?id=RRM7and535" target="_blank" class="chapter-link">
+                            <i class="ti-file"></i> OpenReview
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector -->
+            <div class="chapter-connector reveal delay-1">
+                The first paper established that magnitude gives us a <strong>meaningful geometric distance between datasets</strong>.
+                But a natural follow-up appeared: magnitude assigns a weight to every point in the space — a so-called <em>magnitude weight</em>.
+                What do these weights tell us about individual data points? And can we use them to understand something deeper — like privacy risk?
+            </div>
+
+            <!-- ========== CHAPTER 2 ========== -->
+            <div class="chapter reveal">
+                <div class="chapter-node"><span class="node-num">02</span></div>
+                <div class="chapter-card">
+                    <div class="chapter-card-header">
+                        <span class="chapter-tag">Chapter 2 &nbsp;·&nbsp; In Progress</span>
+                        <h2 class="chapter-title">Magnitude Potential: A Geometric Framework for Data Valuation and Privacy Risk</h2>
+                        <div class="chapter-venue">
+                            Sahel Torkamani, Rik Sarkar &nbsp;·&nbsp;
+                            <span style="color:#bbb;">Targeting NeurIPS 2026</span>
+                        </div>
+                    </div>
+                    <div class="chapter-card-body">
+                        <p class="chapter-story">
+                            "The magnitude weights told us which points 'matter' geometrically. A point that carries high weight is one the dataset 'needs' — remove it and the geometry changes significantly. This felt exactly like memorisation: the model needs to remember it. We formalised this intuition into the Magnitude Potential (MaP) framework, which gives a per-point geometric score that correlates strongly with privacy risk."
+                        </p>
+                        <p class="chapter-ideas-title">Core Ideas</p>
+                        <div class="chapter-ideas">
+                            <span class="idea-chip">Magnitude Potential Φ(z, X)</span>
+                            <span class="idea-chip">Magnitude Potential Ratio (MPR)</span>
+                            <span class="idea-chip">LOO identities via Schur complement</span>
+                            <span class="idea-chip">RKHS interpolation</span>
+                            <span class="idea-chip">Memorisation scores</span>
+                            <span class="idea-chip">Variance collapse theorem</span>
+                            <span class="idea-chip">Privacy risk estimation</span>
+                        </div>
+                        <button class="chapter-abstract-toggle" onclick="toggleAbstract(this)">
+                            Read overview <span class="toggle-arrow">▾</span>
+                        </button>
+                        <div class="chapter-abstract">
+                            <div class="chapter-abstract-inner">
+                                Building on the geometric intuition of magnitude, we introduce the <em>Magnitude Potential</em> (MaP) — defined as the minimal RKHS-norm interpolant of the constant function f ≡ 1 on a dataset. The <em>Magnitude Potential Ratio</em> (MPR) compares the potential at a point across two datasets (e.g., class-conditional vs. full), giving a per-point geometric score. We derive closed-form leave-one-out (LOO) identities for the potential and weights via Schur complement arguments, prove a variance collapse theorem connecting within-class variance to MPR concentration, and demonstrate empirically that MPR rankings correlate strongly with Feldman memorisation scores (NDCG ≈ 0.95–0.99 across benchmarks). This positions MaP as a lightweight, theoretically-grounded proxy for privacy risk in ML training.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chapter-card-footer">
+                        <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Paper in preparation · NeurIPS 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coming Next -->
+            <div class="coming-next reveal delay-1">
+                <span class="coming-next-badge">Coming Next</span>
+                <div class="coming-next-label">Chapter 3 · The Road Ahead</div>
+                <div class="coming-next-title">Where does magnitude take us from here?</div>
+                <p>
+                    The MaP framework opens several directions: using magnitude weights for <strong>data selection and pruning</strong>,
+                    connecting the geometric theory more tightly to <strong>differential privacy guarantees</strong>,
+                    and exploring magnitude in the context of <strong>federated and distributed learning</strong>.
+                    The thread continues.
+                </p>
+            </div>
+
+            <!-- Thread end -->
+            <div class="thread-end reveal delay-2">
+                <div class="thread-end-dot"></div>
+                <span class="thread-end-text">Story in progress — updated as the research develops.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer py-3">
+        <div class="container">
+            <p class="small mb-0 text-light">
+                &copy; <script>document.write(new Date().getFullYear())</script> Sahel Torkamani
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script src="assets/js/johndoe.js"></script>
+    <script>
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => revealObs.observe(el));
+
+        // Thread fill animation
+        const threadFill = document.getElementById('thread-fill');
+        const thread = document.querySelector('.storyline-thread');
+        if (threadFill && thread) {
+            function updateThread() {
+                const rect = thread.getBoundingClientRect();
+                const threadTop = rect.top + window.scrollY;
+                const threadH = thread.offsetHeight;
+                const scrolled = window.scrollY + window.innerHeight * 0.7;
+                const pct = Math.min(100, Math.max(0, ((scrolled - threadTop) / threadH) * 100));
+                threadFill.style.height = pct + '%';
+            }
+            window.addEventListener('scroll', updateThread, { passive: true });
+            updateThread();
+        }
+
+        // Abstract toggle
+        function toggleAbstract(btn) {
+            const abstract = btn.nextElementSibling;
+            const isOpen = abstract.classList.contains('open');
+            abstract.classList.toggle('open', !isOpen);
+            btn.classList.toggle('open', !isOpen);
+            btn.querySelector('.toggle-arrow').style.transform = isOpen ? '' : 'rotate(180deg)';
+        }
+    </script>
+</body>
+</html>
