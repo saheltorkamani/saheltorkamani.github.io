@@ -43,16 +43,24 @@
         .side-link:hover { color: #F85C70; background: rgba(248,92,112,0.04); text-decoration: none; }
         .side-link:hover i { color: #F85C70; }
 
-        /* Navbar */
+        /* ===== NAV UNDERLINE ===== */
+        .navbar .nav-link { position: relative; }
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 50%;
+            width: 0; height: 2px;
+            background: #F85C70;
+            transition: width 0.28s ease, left 0.28s ease;
+        }
+        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
+
+        /* ===== NAVBAR BRAND ===== */
         .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
         .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
         .navbar-brand.brand-block .brand-subtitle { font-size: 0.65rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
-        .navbar .nav-link { position: relative; }
-        .navbar .nav-link::after { content: ''; position: absolute; bottom: 2px; left: 50%; width: 0; height: 2px; background: #F85C70; transition: width 0.28s ease, left 0.28s ease; }
-        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
         .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
-        .navbar .nav-link, .navbar-brand { font-family: "Source Sans Pro", sans-serif; }
-        .navbar-brand.brand-block .brand-title { font-family: "Dosis", sans-serif; }
+        .navbar .nav-link.active::after { width: 80%; left: 10%; }
 
         /* ===== PAGE HEADER ===== */
         .blog-header {
