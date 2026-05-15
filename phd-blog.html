@@ -416,14 +416,12 @@
         <span class="math-deco d3">d(X,Y)</span>
         <div class="blog-header-inner">
             <div class="blog-header-eyebrow">PhD Research Blog</div>
-            <h1>A Story of <em>Magnitude</em></h1>
+            <h1>Geometry as a <em>Language</em> for Neural Networks</h1>
             <p class="blog-header-subtitle">
-                Every PhD has a thread — a conceptual idea that grows from a first question into a body of work.
-                Mine started with a simple curiosity: <em>can the geometry of a dataset tell us something meaningful?</em>
-                This is that story.
+                What if the shape of data — its distances, its structure, its geometry — could tell us how a neural network generalises, what it memorises, and where its decision boundaries live? This is the thesis I am building, one paper at a time.
             </p>
             <div class="blog-header-meta">
-                <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × ML Theory</span>
+                <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × Neural Networks</span>
                 <span class="blog-meta-pill"><i class="ti-calendar" style="margin-right:5px;"></i> 2024 – Present</span>
                 <span class="blog-meta-pill"><i class="ti-layers" style="margin-right:5px;"></i> 2 papers so far</span>
             </div>
@@ -443,7 +441,7 @@
             <p class="storyline-intro reveal">
                 The story begins with a mathematical object from topology — the <strong>magnitude of a metric space</strong>, introduced by Tom Leinster.
                 Magnitude captures, in a single number, the "effective number of points" in a space — a notion sensitive to both scale and geometry.
-                What happens when you bring this idea into machine learning?
+                What happens when you bring this idea into machine learning, and in particular, into understanding how neural networks learn?
             </p>
 
             <!-- ========== CHAPTER 1 ========== -->
@@ -494,8 +492,8 @@
             <!-- Connector -->
             <div class="chapter-connector reveal delay-1">
                 The first paper established that magnitude gives us a <strong>meaningful geometric distance between datasets</strong>.
-                But a natural follow-up appeared: magnitude assigns a weight to every point in the space — a so-called <em>magnitude weight</em>.
-                What do these weights tell us about individual data points? And can we use them to understand something deeper — like privacy risk?
+                But a natural follow-up emerged: magnitude assigns a weight to every point — a per-point quantity reflecting how well that point is "represented" by its surroundings.
+                Could this same idea, applied inside a neural network's representation space, reveal something about <strong>how models generalise</strong>?
             </div>
 
             <!-- ========== CHAPTER 2 ========== -->
@@ -503,38 +501,42 @@
                 <div class="chapter-node"><span class="node-num">02</span></div>
                 <div class="chapter-card">
                     <div class="chapter-card-header">
-                        <span class="chapter-tag">Chapter 2 &nbsp;·&nbsp; In Progress</span>
-                        <h2 class="chapter-title">Magnitude Potential: A Geometric Framework for Data Valuation and Privacy Risk</h2>
+                        <span class="chapter-tag">Chapter 2 &nbsp;·&nbsp; Under Review</span>
+                        <h2 class="chapter-title">Generalization in Neural Networks Through the Lens of Magnitude Potential</h2>
                         <div class="chapter-venue">
-                            Sahel Torkamani, Rik Sarkar &nbsp;·&nbsp;
-                            <span style="color:#bbb;">Targeting NeurIPS 2026</span>
+                            Sahel Torkamani, Henry Gouk, Rik Sarkar &nbsp;·&nbsp;
+                            <a href="https://openreview.net/forum?id=V9A3lPMU5E" target="_blank">OpenReview <i class="ti-angle-double-right" style="font-size:0.65rem;"></i></a>
                         </div>
                     </div>
                     <div class="chapter-card-body">
                         <p class="chapter-story">
-                            "The magnitude weights told us which points 'matter' geometrically. A point that carries high weight is one the dataset 'needs' — remove it and the geometry changes significantly. This felt exactly like memorisation: the model needs to remember it. We formalised this intuition into the Magnitude Potential (MaP) framework, which gives a per-point geometric score that correlates strongly with privacy risk."
+                            "Magnitude distance told us datasets have geometry. The next question was: does a neural network's internal representation space have geometry we can read? We found that the magnitude potential — a quantity tracking how well a point is represented by a given set — when computed at the logit layer, becomes a lens into the model's behaviour. It correlates with memorisation, detects grokking, and tracks decision boundary shifts, all from a single geometric quantity."
                         </p>
                         <p class="chapter-ideas-title">Core Ideas</p>
                         <div class="chapter-ideas">
-                            <span class="idea-chip">Magnitude Potential Φ(z, X)</span>
+                            <span class="idea-chip">Magnitude Potential</span>
                             <span class="idea-chip">Magnitude Potential Ratio (MPR)</span>
-                            <span class="idea-chip">LOO identities via Schur complement</span>
-                            <span class="idea-chip">RKHS interpolation</span>
                             <span class="idea-chip">Memorisation scores</span>
-                            <span class="idea-chip">Variance collapse theorem</span>
-                            <span class="idea-chip">Privacy risk estimation</span>
+                            <span class="idea-chip">Grokking detection</span>
+                            <span class="idea-chip">Decision boundary geometry</span>
+                            <span class="idea-chip">Neural collapse</span>
+                            <span class="idea-chip">Training dynamics</span>
+                            <span class="idea-chip">Logit-layer analysis</span>
                         </div>
                         <button class="chapter-abstract-toggle" onclick="toggleAbstract(this)">
-                            Read overview <span class="toggle-arrow">▾</span>
+                            Read abstract <span class="toggle-arrow">▾</span>
                         </button>
                         <div class="chapter-abstract">
                             <div class="chapter-abstract-inner">
-                                Building on the geometric intuition of magnitude, we introduce the <em>Magnitude Potential</em> (MaP) — defined as the minimal RKHS-norm interpolant of the constant function f ≡ 1 on a dataset. The <em>Magnitude Potential Ratio</em> (MPR) compares the potential at a point across two datasets (e.g., class-conditional vs. full), giving a per-point geometric score. We derive closed-form leave-one-out (LOO) identities for the potential and weights via Schur complement arguments, prove a variance collapse theorem connecting within-class variance to MPR concentration, and demonstrate empirically that MPR rankings correlate strongly with Feldman memorisation scores (NDCG ≈ 0.95–0.99 across benchmarks). This positions MaP as a lightweight, theoretically-grounded proxy for privacy risk in ML training.
+                                Explaining the generalization and training dynamics in neural networks remains a challenge, and various approaches have been developed to study different aspects of these phenomena. In this paper, we introduce the <em>magnitude potential</em> to this study — a quantity based on the theory of metric magnitude — that reflects how well an arbitrary point is represented by a given set. We find that this basic quantity can be applied to examine various features in neural generalization. The ratio between the magnitude potential with respect to a class and with respect to the entire data, computed at the logit layer, is informative of the representation of the point. In experiments, these ratios for individual training points are found to be correlated with the Feldman memorization scores. Magnitude potential ratios aggregated across points detect structural changes in the decision boundaries and provide a geometric indicator of grokking in modular arithmetic. Although the magnitude potential ratio and neural collapse are both closely associated with intra-class and inter-class geometric structure, the magnitude potential ratio remains informative even when neural collapse is explicitly suppressed.
                             </div>
                         </div>
                     </div>
                     <div class="chapter-card-footer">
-                        <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Paper in preparation · NeurIPS 2026</span>
+                        <a href="https://openreview.net/forum?id=V9A3lPMU5E" target="_blank" class="chapter-link">
+                            <i class="ti-file"></i> OpenReview
+                        </a>
+                        <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Under review</span>
                     </div>
                 </div>
             </div>
@@ -543,12 +545,11 @@
             <div class="coming-next reveal delay-1">
                 <span class="coming-next-badge">Coming Next</span>
                 <div class="coming-next-label">Chapter 3 · The Road Ahead</div>
-                <div class="coming-next-title">Where does magnitude take us from here?</div>
+                <div class="coming-next-title">Where does the geometry take us?</div>
                 <p>
-                    The MaP framework opens several directions: using magnitude weights for <strong>data selection and pruning</strong>,
-                    connecting the geometric theory more tightly to <strong>differential privacy guarantees</strong>,
-                    and exploring magnitude in the context of <strong>federated and distributed learning</strong>.
-                    The thread continues.
+                    The magnitude potential opens further directions: using per-point geometric scores for <strong>data selection and curriculum learning</strong>,
+                    connecting the framework to <strong>differential privacy guarantees</strong>,
+                    and exploring how magnitude evolves across layers — not just the logit layer — to build a richer geometric picture of how neural networks learn.
                 </p>
             </div>
 
