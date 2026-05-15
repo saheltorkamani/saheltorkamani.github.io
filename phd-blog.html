@@ -418,7 +418,7 @@
             <div class="blog-header-eyebrow">PhD Research Blog</div>
             <h1>Geometry as a <em>Language</em> for Neural Networks</h1>
             <p class="blog-header-subtitle">
-                What if the shape of data — its distances, its structure, its geometry — could tell us how a neural network generalises, what it memorises, and where its decision boundaries live? This is the thesis I am building, one paper at a time.
+                What if the shape of data — its distances, its structure, its geometry — could tell us how a neural network generalizes, what it memorises, and where its decision boundaries live? This is the thesis I am building, one paper at a time.
             </p>
             <div class="blog-header-meta">
                 <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × Neural Networks</span>
@@ -463,11 +463,8 @@
                         <p class="chapter-ideas-title">Core Ideas</p>
                         <div class="chapter-ideas">
                             <span class="idea-chip">Magnitude of metric spaces</span>
-                            <span class="idea-chip">Scale-tunable distance</span>
-                            <span class="idea-chip">Outlier robustness</span>
                             <span class="idea-chip">High-dimensional geometry</span>
-                            <span class="idea-chip">Generative model training</span>
-                            <span class="idea-chip">Metric axioms</span>
+                            <span class="idea-chip">Generative modeling</span>
                         </div>
                         <button class="chapter-abstract-toggle" onclick="toggleAbstract(this)">
                             Read abstract <span class="toggle-arrow">▾</span>
@@ -493,7 +490,7 @@
             <div class="chapter-connector reveal delay-1">
                 The first paper established that magnitude gives us a <strong>meaningful geometric distance between datasets</strong>.
                 But a natural follow-up emerged: magnitude assigns a weight to every point — a per-point quantity reflecting how well that point is "represented" by its surroundings.
-                Could this same idea, applied inside a neural network's representation space, reveal something about <strong>how models generalise</strong>?
+                Could this same idea, applied inside a neural network's representation space, reveal something about <strong>how models generalize</strong>?
             </div>
 
             <!-- ========== CHAPTER 2 ========== -->
@@ -533,9 +530,6 @@
                         </div>
                     </div>
                     <div class="chapter-card-footer">
-                        <a href="https://openreview.net/forum?id=V9A3lPMU5E" target="_blank" class="chapter-link">
-                            <i class="ti-file"></i> OpenReview
-                        </a>
                         <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Under review</span>
                     </div>
                 </div>
@@ -545,11 +539,9 @@
             <div class="coming-next reveal delay-1">
                 <span class="coming-next-badge">Coming Next</span>
                 <div class="coming-next-label">Chapter 3 · The Road Ahead</div>
-                <div class="coming-next-title">Where does the geometry take us?</div>
+                <div class="coming-next-title">Can Magnitude Scale?</div>
                 <p>
-                    The magnitude potential opens further directions: using per-point geometric scores for <strong>data selection and curriculum learning</strong>,
-                    connecting the framework to <strong>differential privacy guarantees</strong>,
-                    and exploring how magnitude evolves across layers — not just the logit layer — to build a richer geometric picture of how neural networks learn.
+                    Computing the magnitude potential requires inverting a kernel matrix over the entire dataset. The next chapter asks whether the  geometry can be recovered without this prohibitive cost.
                 </p>
             </div>
 
