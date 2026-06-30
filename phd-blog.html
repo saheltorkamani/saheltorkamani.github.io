@@ -289,6 +289,30 @@
             border: 1px solid #f0f0f0;
         }
 
+        /* Origin note (e.g. workshop precursor) */
+        .origin-note {
+            margin-top: 20px;
+            display: flex; gap: 12px; align-items: flex-start;
+            background: rgba(248,92,112,0.04);
+            border: 1px solid rgba(248,92,112,0.15);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+        .origin-note-icon {
+            flex-shrink: 0; width: 26px; height: 26px;
+            background: rgba(248,92,112,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #F85C70; font-size: 0.75rem;
+            margin-top: 1px;
+        }
+        .origin-note-text {
+            font-size: 0.82rem; color: #777; line-height: 1.65;
+        }
+        .origin-note-text strong { color: #17263C; }
+        .origin-note-text a { color: #F85C70; font-weight: 600; text-decoration: none; }
+        .origin-note-text a:hover { text-decoration: underline; }
+
         /* Card footer: links */
         .chapter-card-footer {
             padding: 16px 32px;
@@ -433,7 +457,7 @@
             <div class="blog-header-meta">
                 <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × Neural Networks</span>
                 <span class="blog-meta-pill"><i class="ti-calendar" style="margin-right:5px;"></i> 2024 – Present</span>
-                <span class="blog-meta-pill"><i class="ti-layers" style="margin-right:5px;"></i> 2 papers so far</span>
+                <span class="blog-meta-pill"><i class="ti-layers" style="margin-right:5px;"></i> 3 papers so far</span>
             </div>
         </div>
     </div>
@@ -484,13 +508,29 @@
                                 Quantifying the distance between datasets is a fundamental question in mathematics and machine learning. We propose <em>magnitude distance</em>, a novel distance metric defined on finite datasets using the notion of the magnitude of a metric space. The proposed distance incorporates a tunable scaling parameter, <em>t</em>, that controls the sensitivity to global structure (small <em>t</em>) and finer details (large <em>t</em>). We prove several theoretical properties of magnitude distance, including its limiting behavior across scales and conditions under which it satisfies key metric properties. In contrast to classical distances, we show that magnitude distance remains discriminative in high-dimensional settings when the scale is appropriately tuned. We further demonstrate how magnitude distance can be used as a training objective for push-forward generative models. Our experimental results support our theoretical analysis and demonstrate that magnitude distance provides meaningful signals, comparable to established distance-based generative approaches.
                             </div>
                         </div>
+
+                        <!-- Origin note: EurIPS workshop -->
+                        <div class="origin-note">
+                            <div class="origin-note-icon"><i class="ti-flag-alt-2"></i></div>
+                            <div class="origin-note-text">
+                                <strong>Where it started:</strong> an early version of this work was first presented at the
+                                <a href="https://openreview.net/forum?id=RRM7and535" target="_blank">Workshop on Principles of Generative Modeling (PriGM) at EurIPS 2025</a>,
+                                before being developed further into the full ICML 2026 paper.
+                            </div>
+                        </div>
                     </div>
                     <div class="chapter-card-footer">
                         <a href="https://icml.cc/virtual/2026/poster/65802" target="_blank" class="chapter-link">
                             <i class="ti-link"></i> ICML 2026
                         </a>
+                        <a href="https://icml.cc/media/PosterPDFs/ICML%202026/65802.png?t=1781102799.8792617" target="_blank" class="chapter-link">
+                            <i class="ti-image"></i> Poster
+                        </a>
+                        <a href="https://icml.cc/media/icml-2026/Slides/65802.pdf" target="_blank" class="chapter-link">
+                            <i class="ti-bar-chart"></i> Slides
+                        </a>
                         <a href="https://openreview.net/forum?id=RRM7and535" target="_blank" class="chapter-link">
-                            <i class="ti-file"></i> OpenReview
+                            <i class="ti-file"></i> EurIPS Workshop Version
                         </a>
                     </div>
                 </div>
@@ -537,7 +577,55 @@
                         </div>
                     </div>
                     <div class="chapter-card-footer">
+                        <a href="https://openreview.net/forum?id=V9A3lPMU5E" target="_blank" class="chapter-link">
+                            <i class="ti-file"></i> OpenReview
+                        </a>
                         <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Under review</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector -->
+            <div class="chapter-connector reveal delay-1">
+                Both papers rely on computing magnitude over the full dataset — which means inverting a kernel matrix that grows with every point.
+                That cost becomes a problem the moment you care about <strong>privacy</strong>: releasing exact geometric quantities about real data needs guarantees, not just good intentions.
+                This led to a third question: can magnitude be made <strong>differentially private</strong>, without breaking its theoretical guarantees?
+            </div>
+
+            <!-- ========== CHAPTER 3 ========== -->
+            <div class="chapter reveal">
+                <div class="chapter-node"><span class="node-num">03</span></div>
+                <div class="chapter-card">
+                    <div class="chapter-card-header">
+                        <span class="chapter-tag">Chapter 3 &nbsp;·&nbsp; Under Review</span>
+                        <h2 class="chapter-title">Privacy Requires Slicing: Differentially Private Magnitude via Projections</h2>
+                        <div class="chapter-venue">
+                            Sahel Torkamani, Henry Gouk, Rik Sarkar &nbsp;·&nbsp; EuroTDP 2026
+                        </div>
+                    </div>
+                    <div class="chapter-card-body">
+                        <p class="chapter-story">
+                            "Magnitude is sensitive — in the technical sense and the colloquial one. Adding or removing a single point can shift it by an unbounded amount, which makes it hard to privatize directly. The fix wasn't to approximate the geometry away, but to slice it: project the data through random directions where the sensitivity becomes provably bounded, no matter the scale or dimension."
+                        </p>
+                        <p class="chapter-ideas-title">Core Ideas</p>
+                        <div class="chapter-ideas">
+                            <span class="idea-chip">Sliced Magnitude (SMag)</span>
+                            <span class="idea-chip">Differential Privacy</span>
+                            <span class="idea-chip">Global Sensitivity Bounds</span>
+                            <span class="idea-chip">Laplace Mechanism</span>
+                            <span class="idea-chip">Random Projections</span>
+                        </div>
+                        <button class="chapter-abstract-toggle" onclick="toggleAbstract(this)">
+                            Read overview <span class="toggle-arrow">▾</span>
+                        </button>
+                        <div class="chapter-abstract">
+                            <div class="chapter-abstract-inner">
+                                We introduce <em>sliced magnitude</em> (SMag), a variant of metric space magnitude computed via random projections, designed to enable differentially private release. Unlike standard magnitude, whose sensitivity to individual points can grow without bound, SMag's global sensitivity is bounded uniformly in both the scale parameter <em>t</em> and the ambient dimension <em>D</em>. This allows ε-differentially private release of magnitude-based quantities via the Laplace mechanism, with implementation in PyTorch supporting linear, polynomial, and circular projections on GPU.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chapter-card-footer">
+                        <span style="font-size:0.78rem; color:#bbb; font-style:italic;"><i class="ti-time" style="margin-right:4px;"></i> Submitted to EuroTDP 2026</span>
                     </div>
                 </div>
             </div>
@@ -545,7 +633,7 @@
             <!-- Coming Next -->
             <div class="coming-next reveal delay-1">
                 <span class="coming-next-badge">Coming Next</span>
-                <div class="coming-next-label">Chapter 3 · The Road Ahead</div>
+                <div class="coming-next-label">Chapter 4 · The Road Ahead</div>
                 <div class="coming-next-title">Can Magnitude Scale?</div>
                 <p>
                     Computing the magnitude potential requires inverting a kernel matrix over the entire dataset. The next chapter asks whether the  geometry can be recovered without this prohibitive cost.
