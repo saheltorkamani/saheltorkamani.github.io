@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Education and Skills – Sahel Torkamani">
+    <title>Education & Skills – Sahel Torkamani</title>
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== LORA HEADINGS ===== */
+        h1, h2, h3 { font-family: "Lora", "Dosis", serif; }
+        .navbar .nav-link, .navbar-brand { font-family: "Source Sans Pro", sans-serif; }
+        .navbar-brand.brand-block .brand-title { font-family: "Dosis", sans-serif; }
+        .page-hero h1 { font-family: "Lora", serif; font-style: italic; }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.12s; }
+        .delay-2 { transition-delay: 0.24s; }
+        .delay-3 { transition-delay: 0.36s; }
+
+        /* ===== NAV UNDERLINE ===== */
+        .navbar .nav-link { position: relative; }
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 50%;
+            width: 0; height: 2px;
+            background: #F85C70;
+            transition: width 0.28s ease, left 0.28s ease;
+        }
+        .navbar .nav-link:hover::after { width: 80%; left: 10%; }
+
+        /* ===== SUBPAGE HERO ===== */
+        .page-hero {
+            background-image: linear-gradient(to bottom, rgba(15,25,40,0.55), rgba(15,25,40,0.40)), url(assets/imgs/Edinburgh.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: scroll;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 60px 20px 44px;
+            position: relative;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-family: "Dosis", sans-serif;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.88); letter-spacing: 0.5px; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+        .hero-line {
+            width: 50px; height: 3px;
+            background: #F85C70;
+            margin: 12px auto 14px;
+        }
+        .hero-photo-credit {
+            position: absolute;
+            bottom: 8px;
+            right: 14px;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== RESEARCH SECTION ===== */
+        #research-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        /* ===== PROJECT CARD ===== */
+        .project-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 32px 34px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 4px; height: 100%;
+            background: #F85C70;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.35s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(248,92,112,0.11);
+            border-color: rgba(248,92,112,0.3);
+        }
+        .project-card:hover::before {
+            transform: scaleY(1);
+        }
+        .project-status {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .project-status.ongoing {
+            background: rgba(248,92,112,0.12);
+            color: #F85C70;
+        }
+        .project-status.completed {
+            background: rgba(108,117,125,0.1);
+            color: #6c757d;
+        }
+        .project-card .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #17263C;
+            margin-bottom: 8px;
+            line-height: 1.45;
+            font-family: "Dosis", sans-serif;
+        }
+        .project-card .project-date {
+            font-size: 0.82rem;
+            color: #aaa;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .project-card .project-date i { color: #F85C70; }
+        .project-card .project-desc {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.75;
+            margin: 0;
+        }
+        .project-tags {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #e8e8e8;
+            color: #6c757d;
+            background: #fafafa;
+            transition: all 0.25s ease;
+        }
+        .project-card:hover .project-tag {
+            border-color: rgba(248,92,112,0.3);
+            color: #F85C70;
+            background: rgba(248,92,112,0.04);
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #F85C70;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F85C70;
+            display: inline-block;
+        }
+
+        /* ===== NAVBAR BRAND ===== */
+        .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
+        .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
+        .navbar-brand.brand-block .brand-subtitle { font-size: 0.65rem; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
+        .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
+        .navbar .nav-link.active::after { width: 80%; left: 10%; }
+
+
+        /* ===== HONORS GRID ===== */
+        .honors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0 24px; }
+        .honors-grid .project-card { padding: 22px 26px; }
+        .honors-grid .project-title { font-size: 1.02rem; margin-bottom: 4px; }
+
+        /* ===== SKILLS ===== */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0 24px; }
+        .skill-row { margin-bottom: 14px; }
+        .skill-row:last-child { margin-bottom: 0; }
+        .skill-name { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: #17263C; margin-bottom: 5px; }
+        .skill-name span:last-child { font-weight: 400; color: #aaa; font-size: 0.78rem; }
+        .skill-track { height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .skill-fill { height: 100%; width: 0; background: #F85C70; border-radius: 3px; transition: width 1.1s cubic-bezier(0.4,0,0.2,1); }
+        .page-hero { background-color: #17263C; }
+
+        @media (max-width: 767px) {
+            .page-hero h1 { font-size: 2rem; }
+            .project-card { padding: 22px 20px; }
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40">
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand brand-block" href="index.html">
+                <span class="brand-title">Sahel Torkamani</span>
+                <span class="brand-subtitle">Ph.D Student</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarEducation" aria-controls="navbarEducation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarEducation">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="assets/Pdf/cv.pdf" class="nav-link" target="_blank">CV</a></li>
+                    <li class="nav-item"><a href="research.html" class="nav-link">Research</a></li>
+                    <li class="nav-item"><a href="education.html" class="nav-link active">Education</a></li>
+                    <li class="nav-item"><a href="talks.html" class="nav-link">Talks</a></li>
+                    <li class="nav-item"><a href="teaching.html" class="nav-link">Teaching</a></li>
+                    <li class="nav-item"><a href="phd-blog.html" class="nav-link">PhD Blog</a></li>
+                    <li class="nav-item"><a href="life.html" class="nav-link">Life</a></li>
+                    <li class="nav-item last-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <div>
+            <h1>Education &amp; Skills</h1>
+            <div class="hero-line"></div>
+            <p>Degrees, honours, and technical skills</p>
+        </div>
+        <span class="hero-photo-credit">Edinburgh, UK</span>
+    </div>
+
+    <!-- Education & Skills -->
+    <section id="research-section">
+        <div class="container">
+
+            <div class="section-label reveal">Education</div>
+
+            <div class="project-card reveal">
+                <span class="project-status ongoing">Ongoing</span>
+                <div class="project-title">Ph.D. in Informatics</div>
+                <p class="project-date"><i class="ti-calendar"></i> 2024 – 2028 &nbsp;·&nbsp; <i class="ti-home"></i> University of Edinburgh</p>
+                <p class="project-desc">School of Informatics, advised by <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank" style="color:#F85C70;">Professor Rik Sarkar</a>. Research on Differential Privacy and Theoretical Machine Learning.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Differential Privacy</span>
+                    <span class="project-tag">Machine Learning Theory</span>
+                    <span class="project-tag">Metric Space Magnitude</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal delay-1">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">B.Sc. in Applied Mathematics</div>
+                <p class="project-date"><i class="ti-calendar"></i> 2019 – 2023 &nbsp;·&nbsp; <i class="ti-home"></i> Sharif University of Technology</p>
+                <p class="project-desc">Worked with Professor Javad Ebrahimi on Differential Privacy and Information Theory.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Applied Mathematics</span>
+                    <span class="project-tag">Information Theory</span>
+                    <span class="project-tag">Differential Privacy</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal delay-2">
+                <span class="project-status completed">Completed</span>
+                <div class="project-title">Diploma in Physics and Mathematics</div>
+                <p class="project-date"><i class="ti-calendar"></i> 2013 – 2019 &nbsp;·&nbsp; <i class="ti-home"></i> NODET</p>
+                <p class="project-desc">National Organization for Development of Exceptional Talents.</p>
+            </div>
+
+            <div class="section-label reveal" style="margin-top: 20px;">Selected Honors</div>
+            <div class="honors-grid">
+                <div class="project-card reveal">
+                    <span class="project-status completed">2026</span>
+                    <div class="project-title">Research Spotlight Speaker Prize</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> London Hopper Colloquium 2026, University College London</p>
+                </div>
+                <div class="project-card reveal delay-1">
+                    <span class="project-status completed">2024</span>
+                    <div class="project-title">Informatics Graduate School Scholarship</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> University of Edinburgh</p>
+                </div>
+                <div class="project-card reveal delay-2">
+                    <span class="project-status completed">2024</span>
+                    <div class="project-title">Best Speaker, Undergraduate Research Seminars</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Sharif University of Technology</p>
+                </div>
+                <div class="project-card reveal">
+                    <span class="project-status completed">2019</span>
+                    <div class="project-title">Scholarship</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> National Elites Foundation</p>
+                </div>
+                <div class="project-card reveal delay-1">
+                    <span class="project-status completed">2018</span>
+                    <div class="project-title">National Silver Medal</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Mathematics Olympiad</p>
+                </div>
+                <div class="project-card reveal delay-2">
+                    <span class="project-status completed">2017</span>
+                    <div class="project-title">Gold &amp; International Gold</div>
+                    <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Geometry Olympiad</p>
+                </div>
+            </div>
+
+            <div class="section-label reveal" style="margin-top: 20px;">Skills</div>
+            <div class="skills-grid">
+                <div class="project-card reveal skill-card">
+                    <div class="project-title">Programming Skills</div>
+                    <p class="project-date"><i class="ti-console"></i> Languages and libraries</p>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Python</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="97%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>PyTorch</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="90%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>NumPy / SciPy</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="80%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Matlab</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="90%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Java</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="85%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>R</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="75%"></div></div>
+                    </div>
+                </div>
+                <div class="project-card reveal delay-1 skill-card">
+                    <div class="project-title">Languages</div>
+                    <p class="project-date"><i class="ti-world"></i> Spoken languages</p>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Persian</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="100%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>English</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="80%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Italian</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="40%"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>French</span><span></span></div>
+                        <div class="skill-track"><div class="skill-fill" data-width="20%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer py-3">
+        <div class="container">
+            <p class="small mb-0 text-light">
+                &copy; <script>document.write(new Date().getFullYear())</script> Sahel Torkamani
+            </p>
+        </div>
+    </footer>
+
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    <script>
+        const els = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(el => obs.observe(el));
+
+        // Animated skill bars
+        const barObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.width; });
+                    barObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.25 });
+        document.querySelectorAll('.skill-card').forEach(c => barObs.observe(c));
+    </script>
+</body>
+</html>
