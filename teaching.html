@@ -75,7 +75,7 @@
         }
 
         /* ===== TEACHING SECTION ===== */
-        #teaching-section { padding: 80px 0; }
+        #teaching-section { padding: 48px 0 8px; }
 
         /* ===== SECTION LABEL ===== */
         .section-label {
@@ -202,7 +202,7 @@
             background: #f7fafa;
             border-top: 1px solid #e4f0ee;
             padding: 18px 0;
-            margin-top: 40px;
+            margin-top: 20px;
         }
         .stats-bar .stat-item { text-align: center; color: #555; }
         .stats-bar .stat-num {
@@ -219,6 +219,30 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
+
+        /* ===== COMPACT CV LISTS ===== */
+        .cv-list { list-style: none; padding: 6px 28px; margin: 0 0 24px; background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; }
+        .cv-list li { display: flex; gap: 18px; padding: 12px 0; border-bottom: 1px solid #f3f3f3; align-items: baseline; }
+        .cv-list li:last-child { border-bottom: none; }
+        .cv-year { flex: 0 0 104px; font-size: 0.78rem; font-weight: 700; color: #F85C70; letter-spacing: 0.3px; }
+        .cv-main { flex: 1; min-width: 0; }
+        .cv-title { font-size: 0.95rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; line-height: 1.35; }
+        .cv-sub { font-size: 0.83rem; color: #777; line-height: 1.55; margin-top: 1px; }
+        .cv-sub a { color: #F85C70; }
+        .cv-list.compact li { padding: 8px 0; }
+        .cv-list.compact .cv-main { display: flex; flex-wrap: wrap; column-gap: 8px; align-items: baseline; }
+        .cv-list.compact .cv-title { font-size: 0.9rem; }
+        .cv-list.compact .cv-sub { margin-top: 0; }
+        .cv-list.compact .cv-sub::before { content: '·'; margin-right: 8px; color: #ccc; }
+        .cv-tag { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #F85C70; background: rgba(248,92,112,0.08); padding: 1px 8px; border-radius: 10px; margin-right: 6px; vertical-align: 1px; }
+        .cv-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; }
+        .cv-links a { font-size: 0.78rem; font-weight: 700; color: #F85C70; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .cv-links a:hover { text-decoration: underline; }
+        .cv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .cv-chip { font-size: 0.78rem; font-weight: 600; color: #555; background: #fafafa; border: 1px solid #e8e8e8; padding: 2px 10px; border-radius: 14px; }
+        .section-label { margin-bottom: 16px !important; }
+        @media (max-width: 575px) { .cv-list { padding: 4px 18px; } .cv-list li { flex-direction: column; gap: 2px; } .cv-year { flex: none; } }
 
         /* ===== NAVBAR BRAND ===== */
         .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
@@ -277,130 +301,28 @@
     <section id="teaching-section">
         <div class="container">
 
-            <!-- University of Edinburgh -->
             <div class="section-label reveal">University of Edinburgh</div>
 
-            <div class="course-card reveal">
-                <div class="course-term">
-                    <span class="term-label">Spring</span>
-                    <span class="term-year">2026</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Advanced Topics in Machine Learning</div>
-                    <div class="course-role">Teaching Assistant &amp; Tutorial Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> School of Informatics, University of Edinburgh</div>
-                    <a href="https://opencourse.inf.ed.ac.uk/atml" class="course-link" target="_blank">
-                        <i class="ti-link"></i> Course Page
-                    </a>
-                </div>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">Spring 2026</span><div class="cv-main"><div class="cv-title">Advanced Topics in Machine Learning</div><div class="cv-sub">Teaching Assistant &amp; Tutorial Lecturer · School of Informatics, University of Edinburgh</div><div class="cv-links"><a href="https://opencourse.inf.ed.ac.uk/atml" target="_blank"><i class="ti-link"></i> Course page</a></div></div></li>
+                <li><span class="cv-year">Autumn 2025</span><div class="cv-main"><div class="cv-title">Probabilistic Modelling and Reasoning</div><div class="cv-sub">Teaching Assistant &amp; Tutorial Lecturer · School of Informatics, University of Edinburgh</div><div class="cv-links"><a href="https://opencourse.inf.ed.ac.uk/pmr" target="_blank"><i class="ti-link"></i> Course page</a></div></div></li>
+                <li><span class="cv-year">Spring 2025</span><div class="cv-main"><div class="cv-title">Machine Learning Theory</div><div class="cv-sub">Teaching Assistant &amp; Tutorial Lecturer · School of Informatics, University of Edinburgh</div><div class="cv-links"><a href="https://opencourse.inf.ed.ac.uk/mlt" target="_blank"><i class="ti-link"></i> Course page</a></div></div></li>
+                <li><span class="cv-year">Autumn 2024–26</span><div class="cv-main"><div class="cv-title">Discrete Mathematics and Probability</div><div class="cv-sub">Tutorial Lecturer · School of Informatics, University of Edinburgh</div><div class="cv-links"><a href="https://opencourse.inf.ed.ac.uk/dmp" target="_blank"><i class="ti-link"></i> Course page</a></div></div></li>
+            </ul>
 
-            <div class="course-card reveal delay-1">
-                <div class="course-term">
-                    <span class="term-label">Autumn</span>
-                    <span class="term-year">2025</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Probabilistic Modelling and Reasoning</div>
-                    <div class="course-role">Teaching Assistant &amp; Tutorial Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> School of Informatics, University of Edinburgh</div>
-                    <a href="https://opencourse.inf.ed.ac.uk/pmr" class="course-link" target="_blank">
-                        <i class="ti-link"></i> Course Page
-                    </a>
-                </div>
-            </div>
+            <div class="section-label reveal" style="margin-top: 8px;">Sharif University of Technology</div>
 
-            <div class="course-card reveal delay-2">
-                <div class="course-term">
-                    <span class="term-label">Spring</span>
-                    <span class="term-year">2025</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Machine Learning Theory</div>
-                    <div class="course-role">Teaching Assistant &amp; Tutorial Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> School of Informatics, University of Edinburgh</div>
-                    <a href="https://opencourse.inf.ed.ac.uk/mlt" class="course-link" target="_blank">
-                        <i class="ti-link"></i> Course Page
-                    </a>
-                </div>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">Autumn 2023</span><div class="cv-main"><div class="cv-title">Information Theory</div><div class="cv-sub">Teaching Assistant (Unofficial) · Department of Mathematical Sciences, Sharif University of Technology</div></div></li>
+                <li><span class="cv-year">Autumn 2021</span><div class="cv-main"><div class="cv-title">Statistics and Applications</div><div class="cv-sub">Teaching Assistant (Unofficial) · Department of Mathematical Sciences, Sharif University of Technology</div></div></li>
+            </ul>
 
-            <div class="course-card reveal delay-3">
-                <div class="course-term">
-                    <span class="term-label">Autumn</span>
-                    <span class="term-year">2024 – 2026</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Discrete Mathematics and Probability</div>
-                    <div class="course-role">Tutorial Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> School of Informatics, University of Edinburgh</div>
-                    <a href="https://opencourse.inf.ed.ac.uk/dmp" class="course-link" target="_blank">
-                        <i class="ti-link"></i> Course Page
-                    </a>
-                </div>
-            </div>
+            <div class="section-label reveal" style="margin-top: 8px;">Other</div>
 
-            <!-- Sharif University -->
-            <div class="section-label reveal" style="margin-top: 24px;">Sharif University of Technology</div>
-
-            <div class="course-card reveal">
-                <div class="course-term">
-                    <span class="term-label">Autumn</span>
-                    <span class="term-year">2023</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Information Theory</div>
-                    <div class="course-role">Teaching Assistant (Unofficial)</div>
-                    <div class="course-institution"><i class="ti-home"></i> Department of Mathematical Sciences, Sharif University of Technology</div>
-                </div>
-            </div>
-
-            <div class="course-card reveal delay-1">
-                <div class="course-term">
-                    <span class="term-label">Autumn</span>
-                    <span class="term-year">2021</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Statistics and Applications</div>
-                    <div class="course-role">Teaching Assistant (Unofficial)</div>
-                    <div class="course-institution"><i class="ti-home"></i> Department of Mathematical Sciences, Sharif University of Technology</div>
-                </div>
-            </div>
-
-            <!-- Other -->
-            <div class="section-label reveal" style="margin-top: 24px;">Other</div>
-
-            <div class="course-card reveal">
-                <div class="course-term">
-                    <span class="term-label">Spring</span>
-                    <span class="term-year">2021</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Introduction to Algorithms and Python</div>
-                    <div class="course-role">Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> Yasan Academy</div>
-                </div>
-            </div>
-
-            <div class="course-card reveal delay-1">
-                <div class="course-term">
-                    <span class="term-label">Spring</span>
-                    <span class="term-year">2020</span>
-                </div>
-                <div class="course-divider"></div>
-                <div class="course-body">
-                    <div class="course-title">Algebra and Number Theory in Mathematics Olympiad</div>
-                    <div class="course-role">Lecturer</div>
-                    <div class="course-institution"><i class="ti-home"></i> National Organization for Development of Exceptional Talents, Farzanegan 1</div>
-                </div>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">Spring 2021</span><div class="cv-main"><div class="cv-title">Introduction to Algorithms and Python</div><div class="cv-sub">Lecturer · Yasan Academy</div></div></li>
+                <li><span class="cv-year">Spring 2020</span><div class="cv-main"><div class="cv-title">Algebra and Number Theory in Mathematics Olympiad</div><div class="cv-sub">Lecturer · National Organization for Development of Exceptional Talents, Farzanegan 1</div></div></li>
+            </ul>
 
         </div>
     </section>
