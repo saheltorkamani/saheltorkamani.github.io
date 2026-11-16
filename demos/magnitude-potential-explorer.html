@@ -1,0 +1,341 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Magnitude Potential Explorer · Sahel Torkamani</title>
+<meta name="description" content="Interactive figure for Generalization in Neural Networks Through the Lens of Magnitude Potential (NeurIPS 2026).">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #11151c;
+  --fg-2: #4b5262;
+  --muted: #858b97;
+  --hair: #e0e3e9;
+  --axis: #c4c8d0;
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4eefb;
+  --flip: #d4532a;
+  --c0: #2a78d6; --c1: #eb6834; --c2: #1baf7a;
+  --f-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116; --surface: #171b22; --fg: #eef0f3; --fg-2: #b9bfca; --muted: #868d99;
+    --hair: #272c35; --axis: #3a404b; --accent: #4f95ea; --accent-ink: #0b0f14; --accent-soft: #1a2a40;
+    --flip: #f07a4f; --c0: #3987e5; --c1: #d95926; --c2: #199e70; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1116; --surface: #171b22; --fg: #eef0f3; --fg-2: #b9bfca; --muted: #868d99;
+  --hair: #272c35; --axis: #3a404b; --accent: #4f95ea; --accent-ink: #0b0f14; --accent-soft: #1a2a40;
+  --flip: #f07a4f; --c0: #3987e5; --c1: #d95926; --c2: #199e70; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--f-sans); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 48px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.site-back { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+.site-back a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.site-back a:hover { text-decoration: underline; }
+header { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; font-weight: 600; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.lede { margin: 0; max-width: 68ch; color: var(--fg-2); }
+.lede i, .notes i { font-family: var(--f-sans); }
+
+.card { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; }
+
+.controls { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px 28px; padding: 18px 20px; align-items: start; }
+.tblock { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.trow { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.tlabel { font-size: 13px; color: var(--fg-2); }
+.tval { font-family: var(--f-mono); font-size: 28px; font-weight: 500; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.tval em { font-style: italic; font-family: var(--f-sans); font-weight: 400; color: var(--fg-2); margin-right: 4px; }
+.status { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.status.busy .dot { background: var(--accent); animation: pulse 0.9s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .status.busy .dot { animation: none; } }
+input[type=range] { width: 100%; accent-color: var(--accent); height: 28px; margin: 0; }
+.scale { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-top: -6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chips .lbl { font-size: 12px; color: var(--muted); margin-right: 2px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.chip { font-family: var(--f-mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--hair); background: transparent; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.field-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--hair); border-radius: 8px; padding: 2px; gap: 2px; background: var(--bg); }
+.seg button { border: 0; background: transparent; padding: 5px 10px; border-radius: 6px; font-size: 13px; color: var(--fg-2); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 0 0 1px var(--hair); }
+.hint { font-size: 13px; color: var(--fg-2); margin: 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn-ghost { border: 1px solid var(--hair); background: transparent; border-radius: 6px; padding: 3px 10px; font-size: 12px; }
+.btn-ghost:disabled { opacity: .45; cursor: default; }
+
+.panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+figure { margin: 0; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; position: relative; }
+.fig-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.fig-title { font-weight: 600; font-size: 15px; margin: 0; }
+.fig-sub { font-size: 13px; color: var(--fg-2); margin: 2px 0 0; }
+.canvas-box { position: relative; width: 100%; }
+canvas.plot { display: block; width: 100%; touch-action: manipulation; cursor: crosshair; }
+.legend-row { display: flex; gap: 16px 22px; align-items: flex-end; flex-wrap: wrap; justify-content: space-between; }
+.cbar { flex: 1 1 220px; min-width: 0; max-width: 320px; }
+.cbar-title { font-size: 12px; color: var(--fg-2); margin-bottom: 4px; }
+.cbar canvas { display: block; width: 100%; height: 10px; border-radius: 2px; }
+.cbar-ticks { position: relative; height: 16px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.cbar-ticks span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.cbar-ticks span:first-child { transform: none; }
+.cbar-ticks span:last-child { transform: translateX(-100%); }
+.sizekey { min-width: 0; }
+.sizes { display: flex; gap: 14px; align-items: center; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.sizes span { display: inline-flex; align-items: center; gap: 5px; }
+.keys { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--fg-2); }
+.key { display: inline-flex; align-items: center; gap: 5px; }
+.key svg { overflow: visible; }
+
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--fg); border: 1px solid var(--hair);
+  box-shadow: 0 4px 16px rgba(0,0,0,.12); border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.45; z-index: 5; min-width: 170px; }
+.tip b { font-weight: 600; }
+.tip .r { display: flex; justify-content: space-between; gap: 14px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.tip .r span:first-child { font-family: var(--f-sans); color: var(--fg-2); }
+
+.lower { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; }
+svg.hist { width: 100%; height: auto; display: block; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+.stat { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat .k { font-size: 12px; color: var(--fg-2); }
+.stat .v { font-family: var(--f-mono); font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.stat .s { font-size: 12px; color: var(--muted); }
+.stat.wide { grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid var(--hair); }
+
+.notes { padding: 18px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 28px; }
+.notes h2 { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; font-size: 14px; color: var(--fg-2); }
+.notes code, .math { font-family: var(--f-mono); font-size: 13px; color: var(--fg); }
+.foot { font-size: 12px; color: var(--muted); margin: 0; }
+
+@media (max-width: 860px) {
+  .controls, .lower { grid-template-columns: minmax(0, 1fr); }
+  .panels { grid-template-columns: minmax(0, 1fr); }
+  .notes { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head><body>
+
+<div class="wrap">
+  <nav class="site-back" aria-label="Site">
+    <a href="../index.html">&larr; Sahel Torkamani</a>
+    <span><a href="https://arxiv.org/pdf/2610.01633" target="_blank">Paper</a> &nbsp;·&nbsp; <a href="https://github.com/saheltorkamani/Magnitude_Potential" target="_blank">Code</a></span>
+  </nav>
+  <header>
+    <p class="eyebrow">Magnitude Potential · NeurIPS 2026 · interactive figure</p>
+    <h1>Magnitude Potential Explorer</h1>
+    <p class="lede">Three overlapping Gaussian classes (1,050 training points, the paper's toy set). Move the scale <i>t</i> and the MP ratio is recomputed in your browser with leave-one-out weights, exactly as in the paper. Small <i>t</i> sees global structure; large <i>t</i> sees local detail.</p>
+  </header>
+
+  <section class="card controls" aria-label="Controls">
+    <div class="tblock">
+      <div class="trow">
+        <span class="tval" id="tval"><em>t</em>=&nbsp;5.00</span>
+        <span class="tlabel">scale parameter · similarity <span class="math">e<sup>−t‖x−y‖</sup></span></span>
+        <span class="status" id="status"><span class="dot"></span><span id="statusText">Starting…</span></span>
+      </div>
+      <input type="range" id="tslider" min="0" max="1000" step="1" aria-label="Scale parameter t (logarithmic)">
+      <div class="scale"><span>0.1</span><span>1</span><span>10</span><span>30</span></div>
+      <div class="chips" id="chips"><span class="lbl">Values used in the paper</span></div>
+    </div>
+    <div class="side">
+      <p class="hint"><span>Click any point to change its class and watch the ratio flag it.</span>
+        <button type="button" class="btn-ghost" id="resetBtn" disabled>Reset labels</button></p>
+    </div>
+  </section>
+
+  <div class="panels">
+    <figure class="card" id="figA">
+      <div class="fig-head">
+        <div>
+          <p class="fig-title" id="aTitle">Potential field</p>
+          <p class="fig-sub" id="aSub">MP ratio of class 0 evaluated across the plane</p>
+        </div>
+        <div class="seg" id="viewSeg" role="group" aria-label="Field to show">
+          <button type="button" data-view="0" aria-pressed="true">Class 0</button>
+          <button type="button" data-view="1" aria-pressed="false">Class 1</button>
+          <button type="button" data-view="2" aria-pressed="false">Class 2</button>
+          <button type="button" data-view="g" aria-pressed="false">Global</button>
+        </div>
+      </div>
+      <div class="canvas-box"><canvas class="plot" id="cA" role="img" aria-label="Heatmap of the magnitude potential field with training points"></canvas></div>
+      <div class="legend-row">
+        <div class="cbar"><div class="cbar-title" id="cbarATitle">MP ratio</div><canvas id="cbarA" width="320" height="10"></canvas><div class="cbar-ticks" id="cbarATicks"></div></div>
+        <div class="keys" id="keysA"></div>
+      </div>
+    </figure>
+
+    <figure class="card" id="figB">
+      <div class="fig-head">
+        <div>
+          <p class="fig-title">Per-point MP ratio</p>
+          <p class="fig-sub" id="bSub">Each training point, leave-one-out. Large and solid means atypical.</p>
+        </div>
+      </div>
+      <div class="canvas-box"><canvas class="plot" id="cB" role="img" aria-label="Scatter of training points coloured by MP ratio"></canvas></div>
+      <div class="legend-row">
+        <div class="sizekey"><div class="cbar-title">MP ratio (size and opacity)</div><div class="sizes" id="sizesB"></div></div>
+        <div class="keys" id="keysB"></div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="lower">
+    <figure class="card" id="figH">
+      <div>
+        <p class="fig-title">Distribution of MP ratios</p>
+        <p class="fig-sub" id="hSub">All 1,050 training points at the current <i>t</i></p>
+      </div>
+      <svg class="hist" id="hist" viewBox="0 0 560 200" role="img" aria-label="Histogram of MP ratios"></svg>
+    </figure>
+    <figure class="card">
+      <div>
+        <p class="fig-title">Magnitude at this scale</p>
+        <p class="fig-sub">|X|<sub>t</sub> = Σ<sub>i</sub> w<sub>i</sub> is the effective number of points. It runs from 1 (t → 0) to n (t → ∞).</p>
+      </div>
+      <div class="stats" id="stats"></div>
+    </figure>
+  </div>
+
+  <section class="card notes" aria-label="How it works">
+    <div>
+      <h2>What the ratio measures</h2>
+      <p>Each point gets a potential from the magnitude weights of its own class and of the whole dataset. A ratio near 1 marks a typical class member. A ratio near 0 marks a point that sits in a dense region of the data but is sparse within its own class, such as boundary, overlapping or mislabelled points.</p>
+    </div>
+    <div>
+      <h2>What <i>t</i> does</h2>
+      <p>Similarities decay as <span class="math">e<sup>−t·d</sup></span>. At small <i>t</i> every point sees most of the dataset, so the ratio reflects coarse class layout. At large <i>t</i> each point sees only its nearest neighbours, so the ratio picks out local outliers and the potential field shrinks to small islands around the data.</p>
+    </div>
+    <div>
+      <h2>How it is computed</h2>
+      <p>The page factors <span class="math">S + 10⁻⁵I</span> (Cholesky, float64) for the full set and for each class. Leave-one-out potential at a training point uses the identity <span class="math">p₋ᵢ(xᵢ) = 1 − wᵢ / (S⁻¹)ᵢᵢ</span>, which matches the reference implementation without refitting n times.</p>
+    </div>
+  </section>
+  <p class="foot">Data: <span class="math">make_gaussians(k=3, d=2, n_per_class=500, spread=2, std=1, seed=0)</span>, 70% stratified training split. From “Generalization in Neural Networks Through the Lens of Magnitude Potential”, NeurIPS 2026.</p>
+</div>
+
+<div class="tip" id="tip" hidden></div>
+
+<script id="worker-src" type="text/plain">
+let N, X, D, G, GD, GRID;
+const EPS0 = 1e-5;
+onmessage = (e) => {
+  const m = e.data;
+  if (m.type === 'init') {
+    X = m.X; N = X.length / 2; GRID = m.grid; G = GRID * GRID;
+    D = new Float64Array(N * N);
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
+      const dx = X[2*i] - X[2*j], dy = X[2*i+1] - X[2*j+1];
+      D[i*N + j] = Math.sqrt(dx*dx + dy*dy);
+    }
+    GD = new Float32Array(G * N);
+    const [x0, x1, y0, y1] = m.extent;
+    for (let iy = 0; iy < GRID; iy++) for (let ix = 0; ix < GRID; ix++) {
+      const gx = x0 + (ix + 0.5) * (x1 - x0) / GRID, gy = y0 + (iy + 0.5) * (y1 - y0) / GRID;
+      const g = iy * GRID + ix;
+      for (let j = 0; j < N; j++) { const dx = gx - X[2*j], dy = gy - X[2*j+1]; GD[g*N + j] = Math.sqrt(dx*dx + dy*dy); }
+    }
+    postMessage({ type: 'ready' });
+  } else if (m.type === 'compute') {
+    job = m; if (!running) { running = true; setTimeout(step, 0); }
+  }
+};
+let job = null, running = false;
+function step() {
+  const j = job; job = null;
+  const t0 = performance.now();
+  const a = phase1(j.t, j.labels, j.K);
+  postMessage({ type: 'result', seq: j.seq, t: j.t, ms: performance.now() - t0, ratioG: a.ratioG, inPot: a.inPot, globPot: a.globPot, gridIn: a.gridIn, gridAll: a.gridAll, magAll: a.magAll, magClass: a.magClass },
+    [a.ratioG.buffer, a.inPot.buffer, a.globPot.buffer, a.gridIn.buffer, a.gridAll.buffer]);
+  if (job) setTimeout(step, 0); else running = false;
+}
+// Cholesky of S[idx]+eps I; returns weights w = S^-1 1 and optionally diag(S^-1)
+function fit(idx, t, wantDiag) {
+  const n = idx.length;
+  let eps = EPS0;
+  for (let attempt = 0; attempt < 6; attempt++, eps *= 10) {
+    const L = new Float64Array(n * n);
+    for (let i = 0; i < n; i++) { const ri = idx[i] * N; for (let j = 0; j <= i; j++) L[i*n + j] = Math.exp(-t * D[ri + idx[j]]); L[i*n + i] += eps; }
+    let ok = true;
+    for (let j = 0; j < n && ok; j++) {
+      const rj = j * n;
+      let s = L[rj + j];
+      for (let k = 0; k < j; k++) s -= L[rj + k] * L[rj + k];
+      if (!(s > 0)) { ok = false; break; }
+      const d = Math.sqrt(s); L[rj + j] = d;
+      for (let i = j + 1; i < n; i++) {
+        const ri = i * n; let v = L[ri + j];
+        for (let k = 0; k < j; k++) v -= L[ri + k] * L[rj + k];
+        L[ri + j] = v / d;
+      }
+    }
+    if (!ok) continue;
+    const y = new Float64Array(n), w = new Float64Array(n);
+    for (let i = 0; i < n; i++) { let v = 1; const ri = i * n; for (let k = 0; k < i; k++) v -= L[ri + k] * y[k]; y[i] = v / L[ri + i]; }
+    for (let i = n - 1; i >= 0; i--) { let v = y[i]; for (let k = i + 1; k < n; k++) v -= L[k*n + i] * w[k]; w[i] = v / L[i*n + i]; }
+    let diag = null;
+    if (wantDiag) {
+      diag = new Float64Array(n); const mcol = new Float64Array(n);
+      for (let j = 0; j < n; j++) {
+        let acc = 0;
+        for (let i = j; i < n; i++) {
+          const ri = i * n; let v = (i === j) ? 1 : 0;
+          for (let k = j; k < i; k++) v -= L[ri + k] * mcol[k];
+          v /= L[ri + i]; mcol[i] = v; acc += v * v;
+        }
+        diag[j] = acc;
+      }
+    }
+    return { w, diag, eps };
+  }
+  throw new Error('factorisation failed');
+}
+function phase1(t, labels, K) {
+  const all = []; for (let i = 0; i < N; i++) all.push(i);
+  const glob = fit(all, t, true);
+  const wGlob = glob.w, inPot = new Float64Array(N), globPot = new Float64Array(N), wIn = new Float64Array(N);
+  for (let i = 0; i < N; i++) globPot[i] = 1 - wGlob[i] / glob.diag[i];
+  const magClass = [];
+  for (let c = 0; c < K; c++) {
+    const idx = []; for (let i = 0; i < N; i++) if (labels[i] === c) idx.push(i);
+    let mag = 0;
+    if (idx.length > 0) {
+      const f = fit(idx, t, true);
+      for (let a = 0; a < idx.length; a++) { wIn[idx[a]] = f.w[a]; inPot[idx[a]] = idx.length > 1 ? 1 - f.w[a] / f.diag[a] : 0; mag += f.w[a]; }
+    }
+    magClass.push(mag);
+  }
+  let magAll = 0; for (let i = 0; i < N; i++) magAll += wGlob[i];
+  const ratioG = new Float64Array(N);
+  for (let i = 0; i < N; i++) ratioG[i] = inPot[i] / (globPot[i] + 1e-8);
+  const gridIn = new Float32Array(K * G), gridAll = new Float32Array(G), accIn = new Float64Array(K);
+  for (let g = 0; g < G; g++) {
+    accIn.fill(0); let accAll = 0; const rg = g * N;
+    for (let j = 0; j < N; j++) { const e = Math.exp(-t * GD[rg + j]); accAll += wGlob[j] * e; accIn[labels[j]] += wIn[j] * e; }
+    gridAll[g] = accAll; for (let c = 0; c < K; c++) gridIn[c * G + g] = accIn[c];
+  }
+  return { ratioG, inPot: inPot, globPot, gridIn, gridAll, magAll, magClass };
+}
+</script>
+
+<script src="magnitude-potential-data.js"></script>
+<script src="magnitude-potential-explorer.js"></script>
+
+</body></html>

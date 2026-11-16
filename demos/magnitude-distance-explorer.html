@@ -1,0 +1,675 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Magnitude Distance Explorer · Sahel Torkamani</title>
+<meta name="description" content="Interactive figure for Magnitude Distance: A Geometric Measure of Dataset Similarity (ICML 2026).">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #11151c;
+  --fg-2: #4b5262;
+  --muted: #858b97;
+  --hair: #e0e3e9;
+  --grid: #eef0f3;
+  --axis: #c4c8d0;
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --cx: #2a78d6;
+  --cy: #e0612b;
+  --cu: #11151c;
+  --f-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116; --surface: #171b22; --fg: #eef0f3; --fg-2: #b9bfca; --muted: #868d99;
+    --hair: #272c35; --grid: #1e232b; --axis: #3a404b; --accent: #4f95ea; --accent-ink: #0b0f14;
+    --cx: #4f95ea; --cy: #f07a4f; --cu: #eef0f3; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1116; --surface: #171b22; --fg: #eef0f3; --fg-2: #b9bfca; --muted: #868d99;
+  --hair: #272c35; --grid: #1e232b; --axis: #3a404b; --accent: #4f95ea; --accent-ink: #0b0f14;
+  --cx: #4f95ea; --cy: #f07a4f; --cu: #eef0f3; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--f-sans); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 48px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.site-back { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+.site-back a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.site-back a:hover { text-decoration: underline; }
+header { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; font-weight: 600; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.lede { margin: 0; max-width: 70ch; color: var(--fg-2); }
+.math { font-family: var(--f-mono); font-size: .9em; color: var(--fg); }
+
+.card { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; }
+
+.controls { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px 32px; padding: 18px 20px; align-items: start; }
+.tblock, .side { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.side { gap: 14px; }
+.trow { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.tlabel { font-size: 13px; color: var(--fg-2); }
+.tval { font-family: var(--f-mono); font-size: 28px; font-weight: 500; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.tval em { font-style: italic; font-family: var(--f-sans); font-weight: 400; color: var(--fg-2); margin-right: 4px; }
+.status { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.status.busy .dot { background: var(--accent); animation: pulse .9s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .status.busy .dot { animation: none; } }
+input[type=range] { width: 100%; accent-color: var(--accent); height: 28px; margin: 0; }
+.scale { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-top: -6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chips .lbl { font-size: 12px; color: var(--muted); margin-right: 2px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.chip { font-family: var(--f-mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--hair); background: transparent; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button:focus-visible, input:focus-visible, canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field-label { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+.field-label b { font-family: var(--f-mono); font-weight: 500; color: var(--fg); font-size: 12px; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--hair); border-radius: 8px; padding: 2px; gap: 2px; background: var(--bg); align-self: flex-start; max-width: 100%; }
+.seg button { border: 0; background: transparent; padding: 5px 10px; border-radius: 6px; font-size: 13px; color: var(--fg-2); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 0 0 1px var(--hair); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; }
+.btn-ghost { border: 1px solid var(--hair); background: transparent; border-radius: 6px; padding: 3px 10px; font-size: 12px; }
+.btn-ghost:hover { border-color: var(--accent); }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.panels, .lower { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+figure { margin: 0; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; position: relative; }
+.fig-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.fig-title { font-weight: 600; font-size: 15px; margin: 0; }
+.fig-sub { font-size: 13px; color: var(--fg-2); margin: 2px 0 0; }
+canvas.plot { display: block; width: 100%; touch-action: none; cursor: grab; }
+canvas.plot.dragging { cursor: grabbing; }
+svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+svg.chart text { font-family: var(--f-mono); font-size: 11px; fill: var(--muted); }
+svg.chart .ttl { font-family: var(--f-sans); font-style: italic; font-size: 12px; fill: var(--fg-2); }
+svg.chart .lab { font-size: 11px; }
+.keys { display: flex; gap: 8px 16px; flex-wrap: wrap; font-size: 12px; color: var(--fg-2); align-items: center; }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.key svg { overflow: visible; flex: none; }
+.readout { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
+.stat { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat .k { font-size: 12px; color: var(--fg-2); }
+.stat .v { font-family: var(--f-mono); font-size: 22px; font-weight: 500; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat .s { font-size: 12px; color: var(--muted); }
+.stat.hero { grid-column: 1 / -1; padding-bottom: 12px; border-bottom: 1px solid var(--hair); }
+.stat.hero .v { font-size: 34px; }
+.bar { height: 6px; border-radius: 3px; background: var(--grid); overflow: hidden; margin-top: 6px; max-width: 360px; }
+.bar i { display: block; height: 100%; background: var(--cy); width: 0; transition: width .2s; }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+.notes { padding: 18px 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 28px; }
+.notes h2 { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+.notes p { margin: 0; font-size: 14px; color: var(--fg-2); }
+.foot { font-size: 12px; color: var(--muted); margin: 0; max-width: 100ch; }
+
+@media (max-width: 860px) {
+  .controls, .panels, .lower, .notes { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 420px) { .two { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head><body>
+
+<div class="wrap">
+  <nav class="site-back" aria-label="Site">
+    <a href="../index.html">&larr; Sahel Torkamani</a>
+    <span><a href="https://icml.cc/virtual/2026/poster/65802" target="_blank">Paper</a> &nbsp;·&nbsp; <a href="https://github.com/saheltorkamani/Magnitude_Distance" target="_blank">Code</a></span>
+  </nav>
+  <header>
+    <p class="eyebrow">MagGN · magnitude distance · interactive figure</p>
+    <h1>Magnitude Distance Explorer</h1>
+    <p class="lede">X stands in for a batch of real data and Y for a batch from a generator. Drag Y across the plane, change the scale <i>t</i> or break the generator, and the normalized magnitude distance that MagGN minimises is recomputed in your browser with the same formula as <span class="math">magnitude.py</span>.</p>
+  </header>
+
+  <section class="card controls" aria-label="Controls">
+    <div class="tblock">
+      <div class="trow">
+        <span class="tval" id="tval"><em>t</em>=&nbsp;5.00</span>
+        <span class="tlabel">scale · similarity <span class="math">e<sup>−t‖x−y‖</sup></span></span>
+        <span class="status" id="status"><span class="dot"></span><span id="statusText">Starting…</span></span>
+      </div>
+      <input type="range" id="tslider" min="0" max="1000" step="1" aria-label="Scale parameter t (logarithmic)">
+      <div class="scale"><span>0.1</span><span>1</span><span>10</span><span>100</span></div>
+      <div class="chips" id="chips"><span class="lbl">Values used in the project</span></div>
+      <div class="two">
+        <div class="field">
+          <span class="field-label">Points per set (batch size) <b id="nval">128</b></span>
+          <input type="range" id="nslider" min="32" max="256" step="16" value="128" aria-label="Points per set">
+        </div>
+        <div class="field">
+          <span class="field-label">Spread of Y relative to X <b id="sval">1.00×</b></span>
+          <input type="range" id="sslider" min="-100" max="100" step="1" value="0" aria-label="Spread of Y (logarithmic)">
+        </div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="field">
+        <span class="field-label">Real data X</span>
+        <div class="seg" id="dsSeg" role="group" aria-label="Real dataset">
+          <button type="button" data-v="8g" aria-pressed="true">8 Gaussians</button>
+          <button type="button" data-v="25g" aria-pressed="false">25 Gaussians</button>
+          <button type="button" data-v="swiss" aria-pressed="false">Swiss roll</button>
+          <button type="button" data-v="gauss" aria-pressed="false">N(0, I)</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field-label">Generator Y</span>
+        <div class="seg" id="ySeg" role="group" aria-label="Generated set">
+          <button type="button" data-v="resample" aria-pressed="true">Fresh sample</button>
+          <button type="button" data-v="drop" aria-pressed="false">Mode dropping</button>
+          <button type="button" data-v="blob" aria-pressed="false">Single blob</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field-label">Plotted distance</span>
+        <div class="seg" id="normSeg" role="group" aria-label="Distance shown">
+          <button type="button" data-v="1" aria-pressed="true">Normalized</button>
+          <button type="button" data-v="0" aria-pressed="false">Raw</button>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn-ghost" id="centerBtn">Put Y on X</button>
+        <button type="button" class="btn-ghost" id="seedBtn">Draw new samples</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="panels">
+    <figure class="card">
+      <div class="fig-head">
+        <div>
+          <p class="fig-title">Real and generated batches</p>
+          <p class="fig-sub">Drag anywhere to move Y. Point size shows each point's weight in |X ∪ Y|<sub>t</sub>.</p>
+        </div>
+      </div>
+      <canvas class="plot" id="cA" tabindex="0" role="img" aria-label="Scatter of real points X and generated points Y. Drag or use arrow keys to move Y."></canvas>
+      <div class="keys">
+        <span class="key"><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="var(--cx)"/></svg>Real X</span>
+        <span class="key"><svg width="11" height="10"><path d="M5.5 0.5 L10.5 9.5 L0.5 9.5 Z" fill="var(--cy)"/></svg>Generated Y</span>
+        <span class="key"><svg width="22" height="10"><circle cx="3" cy="5" r="1.6" fill="var(--muted)"/><circle cx="14" cy="5" r="4.5" fill="var(--muted)"/></svg>low → high weight</span>
+        <span class="readout" id="shiftOut">μ = (0.00, 0.00)</span>
+      </div>
+    </figure>
+
+    <figure class="card">
+      <div class="fig-head">
+        <div>
+          <p class="fig-title" id="bTitle">Distance across scales</p>
+          <p class="fig-sub" id="bSub">The same two batches, every <i>t</i> from 0.1 to 100</p>
+        </div>
+        <div class="seg" id="bSeg" role="group" aria-label="Curve to show">
+          <button type="button" data-v="dist" aria-pressed="true">Distance</button>
+          <button type="button" data-v="mag" aria-pressed="false">Magnitudes</button>
+        </div>
+      </div>
+      <svg class="chart" id="chartB" viewBox="0 0 520 380" role="img" aria-label="Magnitude distance against t"></svg>
+      <div class="keys" id="keysB"></div>
+    </figure>
+  </div>
+
+  <div class="lower">
+    <figure class="card">
+      <div>
+        <p class="fig-title">Distance as Y slides away</p>
+        <p class="fig-sub" id="cSub">Y translated along the current shift direction, one curve per <i>t</i></p>
+      </div>
+      <svg class="chart" id="chartC" viewBox="0 0 520 300" role="img" aria-label="Magnitude distance against shift length for several t"></svg>
+    </figure>
+    <figure class="card">
+      <div>
+        <p class="fig-title">At this scale</p>
+        <p class="fig-sub">|·|<sub>t</sub> = sum of the entries of S<sup>−1</sup>, the effective number of distinct points</p>
+      </div>
+      <div class="stats" id="stats"></div>
+    </figure>
+  </div>
+
+  <section class="card notes" aria-label="How it works">
+    <div>
+      <h2>What the distance measures</h2>
+      <p>Magnitude counts how many distinct points a set has at scale <i>t</i>. If Y lands on top of X, the union adds almost nothing, so |X ∪ Y| ≈ |X| and the distance falls to the sampling floor. If Y sits far away, the union counts both, |X ∪ Y| ≈ |X| + |Y|, and the normalized distance reaches 1.</p>
+    </div>
+    <div>
+      <h2>Why the loss uses several <i>t</i></h2>
+      <p>Small <i>t</i> sees coarse layout and saturates once the batches are apart. Large <i>t</i> sees individual modes but is near 1 for any two different samples. The toy MagGN run averages <i>t</i> = 5, 20 and 50 so the generator gets a gradient at every stage. Try mode dropping on 8 Gaussians to see which scales notice.</p>
+    </div>
+    <div>
+      <h2>How it is computed</h2>
+      <p>The page builds <span class="math">S = exp(−t·D)</span> for X, Y and X ∪ Y, factors each with a float64 Cholesky and sums <span class="math">S⁻¹1</span>. Training uses <span class="math">eps = 0</span>; when a matrix is too close to singular (tight clusters at small <i>t</i>) the page adds the smallest jitter that works and says so.</p>
+    </div>
+  </section>
+  <p class="foot">Distance: <span class="math">norm_diff_magnitude_distance_grad(X, Y, t, normalize=True)</span> = (2|X∪Y|<sub>t</sub> − |X|<sub>t</sub> − |Y|<sub>t</sub>) / |X∪Y|<sub>t</sub>. Datasets follow <span class="math">Toy_Experiment/data_generator.py</span>; multiscale schedule from <span class="math">MagGN_toy_experiments.ipynb</span>. Points are sampled in the browser with a fixed seed, not loaded from training runs. From “Magnitude Distance: A Geometric Measure of Dataset Similarity”, ICML 2026.</p>
+</div>
+
+<script id="worker-src" type="text/plain">
+// Magnitude via Cholesky of S = exp(-t D) (+ jitter only if needed)
+function fit(P, t, wantW) {
+  const n = P.length / 2;
+  const D = new Float64Array(n * n);
+  for (let i = 0; i < n; i++) for (let j = 0; j < i; j++) {
+    const dx = P[2*i] - P[2*j], dy = P[2*i+1] - P[2*j+1];
+    D[i*n + j] = Math.sqrt(dx*dx + dy*dy);
+  }
+  const JIT = [0, 1e-10, 1e-8, 1e-6, 1e-5, 1e-4, 1e-3];
+  for (const eps of JIT) {
+    const L = new Float64Array(n * n);
+    for (let i = 0; i < n; i++) { const r = i * n; for (let j = 0; j < i; j++) L[r + j] = Math.exp(-t * D[r + j]); L[r + i] = 1 + eps; }
+    let ok = true;
+    for (let j = 0; j < n && ok; j++) {
+      const rj = j * n; let s = L[rj + j];
+      for (let k = 0; k < j; k++) s -= L[rj + k] * L[rj + k];
+      if (!(s > 1e-14)) { ok = false; break; }
+      const d = Math.sqrt(s); L[rj + j] = d;
+      for (let i = j + 1; i < n; i++) {
+        const ri = i * n; let v = L[ri + j];
+        for (let k = 0; k < j; k++) v -= L[ri + k] * L[rj + k];
+        L[ri + j] = v / d;
+      }
+    }
+    if (!ok) continue;
+    const y = new Float64Array(n), w = new Float64Array(n);
+    for (let i = 0; i < n; i++) { let v = 1; const ri = i * n; for (let k = 0; k < i; k++) v -= L[ri + k] * y[k]; y[i] = v / L[ri + i]; }
+    for (let i = n - 1; i >= 0; i--) { let v = y[i]; for (let k = i + 1; k < n; k++) v -= L[k*n + i] * w[k]; w[i] = v / L[i*n + i]; }
+    let mag = 0; for (let i = 0; i < n; i++) mag += w[i];
+    return { mag, w: wantW ? w : null, eps };
+  }
+  return { mag: NaN, w: null, eps: NaN };
+}
+function cat(A, B) { const o = new Float64Array(A.length + B.length); o.set(A); o.set(B, A.length); return o; }
+function shifted(Y, dx, dy) { const o = new Float64Array(Y.length); for (let i = 0; i < Y.length; i += 2) { o[i] = Y[i] + dx; o[i+1] = Y[i+1] + dy; } return o; }
+
+const PRI = ['point', 'tcurve', 'shift'];
+const pending = {}; let busy = false;
+onmessage = (e) => { pending[e.data.type] = e.data; if (!busy) { busy = true; setTimeout(loop, 0); } };
+const tick = () => new Promise(r => setTimeout(r, 0));
+async function loop() {
+  for (;;) {
+    const type = PRI.find(k => pending[k]);
+    if (!type) { busy = false; postMessage({ type: 'idle' }); return; }
+    const job = pending[type]; delete pending[type];
+    const done = await run(job);
+    if (!done && !pending[type]) pending[type] = job; // pre-empted: retry later
+  }
+}
+const preempt = (job) => { const i = PRI.indexOf(job.type); return PRI.some((k, j) => pending[k] && (j < i || k === job.type)); };
+async function run(job) {
+  const { X, Y } = job;
+  if (job.type === 'point') {
+    const fx = fit(X, job.t, false), fy = fit(Y, job.t, false), fu = fit(cat(X, Y), job.t, true);
+    postMessage({ type: 'point', seq: job.seq, t: job.t, mx: fx.mag, my: fy.mag, mu: fu.mag, w: fu.w, eps: Math.max(fx.eps, fy.eps, fu.eps) });
+    return true;
+  }
+  if (job.type === 'tcurve') {
+    const U = cat(X, Y);
+    for (let i = job.start || 0; i < job.ts.length; i++) {
+      const t = job.ts[i];
+      const mx = fit(X, t).mag, my = fit(Y, t).mag, mu = fit(U, t).mag;
+      postMessage({ type: 'tcurve', seq: job.seq, i, mx, my, mu });
+      job.start = i + 1;
+      await tick(); if (preempt(job)) return i === job.ts.length - 1;
+    }
+    return true;
+  }
+  if (job.type === 'shift') {
+    for (const t of job.tList) {
+      const mx = fit(X, t).mag, my = fit(Y, t).mag, mu = [];
+      for (const s of job.shifts) {
+        mu.push(fit(cat(X, shifted(Y, job.dir[0] * s, job.dir[1] * s)), t).mag);
+        await tick(); if (preempt(job)) return false;
+      }
+      postMessage({ type: 'shift', seq: job.seq, t, mx, my, mu });
+      job.tList = job.tList.filter(v => v !== t);
+    }
+    return true;
+  }
+  return true;
+}
+</script>
+
+<script>
+// ── constants ──────────────────────────────────────────────────────────
+const PROJECT_T = [0.5, 1, 2, 5, 20, 50];
+const LOSS_T = [5, 20, 50];
+const T_MIN = 0.1, T_MAX = 100;
+const TGRID = (() => {
+  const a = []; for (let i = 0; i <= 40; i++) a.push(T_MIN * Math.pow(T_MAX / T_MIN, i / 40));
+  PROJECT_T.forEach(t => { if (!a.some(v => Math.abs(Math.log(v / t)) < 0.03)) a.push(t); else a[a.findIndex(v => Math.abs(Math.log(v / t)) < 0.03)] = t; });
+  return a.sort((p, q) => p - q);
+})();
+const NSHIFT = 17;
+
+// ── seeded sampling (mirrors Toy_Experiment/data_generator.py) ─────────
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function gaussFn(r) { let spare = null; return () => { if (spare !== null) { const s = spare; spare = null; return s; } let u = 0; while (u === 0) u = r(); const v = r(), m = Math.sqrt(-2 * Math.log(u)); spare = m * Math.sin(2 * Math.PI * v); return m * Math.cos(2 * Math.PI * v); }; }
+const C8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [Math.SQRT1_2, Math.SQRT1_2], [Math.SQRT1_2, -Math.SQRT1_2], [-Math.SQRT1_2, Math.SQRT1_2], [-Math.SQRT1_2, -Math.SQRT1_2]].map(([x, y]) => [2 * x, 2 * y]);
+function sample(ds, n, seed, drop) {
+  const r = mulberry(seed), g = gaussFn(r), P = new Float64Array(2 * n);
+  for (let i = 0; i < n; i++) {
+    let x, y;
+    if (ds === '8g') { const c = C8[Math.floor(r() * (drop ? 4 : 8))]; x = (c[0] + 0.02 * g()) / 1.414; y = (c[1] + 0.02 * g()) / 1.414; }
+    else if (ds === '25g') { const ix = Math.floor(r() * (drop ? 3 : 5)) - 2, iy = Math.floor(r() * 5) - 2; x = (2 * ix + 0.05 * g()) / 2.828; y = (2 * iy + 0.05 * g()) / 2.828; }
+    else if (ds === 'swiss') { const u = r() * (drop ? 0.5 : 1), tt = 1.5 * Math.PI * (1 + 2 * u); x = (tt * Math.cos(tt) + 0.25 * g()) / 7.5; y = (tt * Math.sin(tt) + 0.25 * g()) / 7.5; }
+    else { x = g(); y = g(); if (drop && x > 0) x = -x; }
+    P[2 * i] = x; P[2 * i + 1] = y;
+  }
+  return P;
+}
+const DROP_TEXT = { '8g': 'keeps 4 of 8 modes', '25g': 'keeps 15 of 25 modes', swiss: 'keeps the inner half of the roll', gauss: 'keeps the half-plane x₁ < 0' };
+
+// ── state ──────────────────────────────────────────────────────────────
+const S = { t: 5, ds: '8g', ymode: 'resample', n: 128, sigma: 1, norm: true, bView: 'dist', seed: 1, mu: [0, 0] };
+let X, Y0, Y, CEN = [0, 0], R = 1, EXT, seq = 0;
+let point = null, tcurve = null, shiftCurves = new Map(), shiftDir = [1, 0], shiftMax = 1;
+
+function regen() {
+  X = sample(S.ds, S.n, 1000 + S.seed, false);
+  let cx = 0, cy = 0; for (let i = 0; i < S.n; i++) { cx += X[2 * i]; cy += X[2 * i + 1]; } CEN = [cx / S.n, cy / S.n];
+  const rad = []; let vx = 0, vy = 0;
+  for (let i = 0; i < S.n; i++) { const dx = X[2 * i] - CEN[0], dy = X[2 * i + 1] - CEN[1]; rad.push(Math.hypot(dx, dy)); vx += dx * dx; vy += dy * dy; }
+  rad.sort((a, b) => a - b); R = Math.max(0.3, rad[Math.floor(rad.length * 0.98)]);
+  const sd = Math.sqrt((vx + vy) / (2 * S.n));
+  let raw;
+  if (S.ymode === 'blob') { const g = gaussFn(mulberry(2000 + S.seed)); raw = new Float64Array(2 * S.n); for (let i = 0; i < 2 * S.n; i++) raw[i] = CEN[i % 2] + sd * g(); }
+  else raw = sample(S.ds, S.n, 2000 + S.seed, S.ymode === 'drop');
+  Y0 = new Float64Array(2 * S.n);
+  for (let i = 0; i < 2 * S.n; i++) Y0[i] = CEN[i % 2] + S.sigma * (raw[i] - CEN[i % 2]);
+  const half = 2.6 * R; EXT = [CEN[0] - half, CEN[0] + half, CEN[1] - half, CEN[1] + half];
+  applyShift();
+}
+function applyShift() { energyVal = null; Y = new Float64Array(Y0.length); for (let i = 0; i < Y.length; i += 2) { Y[i] = Y0[i] + S.mu[0]; Y[i + 1] = Y0[i + 1] + S.mu[1]; } }
+const clampMu = v => Math.max(-1.6 * R, Math.min(1.6 * R, v));
+
+// ── worker ─────────────────────────────────────────────────────────────
+const worker = new Worker(URL.createObjectURL(new Blob([document.getElementById('worker-src').textContent], { type: 'text/javascript' })));
+let pSeq = 0, tSeq = 0, sSeq = 0;
+function post(job) { worker.postMessage(job); setBusy(true); }
+function reqPoint() { post({ type: 'point', seq: pSeq = ++seq, X, Y, t: S.t }); }
+function reqTCurve() { tcurve = { seq: tSeq = ++seq, mx: [], my: [], mu: [] }; post({ type: 'tcurve', seq: tSeq, X, Y, ts: TGRID }); }
+function reqShift(onlyCurrent) {
+  const d = Math.hypot(S.mu[0], S.mu[1]);
+  const dir = d > 1e-6 ? [S.mu[0] / d, S.mu[1] / d] : [1, 0];
+  if (!onlyCurrent) { shiftCurves = new Map(); shiftDir = dir; shiftMax = 2.4 * R; }
+  const shifts = []; for (let k = 0; k < NSHIFT; k++) shifts.push(shiftMax * k / (NSHIFT - 1));
+  const tList = [S.t, ...PROJECT_T.filter(t => t !== S.t)];
+  const todo = tList.filter(t => !shiftCurves.has(t));
+  if (!todo.length) { drawC(); return; }
+  post({ type: 'shift', seq: sSeq = ++seq, X, Y: Y0, dir: shiftDir, shifts, tList: todo });
+}
+worker.onmessage = (e) => {
+  const m = e.data;
+  if (m.type === 'idle') { setBusy(false); return; }
+  if (m.type === 'point' && m.seq === pSeq) { point = m; drawA(); renderStats(); }
+  else if (m.type === 'tcurve' && m.seq === tSeq) { tcurve.mx[m.i] = m.mx; tcurve.my[m.i] = m.my; tcurve.mu[m.i] = m.mu; drawB(); renderStats(); }
+  else if (m.type === 'shift' && m.seq === sSeq) { shiftCurves.set(m.t, m); drawC(); }
+};
+const statusEl = document.getElementById('status'), statusText = document.getElementById('statusText');
+function setBusy(b) { statusEl.classList.toggle('busy', b); statusText.textContent = b ? 'Computing…' : 'Up to date'; }
+
+function onDataChange() { regen(); point = null; reqPoint(); reqTCurve(); reqShift(false); drawA(); drawB(); drawC(); renderStats(); }
+function onShiftLive() { applyShift(); reqPoint(); drawA(); updShiftOut(); }
+function onShiftEnd() { reqTCurve(); reqShift(false); drawC(); }
+
+// ── helpers ────────────────────────────────────────────────────────────
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const dist = (mx, my, mu, norm = S.norm) => norm ? (2 * mu - mx - my) / mu : 2 * mu - mx - my;
+const fmt = (v, d = 3) => !isFinite(v) ? '–' : Math.abs(v) >= 1000 ? v.toFixed(0) : Math.abs(v) >= 100 ? v.toFixed(1) : v.toFixed(d);
+const fmtT = t => t >= 10 ? t.toFixed(t % 1 ? 1 : 0) : t >= 1 ? t.toFixed(2) : t.toFixed(2);
+function niceTicks(lo, hi, k = 5) {
+  const span = hi - lo || 1, step0 = span / k, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => span / s <= k) || 10 * mag;
+  const out = []; for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(10)); return out;
+}
+
+// ── panel A: point clouds ──────────────────────────────────────────────
+const cA = document.getElementById('cA');
+const M = { l: 34, r: 8, t: 8, b: 26 };
+let geomA = null;
+function drawA() {
+  const w = cA.clientWidth || 400, plot = w - M.l - M.r, h = plot + M.t + M.b, dpr = window.devicePixelRatio || 1;
+  cA.style.height = h + 'px'; cA.width = Math.round(w * dpr); cA.height = Math.round(h * dpr);
+  const ctx = cA.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); geomA = { plot };
+  const sx = x => M.l + (x - EXT[0]) / (EXT[1] - EXT[0]) * plot, sy = y => M.t + (1 - (y - EXT[2]) / (EXT[3] - EXT[2])) * plot;
+  ctx.fillStyle = tok('--surface'); ctx.fillRect(0, 0, w, h);
+  // grid + axes
+  const ticks = niceTicks(EXT[0], EXT[1], 6), ticksY = niceTicks(EXT[2], EXT[3], 6);
+  ctx.strokeStyle = tok('--grid'); ctx.lineWidth = 1; ctx.beginPath();
+  ticks.forEach(v => { const x = Math.round(sx(v)) + .5; ctx.moveTo(x, M.t); ctx.lineTo(x, M.t + plot); });
+  ticksY.forEach(v => { const y = Math.round(sy(v)) + .5; ctx.moveTo(M.l, y); ctx.lineTo(M.l + plot, y); });
+  ctx.stroke();
+  ctx.strokeStyle = tok('--axis'); ctx.strokeRect(M.l + .5, M.t + .5, plot - 1, plot - 1);
+  ctx.fillStyle = tok('--muted'); ctx.font = '11px "IBM Plex Mono", ui-monospace, monospace';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ticks.forEach(v => ctx.fillText(+v.toFixed(2), sx(v), M.t + plot + 6));
+  ctx.textAlign = 'right'; ctx.textBaseline = 'middle'; ticksY.forEach(v => ctx.fillText(+v.toFixed(2), M.l - 6, sy(v)));
+  // shift vector
+  const x0 = sx(CEN[0]), y0 = sy(CEN[1]), x1 = sx(CEN[0] + S.mu[0]), y1 = sy(CEN[1] + S.mu[1]);
+  ctx.strokeStyle = tok('--fg-2'); ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); ctx.setLineDash([]);
+  // weights → radius
+  const n = S.n, wts = point && point.w && point.w.length === 2 * n ? point.w : null;
+  let wmax = 1e-12; if (wts) for (let i = 0; i < 2 * n; i++) wmax = Math.max(wmax, wts[i]);
+  const rad = i => wts ? 1.3 + 4.2 * Math.sqrt(Math.max(0, wts[i]) / wmax) : 2.6;
+  const surf = tok('--surface');
+  ctx.globalAlpha = 0.8; ctx.fillStyle = tok('--cx'); ctx.strokeStyle = surf; ctx.lineWidth = 0.6;
+  for (let i = 0; i < n; i++) { ctx.beginPath(); ctx.arc(sx(X[2 * i]), sy(X[2 * i + 1]), rad(i), 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+  ctx.fillStyle = tok('--cy');
+  for (let i = 0; i < n; i++) {
+    const x = sx(Y[2 * i]), y = sy(Y[2 * i + 1]), s = rad(n + i) * 1.25;
+    ctx.beginPath(); ctx.moveTo(x, y - s); ctx.lineTo(x + s * .92, y + s * .62); ctx.lineTo(x - s * .92, y + s * .62); ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  // handle
+  ctx.strokeStyle = tok('--fg'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x1, y1, 7, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x1 - 11, y1); ctx.lineTo(x1 - 4, y1); ctx.moveTo(x1 + 4, y1); ctx.lineTo(x1 + 11, y1); ctx.moveTo(x1, y1 - 11); ctx.lineTo(x1, y1 - 4); ctx.moveTo(x1, y1 + 4); ctx.lineTo(x1, y1 + 11); ctx.stroke();
+}
+function updShiftOut() { document.getElementById('shiftOut').textContent = `μ = (${S.mu[0].toFixed(2)}, ${S.mu[1].toFixed(2)})  ‖μ‖ = ${Math.hypot(...S.mu).toFixed(2)}`; }
+let dragging = false;
+function ptToMu(ev) {
+  const r = cA.getBoundingClientRect(), p = geomA.plot;
+  const x = EXT[0] + (ev.clientX - r.left - M.l) / p * (EXT[1] - EXT[0]), y = EXT[2] + (1 - (ev.clientY - r.top - M.t) / p) * (EXT[3] - EXT[2]);
+  S.mu = [clampMu(x - CEN[0]), clampMu(y - CEN[1])];
+}
+cA.addEventListener('pointerdown', ev => { dragging = true; cA.classList.add('dragging'); cA.setPointerCapture(ev.pointerId); ptToMu(ev); onShiftLive(); });
+let raf = 0;
+cA.addEventListener('pointermove', ev => { if (!dragging) return; ptToMu(ev); if (!raf) raf = requestAnimationFrame(() => { raf = 0; onShiftLive(); }); });
+const endDrag = () => { if (!dragging) return; dragging = false; cA.classList.remove('dragging'); onShiftEnd(); };
+cA.addEventListener('pointerup', endDrag); cA.addEventListener('pointercancel', endDrag);
+let keyTimer = 0;
+cA.addEventListener('keydown', ev => {
+  const st = 0.08 * R, d = { ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, st], ArrowDown: [0, -st] }[ev.key];
+  if (!d) return; ev.preventDefault();
+  S.mu = [clampMu(S.mu[0] + d[0]), clampMu(S.mu[1] + d[1])]; onShiftLive();
+  clearTimeout(keyTimer); keyTimer = setTimeout(onShiftEnd, 350);
+});
+
+// ── SVG line charts ────────────────────────────────────────────────────
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+function path(xs, ys) { let d = '', pen = false; for (let i = 0; i < xs.length; i++) { if (!isFinite(ys[i]) || !isFinite(xs[i])) { pen = false; continue; } d += (pen ? 'L' : 'M') + xs[i].toFixed(1) + ' ' + ys[i].toFixed(1); pen = true; } return d; }
+function frame(svg, W, H, P, xt, yt, xs, ys, xlab, ylab) {
+  svg.innerHTML = '';
+  const g = el('g', {}, svg);
+  yt.forEach(v => { const y = ys(v); el('line', { x1: P.l, x2: W - P.r, y1: y, y2: y, stroke: 'var(--grid)', 'stroke-width': 1 }, g); el('text', { x: P.l - 6, y: y + 4, 'text-anchor': 'end' }, g, v.label ?? v); });
+  xt.forEach(v => { const x = xs(v.v ?? v); el('line', { x1: x, x2: x, y1: H - P.b, y2: H - P.b + 4, stroke: 'var(--axis)' }, g); el('text', { x, y: H - P.b + 16, 'text-anchor': 'middle' }, g, v.label ?? v); });
+  el('line', { x1: P.l, x2: W - P.r, y1: H - P.b + .5, y2: H - P.b + .5, stroke: 'var(--axis)' }, g);
+  el('text', { x: W - P.r, y: H - 4, 'text-anchor': 'end', class: 'ttl' }, g, xlab);
+  el('text', { x: P.l, y: P.t - 10, 'text-anchor': 'start', class: 'ttl' }, g, ylab);
+  return g;
+}
+
+// panel B: distance or magnitudes vs t
+const chartB = document.getElementById('chartB');
+function drawB() {
+  const W = 520, H = 380, P = { l: 46, r: 64, t: 26, b: 34 };
+  const lx = t => P.l + (Math.log10(t) - Math.log10(T_MIN)) / (Math.log10(T_MAX) - Math.log10(T_MIN)) * (W - P.l - P.r);
+  const xt = [0.1, 1, 10, 100].map(v => ({ v, label: v }));
+  const keys = document.getElementById('keysB');
+  const have = tcurve ? TGRID.map((_, i) => tcurve.mu[i] !== undefined) : [];
+  if (S.bView === 'dist') {
+    document.getElementById('bTitle').textContent = 'Distance across scales';
+    document.getElementById('bSub').innerHTML = 'The same two batches, every <i>t</i> from 0.1 to 100';
+    const ds = TGRID.map((_, i) => have[i] ? dist(tcurve.mx[i], tcurve.my[i], tcurve.mu[i]) : NaN);
+    let hi = S.norm ? 1 : Math.max(1, ...ds.filter(isFinite)) * 1.08;
+    const lo = S.norm ? 0 : Math.min(0, ...ds.filter(isFinite));
+    if (S.norm) hi = Math.max(1, ...ds.filter(isFinite));
+    const ys = v => H - P.b - (v - lo) / (hi - lo) * (H - P.t - P.b);
+    const g = frame(chartB, W, H, P, xt, niceTicks(lo, hi, 5), lx, ys, 'scale t (log)', S.norm ? 'normalized distance' : 'raw distance  2|X∪Y| − |X| − |Y|');
+    // MagGN schedule markers
+    LOSS_T.forEach(t => { const x = lx(t); el('line', { x1: x, x2: x, y1: P.t, y2: H - P.b, stroke: 'var(--cy)', 'stroke-opacity': .35, 'stroke-dasharray': '2 3' }, g); el('text', { x, y: P.t - 2, 'text-anchor': 'middle', class: 'lab', fill: 'var(--cy)' }, g, 't=' + t); });
+    if (S.norm) el('line', { x1: P.l, x2: W - P.r, y1: ys(1), y2: ys(1), stroke: 'var(--axis)', 'stroke-dasharray': '4 4' }, g);
+    const xsv = TGRID.map(lx), ysv = ds.map(ys);
+    el('path', { d: areaPath(xsv, ysv, ys(lo)), fill: 'var(--cy)', 'fill-opacity': .08, stroke: 'none' }, g);
+    el('path', { d: path(xsv, ysv), fill: 'none', stroke: 'var(--cy)', 'stroke-width': 2.2, 'stroke-linejoin': 'round' }, g);
+    // current t
+    const x = lx(S.t); el('line', { x1: x, x2: x, y1: P.t, y2: H - P.b, stroke: 'var(--fg)', 'stroke-width': 1 }, g);
+    if (point) { const v = dist(point.mx, point.my, point.mu); if (isFinite(v)) { el('circle', { cx: x, cy: ys(v), r: 5, fill: 'var(--cy)', stroke: 'var(--surface)', 'stroke-width': 2 }, g); el('text', { x: x + 8, y: ys(v) - 8, class: 'lab', fill: 'var(--fg)' }, g, fmt(v)); } }
+    keys.innerHTML = '<span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--cy)" stroke-width="2.2"/></svg>distance(X, Y)</span><span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--cy)" stroke-opacity=".5" stroke-dasharray="2 3"/></svg>MagGN multiscale t</span>' + (S.norm ? '<span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--axis)" stroke-dasharray="4 4"/></svg>disjoint sets (1)</span>' : '');
+  } else {
+    document.getElementById('bTitle').textContent = 'Magnitudes across scales';
+    document.getElementById('bSub').innerHTML = 'Effective number of points in each set, from 1 at small <i>t</i> to n at large <i>t</i>';
+    const lo = 0, hi = Math.log10(2 * S.n);
+    const ys = v => H - P.b - (Math.log10(Math.max(1, v)) - lo) / (hi - lo) * (H - P.t - P.b);
+    const yt = [1, 2, 5, 10, 20, 50, 100, 200, 500].filter(v => v <= 2 * S.n).map(v => ({ label: v, valueOf: () => v }));
+    const g = frame(chartB, W, H, P, xt, [], lx, ys, 'scale t (log)', 'magnitude (log)');
+    yt.forEach(v => { const y = ys(+v); el('line', { x1: P.l, x2: W - P.r, y1: y, y2: y, stroke: 'var(--grid)' }, g); el('text', { x: P.l - 6, y: y + 4, 'text-anchor': 'end' }, g, v.label); });
+    const xsv = TGRID.map(lx);
+    const series = [['mu', 'var(--cu)', '|X ∪ Y|'], ['mx', 'var(--cx)', '|X|'], ['my', 'var(--cy)', '|Y|']];
+    const ends = [];
+    series.forEach(([k, c, lab]) => {
+      const vals = TGRID.map((_, i) => have[i] ? tcurve[k][i] : NaN);
+      el('path', { d: path(xsv, vals.map(ys)), fill: 'none', stroke: c, 'stroke-width': k === 'mu' ? 2.2 : 1.8, 'stroke-dasharray': k === 'my' ? '5 3' : 'none' }, g);
+      let li = -1; vals.forEach((v, i) => { if (isFinite(v)) li = i; });
+      if (li >= 0) ends.push({ y: ys(vals[li]), x: xsv[li], lab, c });
+    });
+    ends.sort((a, b) => a.y - b.y); for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 13) ends[i].y = ends[i - 1].y + 13;
+    ends.forEach(e => el('text', { x: e.x + 6, y: e.y + 4, class: 'lab', fill: e.c }, g, e.lab));
+    const x = lx(S.t); el('line', { x1: x, x2: x, y1: P.t, y2: H - P.b, stroke: 'var(--fg)', 'stroke-width': 1, 'stroke-opacity': .6 }, g);
+    keys.innerHTML = '<span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--cu)" stroke-width="2.2"/></svg>union</span><span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--cx)" stroke-width="1.8"/></svg>real X</span><span class="key"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="var(--cy)" stroke-width="1.8" stroke-dasharray="5 3"/></svg>generated Y</span>';
+  }
+}
+function areaPath(xs, ys, base) {
+  const idx = xs.map((_, i) => i).filter(i => isFinite(ys[i])); if (idx.length < 2) return '';
+  let d = `M${xs[idx[0]].toFixed(1)} ${base}`; idx.forEach(i => { d += `L${xs[i].toFixed(1)} ${ys[i].toFixed(1)}`; }); return d + `L${xs[idx[idx.length - 1]].toFixed(1)} ${base}Z`;
+}
+
+// panel C: distance vs shift
+const chartC = document.getElementById('chartC');
+function drawC() {
+  const W = 520, H = 300, P = { l: 46, r: 58, t: 24, b: 34 };
+  const xs = s => P.l + s / shiftMax * (W - P.l - P.r);
+  const curves = [];
+  shiftCurves.forEach((m, t) => curves.push({ t, vals: m.mu.map(mu => dist(m.mx, m.my, mu)) }));
+  const all = curves.flatMap(c => c.vals).filter(isFinite);
+  const lo = S.norm ? 0 : Math.min(0, ...all), hi = S.norm ? Math.max(1, ...all) : Math.max(1, ...all) * 1.05;
+  const ys = v => H - P.b - (v - lo) / (hi - lo) * (H - P.t - P.b);
+  const g = frame(chartC, W, H, P, niceTicks(0, shiftMax, 5), niceTicks(lo, hi, 4), xs, ys, 'shift length ‖μ‖', S.norm ? 'normalized distance' : 'raw distance');
+  const shifts = []; for (let k = 0; k < NSHIFT; k++) shifts.push(shiftMax * k / (NSHIFT - 1));
+  const sxv = shifts.map(xs);
+  curves.sort((a, b) => (a.t === S.t) - (b.t === S.t));
+  const labels = [];
+  curves.forEach(c => {
+    const cur = c.t === S.t;
+    el('path', { d: path(sxv, c.vals.map(ys)), fill: 'none', stroke: cur ? 'var(--cy)' : 'var(--fg-2)', 'stroke-opacity': cur ? 1 : .45, 'stroke-width': cur ? 2.4 : 1.2 }, g);
+    labels.push({ y: ys(c.vals[c.vals.length - 1]), text: 't=' + fmtT(c.t).replace(/\.00$/, ''), cur });
+  });
+  labels.sort((a, b) => a.y - b.y); for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 12) labels[i].y = labels[i - 1].y + 12;
+  labels.forEach(l => el('text', { x: W - P.r + 6, y: l.y + 4, class: 'lab', fill: l.cur ? 'var(--cy)' : 'var(--muted)', 'font-weight': l.cur ? 500 : 400 }, g, l.text));
+  // current shift marker (projected on the sweep direction)
+  const proj = S.mu[0] * shiftDir[0] + S.mu[1] * shiftDir[1];
+  if (proj >= 0 && proj <= shiftMax) { const x = xs(proj); el('line', { x1: x, x2: x, y1: P.t, y2: H - P.b, stroke: 'var(--fg)', 'stroke-opacity': .5, 'stroke-dasharray': '3 3' }, g); el('text', { x: x + 4, y: P.t + 10, class: 'lab', fill: 'var(--fg-2)' }, g, 'Y now'); }
+  if (!curves.length) el('text', { x: W / 2, y: H / 2, 'text-anchor': 'middle', fill: 'var(--muted)' }, g, 'Computing curves…');
+  const ang = Math.atan2(shiftDir[1], shiftDir[0]) * 180 / Math.PI;
+  document.getElementById('cSub').innerHTML = `Y translated from X along ${Math.abs(ang) < 0.5 ? 'the x₁ axis' : 'direction ' + ang.toFixed(0) + '°'}, one curve per <i>t</i>. Orange is the current <i>t</i>.`;
+}
+
+// stats
+let energyVal = null;
+function energy() {
+  if (energyVal !== null) return energyVal;
+  const n = S.n; let xy = 0, xx = 0, yy = 0;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    xy += Math.hypot(X[2 * i] - Y[2 * j], X[2 * i + 1] - Y[2 * j + 1]);
+    if (j > i) { xx += Math.hypot(X[2 * i] - X[2 * j], X[2 * i + 1] - X[2 * j + 1]); yy += Math.hypot(Y[2 * i] - Y[2 * j], Y[2 * i + 1] - Y[2 * j + 1]); }
+  }
+  return energyVal = 2 * xy / (n * n) - 2 * xx / (n * n) - 2 * yy / (n * n);
+}
+function renderStats() {
+  const el2 = document.getElementById('stats');
+  const p = point, ok = p && Math.abs(p.t - S.t) < 1e-12;
+  const nd = ok ? dist(p.mx, p.my, p.mu, true) : NaN, rd = ok ? dist(p.mx, p.my, p.mu, false) : NaN;
+  let loss = NaN;
+  if (tcurve) { const v = LOSS_T.map(t => { const i = TGRID.indexOf(t); return tcurve.mu[i] !== undefined ? dist(tcurve.mx[i], tcurve.my[i], tcurve.mu[i], true) : NaN; }); if (v.every(isFinite)) loss = v.reduce((a, b) => a + b, 0) / v.length; }
+  const jit = ok && p.eps > 0 ? `jitter ${p.eps.toExponential(0)} added to the diagonal` : 'no jitter needed (eps = 0)';
+  el2.innerHTML = `
+    <div class="stat hero"><span class="k">Normalized magnitude distance at <i>t</i> = ${fmtT(S.t)}</span><span class="v">${fmt(nd)}</span><div class="bar"><i style="width:${isFinite(nd) ? Math.max(0, Math.min(1, nd)) * 100 : 0}%"></i></div><span class="s">0 means Y adds nothing to X; 1 means fully disjoint</span></div>
+    <div class="stat"><span class="k">|X|<sub>t</sub> real</span><span class="v" style="color:var(--cx)">${fmt(ok ? p.mx : NaN, 2)}</span><span class="s">of ${S.n} points</span></div>
+    <div class="stat"><span class="k">|Y|<sub>t</sub> generated</span><span class="v" style="color:var(--cy)">${fmt(ok ? p.my : NaN, 2)}</span><span class="s">of ${S.n} points</span></div>
+    <div class="stat"><span class="k">|X ∪ Y|<sub>t</sub></span><span class="v">${fmt(ok ? p.mu : NaN, 2)}</span><span class="s">${jit}</span></div>
+    <div class="stat"><span class="k">Raw distance</span><span class="v">${fmt(rd, 2)}</span><span class="s">2|X∪Y| − |X| − |Y|</span></div>
+    <div class="stat"><span class="k">MagGN loss, <i>t</i> ∈ {5, 20, 50}</span><span class="v">${fmt(loss)}</span><span class="s">mean normalized distance, toy schedule</span></div>
+    <div class="stat"><span class="k">Energy distance</span><span class="v">${fmt(energy())}</span><span class="s">for comparison, as in the analysis notebooks</span></div>`;
+}
+
+// ── controls ───────────────────────────────────────────────────────────
+const slider = document.getElementById('tslider'), tval = document.getElementById('tval');
+const tToS = t => Math.round((Math.log(t) - Math.log(T_MIN)) / (Math.log(T_MAX) - Math.log(T_MIN)) * 1000);
+const sToT = s => T_MIN * Math.pow(T_MAX / T_MIN, s / 1000);
+const chipsEl = document.getElementById('chips');
+PROJECT_T.forEach(t => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = t; b.dataset.t = t; b.setAttribute('aria-pressed', 'false'); b.title = LOSS_T.includes(t) ? 'MagGN toy multiscale schedule' : t === 2 ? 'Statistical analysis notebooks' : 'Small-scale reference'; b.onclick = () => setT(t); chipsEl.appendChild(b); });
+function setT(t, fromSlider) {
+  S.t = +(+t).toPrecision(4);
+  if (!fromSlider) slider.value = tToS(S.t);
+  tval.innerHTML = `<em>t</em>=&nbsp;${fmtT(S.t)}`;
+  chipsEl.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(Math.abs(+b.dataset.t - S.t) < 1e-9)));
+  reqPoint(); reqShift(true); drawB(); drawC(); renderStats();
+}
+slider.addEventListener('input', () => { const t = sToT(+slider.value), snap = PROJECT_T.find(v => Math.abs(Math.log(v / t)) < 0.02); setT(snap ?? t, true); });
+
+function seg(id, key, cb) {
+  const root = document.getElementById(id);
+  root.addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    root.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    S[key] = key === 'norm' ? b.dataset.v === '1' : b.dataset.v; cb();
+  });
+}
+seg('dsSeg', 'ds', () => { S.mu = [0, 0]; onDataChange(); updShiftOut(); });
+seg('ySeg', 'ymode', () => { updYHint(); onDataChange(); });
+seg('normSeg', 'norm', () => { drawB(); drawC(); });
+seg('bSeg', 'bView', drawB);
+function updYHint() { const b = document.querySelector('#ySeg [data-v="drop"]'); b.title = DROP_TEXT[S.ds]; }
+
+const nslider = document.getElementById('nslider'), sslider = document.getElementById('sslider');
+let nTimer = 0;
+nslider.addEventListener('input', () => { S.n = +nslider.value; document.getElementById('nval').textContent = S.n; clearTimeout(nTimer); nTimer = setTimeout(onDataChange, 120); });
+let sTimer = 0;
+sslider.addEventListener('input', () => { S.sigma = +Math.pow(4, +sslider.value / 100).toFixed(3); document.getElementById('sval').textContent = S.sigma.toFixed(2) + '×'; clearTimeout(sTimer); sTimer = setTimeout(onDataChange, 120); });
+document.getElementById('centerBtn').onclick = () => { S.mu = [0, 0]; applyShift(); updShiftOut(); reqPoint(); drawA(); onShiftEnd(); };
+document.getElementById('seedBtn').onclick = () => { S.seed++; onDataChange(); };
+
+let rT = 0; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(drawA, 80); });
+const mq = matchMedia('(prefers-color-scheme: dark)'); (mq.addEventListener ? mq.addEventListener('change', () => { drawA(); }) : null);
+new MutationObserver(() => drawA()).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+// start: 8 Gaussians, Y shifted a little so the distance is non-trivial
+regen(); S.mu = [clampMu(0.55 * R), clampMu(0.25 * R)];
+updYHint(); updShiftOut();
+slider.value = tToS(S.t);
+tval.innerHTML = `<em>t</em>=&nbsp;${fmtT(S.t)}`;
+chipsEl.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.t === S.t)));
+onDataChange();
+</script>
+
+</body></html>
