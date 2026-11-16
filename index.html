@@ -337,6 +337,23 @@
         #resume .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
         #resume .progress-bar { transition: width 1.1s cubic-bezier(0.4,0,0.2,1) !important; }
 
+        /* ===== INTERACTIVE DEMOS ===== */
+        #demos { background: linear-gradient(135deg, #17263C 0%, #1e3450 60%, #253d5e 100%); position: relative; overflow: hidden; }
+        #demos::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(248,92,112,0.18) 0%, transparent 60%); pointer-events: none; }
+        #demos .container { position: relative; }
+        #demos h2 { color: #fff; }
+        #demos .demos-lede { color: rgba(255,255,255,0.65); font-size: 0.95rem; max-width: 640px; margin-bottom: 34px; }
+        .demo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+        .demo-card { display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 26px 28px; color: #fff; text-decoration: none; transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .demo-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); border-color: rgba(248,92,112,0.6); box-shadow: 0 16px 40px rgba(0,0,0,0.3); color: #fff; text-decoration: none; }
+        .demo-badge { align-self: flex-start; font-size: 0.66rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: #F85C70; color: #fff; padding: 3px 11px; border-radius: 12px; }
+        .demo-title { font-family: "Dosis", sans-serif; font-size: 1.35rem; font-weight: 700; line-height: 1.25; margin: 0; }
+        .demo-paper { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin: 0; }
+        .demo-desc { font-size: 0.88rem; color: rgba(255,255,255,0.78); line-height: 1.65; margin: 0; }
+        .demo-cta { margin-top: 6px; font-weight: 700; font-size: 0.88rem; color: #F85C70; display: inline-flex; align-items: center; gap: 8px; }
+        .demo-card:hover .demo-cta i { transform: translateX(4px); }
+        .demo-cta i { transition: transform 0.25s ease; }
+
         /* ===== NEWS SCROLL ===== */
         .scroll-container {
             display: flex; overflow-x: auto;
@@ -467,6 +484,7 @@
     <nav class="side-nav" aria-label="Page sections">
         <a href="#about" class="side-link"><i class="ti-user"></i><span>About</span></a>
         <a href="education.html" class="side-link"><i class="ti-briefcase"></i><span>Education</span></a>
+        <a href="#demos" class="side-link"><i class="ti-control-play"></i><span>Demos</span></a>
         <a href="#news" class="side-link"><i class="ti-rss"></i><span>News</span></a>
         <a href="life.html" class="side-link"><i class="ti-image"></i><span>Life</span></a>
         <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="side-link" target="_blank"><i class="ti-book"></i><span>Publications</span></a>
@@ -530,9 +548,10 @@
                 <h3 class="font-weight-light" style="margin-bottom:10px;">Who am I?</h3>
                 <span class="line mb-4"></span>
                 <p style="font-size:0.93rem; line-height:1.8; color:#555;">
-                    I am a Ph.D. student in Computer Science at the University of Edinburgh, advised by
-                    <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank">Professor Rik Sarkar</a>.
-                    My research focuses on Differential Privacy and Theoretical Machine Learning.
+                    I am a Ph.D. student in Computer Science at the University of Edinburgh and EPFL, as part of the ELLIS PhD Program,
+                    supervised by <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank">Professor Rik Sarkar</a>,
+                    Professor Henry Gouk, and Professor Pascal Frossard.
+                    My research focuses on Theoretical Machine Learning and Geometric Deep Learning.
                 </p>
                 <p style="font-size:0.93rem; line-height:1.8; color:#555;">
                     I completed my B.Sc. in Applied Mathematics at Sharif University of Technology, working with
@@ -543,7 +562,8 @@
                 </p>
                 <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#bbb; margin-bottom:8px; margin-top:20px;">Research Interests</p>
                 <div class="interest-chips">
-                    <span class="interest-chip">Machine Learning Theory</span>
+                    <span class="interest-chip">Theoretical Machine Learning</span>
+                    <span class="interest-chip">Geometric Deep Learning</span>
                     <span class="interest-chip">Differential Privacy</span>
                 </div>
             </div>
@@ -598,6 +618,31 @@
         </div>
     </section>
 
+    <!-- Interactive Demos -->
+    <section class="section" id="demos">
+        <div class="container">
+            <span class="section-eyebrow reveal">Try It Yourself</span>
+            <h2 class="mb-2 reveal delay-1">Interactive <span class="text-danger">Demos</span></h2>
+            <p class="demos-lede reveal delay-2">Explore the ideas behind my papers directly in your browser. Every number is computed live as you drag, click, and change the scale.</p>
+            <div class="demo-grid">
+                <a class="demo-card reveal" href="demos/magnitude-potential-explorer.html" target="_blank">
+                    <span class="demo-badge">NeurIPS 2026</span>
+                    <p class="demo-title">Magnitude Potential Explorer</p>
+                    <p class="demo-paper">Generalization in Neural Networks Through the Lens of Magnitude Potential</p>
+                    <p class="demo-desc">Change the scale and relabel points to see how the magnitude potential ratio flags atypical and mislabelled data.</p>
+                    <span class="demo-cta">Launch demo <i class="ti-arrow-right"></i></span>
+                </a>
+                <a class="demo-card reveal delay-1" href="demos/magnitude-distance-explorer.html" target="_blank">
+                    <span class="demo-badge">ICML 2026</span>
+                    <p class="demo-title">Magnitude Distance Explorer</p>
+                    <p class="demo-paper">Magnitude Distance: A Geometric Measure of Dataset Similarity</p>
+                    <p class="demo-desc">Drag a generated batch against real data and watch the magnitude distance respond across scales.</p>
+                    <span class="demo-cta">Launch demo <i class="ti-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Latest News -->
     <section class="section" id="news">
         <div class="container">
@@ -630,7 +675,7 @@
                     <div class="content-holder">
                         <h6 class="title">London Hopper Colloquium 2026</h6>
                         <p><b>May 2026</b></p>
-                        <p>Selected as a finalist in the Research Spotlight Competition at the London Hopper Colloquium 2026, hosted by UCL &amp; BCS Academy of Computing.</p>
+                        <p>Awarded the Research Spotlight Speaker Prize at the London Hopper Colloquium 2026, hosted by UCL &amp; BCS Academy of Computing.</p>
                         <div class="news-links">
                             <a href="https://www.ucl.ac.uk/engineering/events/2026/may/london-hopper-colloquium-2026" target="_blank" class="read-more">Event page <i class="ti-angle-double-right"></i></a>
                         </div>
@@ -645,6 +690,16 @@
                             <a href="https://icml.cc/virtual/2026/poster/65802" target="_blank" class="read-more">ICML <i class="ti-angle-double-right"></i></a>
                             <a href="https://github.com/saheltorkamani/Magnitude_Distance" target="_blank" class="read-more">Code <i class="ti-angle-double-right"></i></a>
                             <a href="demos/magnitude-distance-explorer.html" target="_blank" class="read-more">Demo <i class="ti-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="content-holder">
+                        <h6 class="title">PrivaDE: Privacy-preserving Data Evaluation for Blockchain-based Data Marketplaces</h6>
+                        <p><b>December 2025</b></p>
+                        <p>Paper accepted at AsiaCCS 2026.</p>
+                        <div class="news-links">
+                            <a href="https://arxiv.org/abs/2510.18109" target="_blank" class="read-more">arXiv <i class="ti-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>

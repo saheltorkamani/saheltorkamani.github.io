@@ -62,6 +62,38 @@
         .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
         .navbar .nav-link.active::after { width: 80%; left: 10%; }
 
+        /* ===== SUBPAGE HERO (same as other pages) ===== */
+        .page-hero {
+            background-image: linear-gradient(to bottom, rgba(15,25,40,0.55), rgba(15,25,40,0.40)), url(assets/imgs/Vienna_Car.jpg);
+            background-color: #17263C;
+            background-size: cover;
+            background-position: center center;
+            background-attachment: scroll;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 60px 20px 44px;
+            position: relative;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-family: "Lora", serif;
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+        .page-hero p { font-size: 1rem; color: rgba(255,255,255,0.88); letter-spacing: 0.5px; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+        .hero-line { width: 50px; height: 3px; background: #F85C70; margin: 12px auto 14px; }
+        .hero-photo-credit { position: absolute; bottom: 8px; right: 14px; font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+        .navbar .nav-link, .navbar-brand { font-family: "Source Sans Pro", sans-serif; }
+        .navbar-brand.brand-block .brand-title { font-family: "Dosis", sans-serif; }
+        @media (max-width: 767px) { .page-hero h1 { font-size: 2rem; } }
+
         /* ===== PAGE HEADER ===== */
         .blog-header {
             background: linear-gradient(135deg, #17263C 0%, #1e3450 60%, #253d5e 100%);
@@ -445,23 +477,14 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <div class="blog-header">
-        <span class="math-deco d1">Φ</span>
-        <span class="math-deco d2">∥·∥</span>
-        <span class="math-deco d3">d(X,Y)</span>
-        <div class="blog-header-inner">
-            <div class="blog-header-eyebrow">PhD Research Blog</div>
-            <h1>The Geometry of <em>Learning</em></h1>
-            <p class="blog-header-subtitle">
-                How data geometry shapes neural network behaviour, from dataset distances to internal representations.
-            </p>
-            <div class="blog-header-meta">
-                <span class="blog-meta-pill"><i class="ti-map" style="margin-right:5px;"></i> Metric Geometry × Neural Networks</span>
-                <span class="blog-meta-pill"><i class="ti-calendar" style="margin-right:5px;"></i> 2024 – Present</span>
-                <span class="blog-meta-pill"><i class="ti-layers" style="margin-right:5px;"></i> 3 papers so far</span>
-            </div>
+    <!-- Hero -->
+    <div class="page-hero">
+        <div>
+            <h1>The Geometry of Learning</h1>
+            <div class="hero-line"></div>
+            <p>PhD research blog · how data geometry shapes neural network behaviour</p>
         </div>
+        <span class="hero-photo-credit">Vienna, Austria</span>
     </div>
 
     <!-- Storyline -->

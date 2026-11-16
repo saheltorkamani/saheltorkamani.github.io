@@ -205,6 +205,16 @@
         .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
         .navbar .nav-link.active::after { width: 80%; left: 10%; }
 
+        /* ===== DEMO BANNER ===== */
+        .demo-banner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, #17263C 0%, #253d5e 100%); border-radius: 12px; padding: 20px 26px; margin-bottom: 34px; color: #fff; }
+        .demo-banner .db-icon { width: 46px; height: 46px; border-radius: 50%; background: #F85C70; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .demo-banner .db-text { flex: 1; min-width: 220px; }
+        .demo-banner .db-title { font-family: "Dosis", sans-serif; font-size: 1.15rem; font-weight: 700; margin: 0; }
+        .demo-banner .db-sub { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0; }
+        .demo-banner .db-btn { font-size: 0.82rem; font-weight: 700; color: #fff; border: 2px solid #F85C70; background: #F85C70; padding: 7px 18px; border-radius: 25px; text-decoration: none; transition: all 0.25s ease; white-space: nowrap; }
+        .demo-banner .db-btn.ghost { background: transparent; }
+        .demo-banner .db-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(248,92,112,0.35); color: #fff; text-decoration: none; }
+
         @media (max-width: 767px) {
             .page-hero h1 { font-size: 2rem; }
             .project-card { padding: 22px 20px; }
@@ -252,6 +262,16 @@
     <!-- Projects -->
     <section id="research-section">
         <div class="container">
+
+            <div class="demo-banner reveal">
+                <div class="db-icon"><i class="ti-control-play"></i></div>
+                <div class="db-text">
+                    <p class="db-title">Try the interactive demos</p>
+                    <p class="db-sub">Explore magnitude potential and magnitude distance live in your browser.</p>
+                </div>
+                <a href="demos/magnitude-potential-explorer.html" target="_blank" class="db-btn">Magnitude Potential</a>
+                <a href="demos/magnitude-distance-explorer.html" target="_blank" class="db-btn ghost">Magnitude Distance</a>
+            </div>
 
             <div class="section-label reveal">Current &amp; Recent Work</div>
 
@@ -315,8 +335,8 @@
             </div>
 
             <div class="project-card reveal delay-1">
-                <span class="project-status completed">Completed</span>
-                <div class="project-title">Secure Data Scoring and Selection for ML Models with Zero-Knowledge Proofs</div>
+                <span class="project-status completed">Accepted · AsiaCCS 2026</span>
+                <div class="project-title">PrivaDE: Privacy-preserving Data Evaluation for Blockchain-based Data Marketplaces</div>
                 <p class="project-date"><i class="ti-calendar"></i> December 2024 – April 2025</p>
                 <p class="project-desc">We describe secure protocols that make use of a small subset of the data to perform an assessment and output a score that can be used to determine the final price of a data transaction. The protocols are based on zero-knowledge proofs of properties of the data and model inference, ensuring both correctness and confidentiality of the underlying data.</p>
                 <div class="project-tags">
@@ -324,10 +344,13 @@
                     <span class="project-tag">Data Markets</span>
                     <span class="project-tag">Secure Computation</span>
                 </div>
+                <div style="margin-top:16px;">
+                    <a href="https://arxiv.org/abs/2510.18109" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> arXiv</a>
+                </div>
             </div>
 
             <div class="project-card reveal delay-2">
-                <span class="project-status completed">Completed</span>
+                <span class="project-status completed">FORC 2025 · TPDP 2024</span>
                 <div class="project-title">Continual Observation with Differential Privacy</div>
                 <p class="project-date"><i class="ti-calendar"></i> March 2024 – September 2024</p>
                 <p class="project-desc">We consider the problem of counting under continual observation and present a new generalization of the binary tree mechanism that uses a k-ary number system with negative digits to improve the privacy-accuracy trade-off. This leads to improved error bounds compared to previous approaches.</p>
@@ -335,6 +358,9 @@
                     <span class="project-tag">Differential Privacy</span>
                     <span class="project-tag">Continual Observation</span>
                     <span class="project-tag">Counting Mechanisms</span>
+                </div>
+                <div style="margin-top:16px;">
+                    <a href="https://arxiv.org/pdf/2408.07021" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> arXiv</a>
                 </div>
             </div>
 
@@ -353,7 +379,7 @@
             </div>
 
             <div class="project-card reveal delay-1">
-                <span class="project-status completed">Completed</span>
+                <span class="project-status completed">JSAIT 2023 · ISIT 2022</span>
                 <div class="project-title">Algorithms and Differential Privacy via Graphs</div>
                 <p class="project-date"><i class="ti-calendar"></i> March 2021 – February 2024</p>
                 <p class="project-desc">In this project, we generalized the previous framework for designing utility-optimal differentially private (DP) mechanisms via graphs in two main directions. First, heterogeneous mechanisms where the partial mechanism can have different probability distributions at the boundary. Secondly, we solved the problem in a general heterogeneous privacy setting on neighboring datasets to provide different levels of privacy for each data point.</p>
@@ -362,6 +388,10 @@
                     <span class="project-tag">Graph Theory</span>
                     <span class="project-tag">Utility Optimization</span>
                     <span class="project-tag">Heterogeneous Privacy</span>
+                </div>
+                <div style="margin-top:16px;">
+                    <a href="https://arxiv.org/abs/2310.20486" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> JSAIT 2023</a>
+                    <a href="https://arxiv.org/abs/2203.15429" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-link"></i> ISIT 2022</a>
                 </div>
             </div>
 
