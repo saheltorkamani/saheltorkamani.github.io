@@ -78,7 +78,7 @@
 
         /* ===== RESEARCH SECTION ===== */
         #research-section {
-            padding: 80px 0;
+            padding: 44px 0 56px;
             position: relative;
         }
         #research-section::after {
@@ -205,12 +205,37 @@
         .navbar .nav-link.active { color: #F85C70 !important; font-weight: 700; }
         .navbar .nav-link.active::after { width: 80%; left: 10%; }
 
+        /* ===== COMPACT CV LISTS ===== */
+        .cv-list { list-style: none; padding: 6px 28px; margin: 0 0 24px; background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; }
+        .cv-list li { display: flex; gap: 18px; padding: 12px 0; border-bottom: 1px solid #f3f3f3; align-items: baseline; }
+        .cv-list li:last-child { border-bottom: none; }
+        .cv-year { flex: 0 0 104px; font-size: 0.78rem; font-weight: 700; color: #F85C70; letter-spacing: 0.3px; }
+        .cv-main { flex: 1; min-width: 0; }
+        .cv-title { font-size: 0.95rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; line-height: 1.35; }
+        .cv-sub { font-size: 0.83rem; color: #777; line-height: 1.55; margin-top: 1px; }
+        .cv-sub a { color: #F85C70; }
+        .cv-list.compact li { padding: 8px 0; }
+        .cv-list.compact .cv-main { display: flex; flex-wrap: wrap; column-gap: 8px; align-items: baseline; }
+        .cv-list.compact .cv-title { font-size: 0.9rem; }
+        .cv-list.compact .cv-sub { margin-top: 0; }
+        .cv-list.compact .cv-sub::before { content: '·'; margin-right: 8px; color: #ccc; }
+        .cv-tag { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #F85C70; background: rgba(248,92,112,0.08); padding: 1px 8px; border-radius: 10px; margin-right: 6px; vertical-align: 1px; }
+        .cv-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; }
+        .cv-links a { font-size: 0.78rem; font-weight: 700; color: #F85C70; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .cv-links a:hover { text-decoration: underline; }
+        .cv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .cv-chip { font-size: 0.78rem; font-weight: 600; color: #555; background: #fafafa; border: 1px solid #e8e8e8; padding: 2px 10px; border-radius: 14px; }
+        .section-label { margin-bottom: 16px !important; }
+        @media (max-width: 575px) { .cv-list { padding: 4px 18px; } .cv-list li { flex-direction: column; gap: 2px; } .cv-year { flex: none; } }
+        .cv-topics { font-size: 0.76rem; color: #aaa; margin-top: 3px; }
+        .cv-list .cv-sub { font-size: 0.85rem; color: #666; }
+
         /* ===== DEMO BANNER ===== */
-        .demo-banner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, #17263C 0%, #253d5e 100%); border-radius: 12px; padding: 20px 26px; margin-bottom: 34px; color: #fff; }
+        .demo-banner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, #17263C 0%, #253d5e 100%); border-radius: 12px; padding: 20px 26px; margin-bottom: 26px; color: #fff; }
         .demo-banner .db-icon { width: 46px; height: 46px; border-radius: 50%; background: #F85C70; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
         .demo-banner .db-text { flex: 1; min-width: 220px; }
-        .demo-banner .db-title { font-family: "Dosis", sans-serif; font-size: 1.15rem; font-weight: 700; margin: 0; }
-        .demo-banner .db-sub { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0; }
+        .demo-banner .db-title { font-family: "Dosis", sans-serif; font-size: 1.15rem; font-weight: 700; margin: 0; color: #fff !important; }
+        .demo-banner .db-sub { font-size: 0.85rem; color: rgba(255,255,255,0.7) !important; margin: 0; }
         .demo-banner .db-btn { font-size: 0.82rem; font-weight: 700; color: #fff; border: 2px solid #F85C70; background: #F85C70; padding: 7px 18px; border-radius: 25px; text-decoration: none; transition: all 0.25s ease; white-space: nowrap; }
         .demo-banner .db-btn.ghost { background: transparent; }
         .demo-banner .db-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(248,92,112,0.35); color: #fff; text-decoration: none; }
@@ -274,129 +299,21 @@
 
             <div class="section-label reveal">Current &amp; Recent Work</div>
 
-            <div class="project-card reveal">
-                <span class="project-status ongoing">Ongoing</span>
-                <div class="project-title">Potential Privacy Risk in Machine Learning</div>
-                <p class="project-date"><i class="ti-calendar"></i> December 2024 – Present</p>
-                <p class="project-desc">We consider the problem of advanced estimation of privacy risk of adding a data point to the training set of a machine learning model with standard optimisation methods. The goal is to develop principled tools that help practitioners assess the privacy cost before committing to training decisions.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Differential Privacy</span>
-                    <span class="project-tag">Machine Learning</span>
-                    <span class="project-tag">Privacy Risk</span>
-                </div>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">December 2024 – Present</span><div class="cv-main"><div class="cv-title">Potential Privacy Risk in Machine Learning</div><div class="cv-sub"><span class="cv-tag">Ongoing</span>We consider the problem of advanced estimation of privacy risk of adding a data point to the training set of a machine learning model with standard optimisation methods. The goal is to develop principled tools that help practitioners assess the privacy cost before committing to training decisions.</div><div class="cv-topics">Differential Privacy · Machine Learning · Privacy Risk</div></div></li>
+                <li><span class="cv-year">2025 – 2026</span><div class="cv-main"><div class="cv-title">Magnitude Distance: A Geometric Measure of Dataset Similarity</div><div class="cv-sub"><span class="cv-tag">Accepted · ICML 2026</span>We propose magnitude distance, a novel distance metric on finite datasets based on the magnitude of a metric space, with a tunable scaling parameter controlling sensitivity to global structure versus finer detail. We prove key theoretical properties, show it remains discriminative in high dimensions, and demonstrate its use as a training objective for push-forward generative models.</div><div class="cv-topics">Metric Space Magnitude · Dataset Distances · Generative Modelling</div><div class="cv-links"><a href="https://icml.cc/virtual/2026/poster/65802" target="_blank"><i class="ti-link"></i> View on ICML 2026</a><a href="https://github.com/saheltorkamani/Magnitude_Distance" target="_blank"><i class="ti-github"></i> Code</a><a href="demos/magnitude-distance-explorer.html" target="_blank"><i class="ti-control-play"></i> Interactive Demo</a></div></div></li>
+                <li><span class="cv-year">2025 – 2026</span><div class="cv-main"><div class="cv-title">Generalization in Neural Networks Through the Lens of Magnitude Potential</div><div class="cv-sub"><span class="cv-tag">Accepted · NeurIPS 2026</span>We introduce the magnitude potential, a quantity based on metric magnitude theory that reflects how well a point is represented by a given set. Computed at the logit layer, the ratio between class-conditional and full-dataset magnitude potential correlates with Feldman memorization scores, detects structural changes in decision boundaries, and provides a geometric indicator of grokking.</div><div class="cv-topics">Magnitude Potential · Generalization · Grokking · Memorization</div><div class="cv-links"><a href="https://arxiv.org/pdf/2610.01633" target="_blank"><i class="ti-link"></i> arXiv</a><a href="https://github.com/saheltorkamani/Magnitude_Potential" target="_blank"><i class="ti-github"></i> Code</a><a href="demos/magnitude-potential-explorer.html" target="_blank"><i class="ti-control-play"></i> Interactive Demo</a><a href="assets/Pdf/NeurIPS2026_Slides.pdf" target="_blank"><i class="ti-bar-chart"></i> Slides</a></div></div></li>
+                <li><span class="cv-year">2025 – 2026</span><div class="cv-main"><div class="cv-title">Privacy Requires Slicing: Differentially Private Magnitude via Projections</div><div class="cv-sub"><span class="cv-tag">Workshop · EuroTDP 2026</span>We introduce sliced magnitude (SMag), with global sensitivity bounded uniformly in the scale parameter and dimension, enabling ε-differentially private release of magnitude-based quantities via the Laplace mechanism.</div><div class="cv-topics">Differential Privacy · Metric Space Magnitude · Sliced Projections</div><div class="cv-links"><a href="assets/Pdf/EuroTDP_Poster.pdf" target="_blank"><i class="ti-image"></i> Poster</a></div></div></li>
+                <li><span class="cv-year">December 2024 – April 2025</span><div class="cv-main"><div class="cv-title">PrivaDE: Privacy-preserving Data Evaluation for Blockchain-based Data Marketplaces</div><div class="cv-sub"><span class="cv-tag">Accepted · AsiaCCS 2026</span>We describe secure protocols that make use of a small subset of the data to perform an assessment and output a score that can be used to determine the final price of a data transaction. The protocols are based on zero-knowledge proofs of properties of the data and model inference, ensuring both correctness and confidentiality of the underlying data.</div><div class="cv-topics">Zero-Knowledge Proofs · Data Markets · Secure Computation</div><div class="cv-links"><a href="https://arxiv.org/abs/2510.18109" target="_blank"><i class="ti-link"></i> arXiv</a></div></div></li>
+                <li><span class="cv-year">March 2024 – September 2024</span><div class="cv-main"><div class="cv-title">Continual Observation with Differential Privacy</div><div class="cv-sub"><span class="cv-tag">FORC 2025 · TPDP 2024</span>We consider the problem of counting under continual observation and present a new generalization of the binary tree mechanism that uses a k-ary number system with negative digits to improve the privacy-accuracy trade-off. This leads to improved error bounds compared to previous approaches.</div><div class="cv-topics">Differential Privacy · Continual Observation · Counting Mechanisms</div><div class="cv-links"><a href="https://arxiv.org/pdf/2408.07021" target="_blank"><i class="ti-link"></i> arXiv</a></div></div></li>
+            </ul>
 
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">Accepted · ICML 2026</span>
-                <div class="project-title">Magnitude Distance: A Geometric Measure of Dataset Similarity</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2025 – 2026</p>
-                <p class="project-desc">We propose magnitude distance, a novel distance metric on finite datasets based on the magnitude of a metric space, with a tunable scaling parameter controlling sensitivity to global structure versus finer detail. We prove key theoretical properties, show it remains discriminative in high dimensions, and demonstrate its use as a training objective for push-forward generative models.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Metric Space Magnitude</span>
-                    <span class="project-tag">Dataset Distances</span>
-                    <span class="project-tag">Generative Modelling</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="https://icml.cc/virtual/2026/poster/65802" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> View on ICML 2026</a>
-                    <a href="https://github.com/saheltorkamani/Magnitude_Distance" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-github"></i> Code</a>
-                    <a href="demos/magnitude-distance-explorer.html" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-control-play"></i> Interactive Demo</a>
-                </div>
-            </div>
+            <div class="section-label reveal" style="margin-top: 8px;">Earlier Work</div>
 
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">Accepted · NeurIPS 2026</span>
-                <div class="project-title">Generalization in Neural Networks Through the Lens of Magnitude Potential</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2025 – 2026</p>
-                <p class="project-desc">We introduce the magnitude potential, a quantity based on metric magnitude theory that reflects how well a point is represented by a given set. Computed at the logit layer, the ratio between class-conditional and full-dataset magnitude potential correlates with Feldman memorization scores, detects structural changes in decision boundaries, and provides a geometric indicator of grokking.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Magnitude Potential</span>
-                    <span class="project-tag">Generalization</span>
-                    <span class="project-tag">Grokking</span>
-                    <span class="project-tag">Memorization</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="https://arxiv.org/pdf/2610.01633" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> arXiv</a>
-                    <a href="https://github.com/saheltorkamani/Magnitude_Potential" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-github"></i> Code</a>
-                    <a href="demos/magnitude-potential-explorer.html" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-control-play"></i> Interactive Demo</a>
-                    <a href="assets/Pdf/NeurIPS2026_Slides.pdf" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-bar-chart"></i> Slides</a>
-                </div>
-            </div>
-
-            <div class="project-card reveal">
-                <span class="project-status completed">Workshop · EuroTDP 2026</span>
-                <div class="project-title">Privacy Requires Slicing: Differentially Private Magnitude via Projections</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2025 – 2026</p>
-                <p class="project-desc">We introduce sliced magnitude (SMag), with global sensitivity bounded uniformly in the scale parameter and dimension, enabling ε-differentially private release of magnitude-based quantities via the Laplace mechanism.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Differential Privacy</span>
-                    <span class="project-tag">Metric Space Magnitude</span>
-                    <span class="project-tag">Sliced Projections</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="assets/Pdf/EuroTDP_Poster.pdf" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-image"></i> Poster</a>
-                </div>
-            </div>
-
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">Accepted · AsiaCCS 2026</span>
-                <div class="project-title">PrivaDE: Privacy-preserving Data Evaluation for Blockchain-based Data Marketplaces</div>
-                <p class="project-date"><i class="ti-calendar"></i> December 2024 – April 2025</p>
-                <p class="project-desc">We describe secure protocols that make use of a small subset of the data to perform an assessment and output a score that can be used to determine the final price of a data transaction. The protocols are based on zero-knowledge proofs of properties of the data and model inference, ensuring both correctness and confidentiality of the underlying data.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Zero-Knowledge Proofs</span>
-                    <span class="project-tag">Data Markets</span>
-                    <span class="project-tag">Secure Computation</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="https://arxiv.org/abs/2510.18109" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> arXiv</a>
-                </div>
-            </div>
-
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">FORC 2025 · TPDP 2024</span>
-                <div class="project-title">Continual Observation with Differential Privacy</div>
-                <p class="project-date"><i class="ti-calendar"></i> March 2024 – September 2024</p>
-                <p class="project-desc">We consider the problem of counting under continual observation and present a new generalization of the binary tree mechanism that uses a k-ary number system with negative digits to improve the privacy-accuracy trade-off. This leads to improved error bounds compared to previous approaches.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Differential Privacy</span>
-                    <span class="project-tag">Continual Observation</span>
-                    <span class="project-tag">Counting Mechanisms</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="https://arxiv.org/pdf/2408.07021" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> arXiv</a>
-                </div>
-            </div>
-
-            <div class="section-label reveal" style="margin-top: 20px;">Earlier Work</div>
-
-            <div class="project-card reveal">
-                <span class="project-status completed">Completed</span>
-                <div class="project-title">Sparse MultiDecoder Recursive Projection Aggregation for Reed-Muller Codes</div>
-                <p class="project-date"><i class="ti-calendar"></i> March 2022 – September 2022</p>
-                <p class="project-desc">The Sparse Recursive Projection Aggregation (SRPA) decoder for Reed-Muller codes achieves performance close to the maximum likelihood decoder for short-length RM codes. We simulated an algorithm based on a neural network to lower the computational budget while keeping performance close to that of the SRPA decoder by performing a better selection of projections in each sparsified decoder.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Reed-Muller Codes</span>
-                    <span class="project-tag">Neural Networks</span>
-                    <span class="project-tag">Coding Theory</span>
-                </div>
-            </div>
-
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">JSAIT 2023 · ISIT 2022</span>
-                <div class="project-title">Algorithms and Differential Privacy via Graphs</div>
-                <p class="project-date"><i class="ti-calendar"></i> March 2021 – February 2024</p>
-                <p class="project-desc">In this project, we generalized the previous framework for designing utility-optimal differentially private (DP) mechanisms via graphs in two main directions. First, heterogeneous mechanisms where the partial mechanism can have different probability distributions at the boundary. Secondly, we solved the problem in a general heterogeneous privacy setting on neighboring datasets to provide different levels of privacy for each data point.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Differential Privacy</span>
-                    <span class="project-tag">Graph Theory</span>
-                    <span class="project-tag">Utility Optimization</span>
-                    <span class="project-tag">Heterogeneous Privacy</span>
-                </div>
-                <div style="margin-top:16px;">
-                    <a href="https://arxiv.org/abs/2310.20486" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none;"><i class="ti-link"></i> JSAIT 2023</a>
-                    <a href="https://arxiv.org/abs/2203.15429" target="_blank" style="font-size:0.82rem; font-weight:700; color:#F85C70; text-decoration:none; margin-left:16px;"><i class="ti-link"></i> ISIT 2022</a>
-                </div>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">March 2022 – September 2022</span><div class="cv-main"><div class="cv-title">Sparse MultiDecoder Recursive Projection Aggregation for Reed-Muller Codes</div><div class="cv-sub"><span class="cv-tag">Completed</span>The Sparse Recursive Projection Aggregation (SRPA) decoder for Reed-Muller codes achieves performance close to the maximum likelihood decoder for short-length RM codes. We simulated an algorithm based on a neural network to lower the computational budget while keeping performance close to that of the SRPA decoder by performing a better selection of projections in each sparsified decoder.</div><div class="cv-topics">Reed-Muller Codes · Neural Networks · Coding Theory</div></div></li>
+                <li><span class="cv-year">March 2021 – February 2024</span><div class="cv-main"><div class="cv-title">Algorithms and Differential Privacy via Graphs</div><div class="cv-sub"><span class="cv-tag">JSAIT 2023 · ISIT 2022</span>In this project, we generalized the previous framework for designing utility-optimal differentially private (DP) mechanisms via graphs in two main directions. First, heterogeneous mechanisms where the partial mechanism can have different probability distributions at the boundary. Secondly, we solved the problem in a general heterogeneous privacy setting on neighboring datasets to provide different levels of privacy for each data point.</div><div class="cv-topics">Differential Privacy · Graph Theory · Utility Optimization · Heterogeneous Privacy</div><div class="cv-links"><a href="https://arxiv.org/abs/2310.20486" target="_blank"><i class="ti-link"></i> JSAIT 2023</a><a href="https://arxiv.org/abs/2203.15429" target="_blank"><i class="ti-link"></i> ISIT 2022</a></div></div></li>
+            </ul>
 
         </div>
     </section>
