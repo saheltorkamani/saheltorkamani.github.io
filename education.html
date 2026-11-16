@@ -195,6 +195,23 @@
         .navbar .nav-link.active::after { width: 80%; left: 10%; }
 
 
+
+        /* ===== COMPACT CV LISTS ===== */
+        .cv-list { list-style: none; padding: 6px 28px; margin: 0 0 24px; background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; }
+        .cv-list li { display: flex; gap: 18px; padding: 12px 0; border-bottom: 1px solid #f3f3f3; align-items: baseline; }
+        .cv-list li:last-child { border-bottom: none; }
+        .cv-year { flex: 0 0 104px; font-size: 0.78rem; font-weight: 700; color: #F85C70; letter-spacing: 0.3px; }
+        .cv-main { flex: 1; min-width: 0; }
+        .cv-title { font-size: 0.95rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; line-height: 1.35; }
+        .cv-sub { font-size: 0.83rem; color: #777; line-height: 1.55; margin-top: 1px; }
+        .cv-sub a { color: #F85C70; }
+        .cv-list.compact li { padding: 8px 0; }
+        .cv-list.compact .cv-main { display: flex; flex-wrap: wrap; column-gap: 8px; align-items: baseline; }
+        .cv-list.compact .cv-title { font-size: 0.9rem; }
+        .cv-list.compact .cv-sub { margin-top: 0; }
+        .cv-list.compact .cv-sub::before { content: '·'; margin-right: 8px; color: #ccc; }
+        @media (max-width: 575px) { .cv-list { padding: 4px 18px; } .cv-list li { flex-direction: column; gap: 2px; } .cv-year { flex: none; } }
+
         /* ===== HONORS GRID ===== */
         .honors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0 24px; }
         .honors-grid .project-card { padding: 22px 26px; }
@@ -260,34 +277,11 @@
 
             <div class="section-label reveal">Education</div>
 
-            <div class="project-card reveal">
-                <span class="project-status ongoing">Ongoing</span>
-                <div class="project-title">Ph.D. in Computer Science</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2024 – Present &nbsp;·&nbsp; <i class="ti-home"></i> University of Edinburgh &amp; EPFL (ELLIS PhD Program)</p>
-                <p class="project-desc">Supervised by <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank" style="color:#F85C70;">Professor Rik Sarkar</a>, Professor Henry Gouk, and Professor Pascal Frossard.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Theoretical Machine Learning</span>
-                    <span class="project-tag">Geometric Deep Learning</span>
-                    <span class="project-tag">Differential Privacy</span>
-                </div>
-            </div>
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">Completed</span>
-                <div class="project-title">B.Sc. in Applied Mathematics</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2019 – 2023 &nbsp;·&nbsp; <i class="ti-home"></i> Sharif University of Technology</p>
-                <p class="project-desc">Worked with Professor Javad Ebrahimi on Differential Privacy and Information Theory.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Applied Mathematics</span>
-                    <span class="project-tag">Information Theory</span>
-                    <span class="project-tag">Differential Privacy</span>
-                </div>
-            </div>
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">Completed</span>
-                <div class="project-title">Diploma in Physics and Mathematics</div>
-                <p class="project-date"><i class="ti-calendar"></i> 2013 – 2019 &nbsp;·&nbsp; <i class="ti-home"></i> Farzanegan 1 High School</p>
-                <p class="project-desc">National Organization for the Development of Exceptional Talent (NODET).</p>
-            </div>
+            <ul class="cv-list reveal">
+                <li><span class="cv-year">2024 – Present</span><div class="cv-main"><div class="cv-title">Ph.D. in Computer Science</div><div class="cv-sub">University of Edinburgh &amp; EPFL (ELLIS PhD Program). Supervised by <a href="https://homepages.inf.ed.ac.uk/rsarkar/" target="_blank">Professor Rik Sarkar</a>, Professor Henry Gouk, and Professor Pascal Frossard.</div></div></li>
+                <li><span class="cv-year">2019 – 2023</span><div class="cv-main"><div class="cv-title">B.Sc. in Applied Mathematics</div><div class="cv-sub">Sharif University of Technology. Worked with Professor Javad Ebrahimi on Differential Privacy and Information Theory.</div></div></li>
+                <li><span class="cv-year">2013 – 2019</span><div class="cv-main"><div class="cv-title">Diploma in Physics and Mathematics</div><div class="cv-sub">Farzanegan 1 High School, National Organization for the Development of Exceptional Talent (NODET).</div></div></li>
+            </ul>
 
             <div class="section-label reveal" style="margin-top: 20px;">Research Visits &amp; Internships</div>
 
@@ -311,63 +305,20 @@
             </div>
 
             <div class="section-label reveal" style="margin-top: 20px;">Honors &amp; Awards</div>
-            <div class="honors-grid">
-            <div class="project-card reveal">
-                <span class="project-status completed">2026</span>
-                <div class="project-title">ELLIS PhD Program</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Nominated and accepted, European Laboratory for Learning and Intelligent Systems (ELLIS)</p>
-            </div>
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">2026</span>
-                <div class="project-title">Research Spotlight Speaker Prize</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> London Hopper Colloquium 2026, University College London</p>
-            </div>
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">2026</span>
-                <div class="project-title">One-year BCS Membership</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> British Computer Society</p>
-            </div>
-            <div class="project-card reveal">
-                <span class="project-status completed">2024</span>
-                <div class="project-title">Informatics Graduate School Scholarship</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> University of Edinburgh</p>
-            </div>
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">2024</span>
-                <div class="project-title">Best Speaker, Undergraduate Research Seminars</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Graph theory and computer science, Sharif University of Technology</p>
-            </div>
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">2019</span>
-                <div class="project-title">Scholarship</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> National Elites Foundation</p>
-            </div>
-            <div class="project-card reveal">
-                <span class="project-status completed">2018</span>
-                <div class="project-title">National Silver Medal</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Mathematics Olympiad</p>
-            </div>
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">2017</span>
-                <div class="project-title">National and International Gold Ruler</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Geometry Olympiad, Advanced Level</p>
-            </div>
-            <div class="project-card reveal delay-2">
-                <span class="project-status completed">2017</span>
-                <div class="project-title">National Silver Medal</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Mathematics Olympiad</p>
-            </div>
-            <div class="project-card reveal">
-                <span class="project-status completed">2016</span>
-                <div class="project-title">National Silver Ruler</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Geometry Olympiad, Medium Level</p>
-            </div>
-            <div class="project-card reveal delay-1">
-                <span class="project-status completed">2015</span>
-                <div class="project-title">National Gold and International Bronze Ruler</div>
-                <p class="project-date" style="margin-bottom:0;"><i class="ti-medall"></i> Iranian Geometry Olympiad, Elementary Level</p>
-            </div>
-            </div>
+
+            <ul class="cv-list compact reveal">
+                <li><span class="cv-year">2026</span><div class="cv-main"><div class="cv-title">ELLIS PhD Program</div><div class="cv-sub">Nominated and accepted, European Laboratory for Learning and Intelligent Systems (ELLIS)</div></div></li>
+                <li><span class="cv-year">2026</span><div class="cv-main"><div class="cv-title">Research Spotlight Speaker Prize</div><div class="cv-sub">London Hopper Colloquium 2026, University College London</div></div></li>
+                <li><span class="cv-year">2026</span><div class="cv-main"><div class="cv-title">One-year BCS Membership</div><div class="cv-sub">British Computer Society</div></div></li>
+                <li><span class="cv-year">2024</span><div class="cv-main"><div class="cv-title">Informatics Graduate School Scholarship</div><div class="cv-sub">University of Edinburgh</div></div></li>
+                <li><span class="cv-year">2024</span><div class="cv-main"><div class="cv-title">Best Speaker, Undergraduate Research Seminars</div><div class="cv-sub">Graph theory and computer science, Sharif University of Technology</div></div></li>
+                <li><span class="cv-year">2019</span><div class="cv-main"><div class="cv-title">Scholarship</div><div class="cv-sub">National Elites Foundation</div></div></li>
+                <li><span class="cv-year">2018</span><div class="cv-main"><div class="cv-title">National Silver Medal</div><div class="cv-sub">Iranian Mathematics Olympiad</div></div></li>
+                <li><span class="cv-year">2017</span><div class="cv-main"><div class="cv-title">National and International Gold Ruler</div><div class="cv-sub">Iranian Geometry Olympiad, Advanced Level</div></div></li>
+                <li><span class="cv-year">2017</span><div class="cv-main"><div class="cv-title">National Silver Medal</div><div class="cv-sub">Iranian Mathematics Olympiad</div></div></li>
+                <li><span class="cv-year">2016</span><div class="cv-main"><div class="cv-title">National Silver Ruler</div><div class="cv-sub">Iranian Geometry Olympiad, Medium Level</div></div></li>
+                <li><span class="cv-year">2015</span><div class="cv-main"><div class="cv-title">National Gold and International Bronze Ruler</div><div class="cv-sub">Iranian Geometry Olympiad, Elementary Level</div></div></li>
+            </ul>
 
             <div class="section-label reveal" style="margin-top: 20px;">Skills</div>
             <div class="skills-grid">
