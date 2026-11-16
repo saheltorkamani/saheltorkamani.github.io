@@ -78,7 +78,6 @@
         }
 
         /* ===== CONTACT SECTION ===== */
-        #contact-section { padding: 80px 0; }
 
         .contact-grid {
             display: grid;
@@ -192,6 +191,20 @@
             text-decoration: none;
         }
 
+        /* ===== CONTACT LIST ===== */
+        #contact-section { padding: 48px 0 56px; }
+        .cv-list { list-style: none; padding: 6px 28px; margin: 0; background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; }
+        .cv-list li { display: flex; gap: 18px; padding: 13px 0; border-bottom: 1px solid #f3f3f3; align-items: baseline; }
+        .cv-list li:last-child { border-bottom: none; }
+        .cv-year { flex: 0 0 130px; font-size: 0.78rem; font-weight: 700; color: #F85C70; letter-spacing: 0.3px; text-transform: uppercase; }
+        .cv-year i { margin-right: 6px; }
+        .cv-main { flex: 1; min-width: 0; font-size: 0.95rem; font-weight: 600; color: #17263C; overflow-wrap: anywhere; }
+        .cv-main a { color: #F85C70; text-decoration: none; }
+        .cv-main a:hover { text-decoration: underline; }
+        .cv-online { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+        .cv-online i { margin-right: 4px; font-size: 0.85rem; }
+        @media (max-width: 575px) { .cv-list { padding: 4px 18px; } .cv-list li { flex-direction: column; gap: 2px; } .cv-year { flex: none; } }
+
         /* ===== NAVBAR BRAND ===== */
         .navbar-brand.brand-block { display: flex; flex-direction: column; line-height: 1.2; padding: 4px 0; text-decoration: none; }
         .navbar-brand.brand-block .brand-title { font-size: 1.05rem; font-weight: 700; color: #17263C; font-family: "Dosis", sans-serif; margin: 0; white-space: nowrap; }
@@ -245,65 +258,18 @@
     <!-- Contact -->
     <section id="contact-section">
         <div class="container">
-
-            <div class="contact-grid">
-                <div class="contact-card reveal">
-                    <div class="contact-icon-wrap"><i class="ti-email"></i></div>
-                    <div style="min-width:0;flex:1">
-                        <div class="contact-text-label">Email</div>
-                        <div class="contact-text-value">
-                            <a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-card reveal delay-1">
-                    <div class="contact-icon-wrap"><i class="ti-home"></i></div>
-                    <div>
-                        <div class="contact-text-label">Institution</div>
-                        <div class="contact-text-value">The University of Edinburgh &amp; EPFL (ELLIS PhD Program)</div>
-                    </div>
-                </div>
-
-                <div class="contact-card reveal delay-2">
-                    <div class="contact-icon-wrap"><i class="ti-search"></i></div>
-                    <div>
-                        <div class="contact-text-label">Lab</div>
-                        <div class="contact-text-value">
-                            <a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-card reveal delay-3">
-                    <div class="contact-icon-wrap"><i class="ti-location-pin"></i></div>
-                    <div>
-                        <div class="contact-text-label">Location</div>
-                        <div class="contact-text-value">Edinburgh, Scotland</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social links -->
-            <div class="social-section reveal delay-4">
-                <h4>Find Me Online</h4>
-                <p>Connect across platforms</p>
-                <div class="social-row">
-                    <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" class="social-pill" target="_blank">
-                        <i class="ti-google"></i> Google Scholar
-                    </a>
-                    <a href="https://linkedin.com/in/sahel-torkamani/" class="social-pill" target="_blank">
-                        <i class="ti-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/saheltorkamani" class="social-pill" target="_blank">
-                        <i class="ti-github"></i> GitHub
-                    </a>
-                    <a href="https://orcid.org/0009-0004-2110-1641" class="social-pill" target="_blank">
-                        <i class="ti-link"></i> ORCID
-                    </a>
-                </div>
-            </div>
-
+            <ul class="cv-list reveal">
+                <li><span class="cv-year"><i class="ti-email"></i> Email</span><div class="cv-main"><a href="mailto:sahel.torkamani@ed.ac.uk">sahel.torkamani@ed.ac.uk</a></div></li>
+                <li><span class="cv-year"><i class="ti-home"></i> Institution</span><div class="cv-main">The University of Edinburgh &amp; EPFL (ELLIS PhD Program)</div></li>
+                <li><span class="cv-year"><i class="ti-search"></i> Lab</span><div class="cv-main"><a href="https://angle-lab.com/site/home/" target="_blank">ANGLE Lab</a></div></li>
+                <li><span class="cv-year"><i class="ti-location-pin"></i> Location</span><div class="cv-main">Edinburgh, Scotland</div></li>
+                <li><span class="cv-year"><i class="ti-world"></i> Online</span><div class="cv-main cv-online">
+                    <a href="https://scholar.google.com/citations?user=gCDricIAAAAJ&hl=en" target="_blank"><i class="ti-google"></i> Google Scholar</a>
+                    <a href="https://www.linkedin.com/in/sahel-torkamani" target="_blank"><i class="ti-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/saheltorkamani" target="_blank"><i class="ti-github"></i> GitHub</a>
+                    <a href="https://orcid.org/0009-0004-2110-1641" target="_blank"><i class="ti-link"></i> ORCID</a>
+                </div></li>
+            </ul>
         </div>
     </section>
 
